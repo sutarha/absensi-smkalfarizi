@@ -2,7 +2,7 @@
 use App\Config\App;
 
 $activeNav = 'nilai';
-$isGuru = (($user['role'] ?? '') === 'guru');
+$isGuru = isset($isGuru) ? $isGuru : (($user['role'] ?? '') === 'guru');
 $saveUrl = $isGuru ? App::baseUrl('guru/nilai/save') : App::baseUrl('admin/nilai/save');
 $backUrl = $isGuru 
     ? App::baseUrl("guru/nilai?kelas_id={$kelasId}&mapel_id={$mapelId}&semester_ke={$semesterKe}")

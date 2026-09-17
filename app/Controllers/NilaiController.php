@@ -26,7 +26,9 @@ class NilaiController
     {
         $user = $this->authAdminOrGuru();
         $config = KonfigurasiSekolah::get();
-        $isGuru = ($user['role'] === 'guru');
+        $uriPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+        $isGuruRoute = (strpos($uriPath, '/guru/') !== false);
+        $isGuru = ($user['role'] === 'guru' || $isGuruRoute);
         $tapelList = TahunPelajaran::getAll();
         $activeTapel = TahunPelajaran::getActive();
         $isGenap = ($activeTapel && strtolower($activeTapel['semester']) === 'genap');
@@ -104,7 +106,9 @@ class NilaiController
     {
         $user = $this->authAdminOrGuru();
         $config = KonfigurasiSekolah::get();
-        $isGuru = ($user['role'] === 'guru');
+        $uriPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+        $isGuruRoute = (strpos($uriPath, '/guru/') !== false);
+        $isGuru = ($user['role'] === 'guru' || $isGuruRoute);
         $activeTapel = TahunPelajaran::getActive();
 
         $kelasId = !empty($_GET['kelas_id']) ? (int)$_GET['kelas_id'] : 0;
@@ -162,8 +166,12 @@ class NilaiController
         $semesterKe = (int)($_POST['semester_ke'] ?? 1);
         $tapelId = !empty($_POST['tahun_pelajaran_id']) ? (int)$_POST['tahun_pelajaran_id'] : null;
 
+        $uriPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+        $isGuruRoute = (strpos($uriPath, '/guru/') !== false);
+        $isGuru = ($user['role'] === 'guru' || $isGuruRoute);
+
         // Security Guard: Blokir jika guru mencoba menyimpan nilai mapel yang bukan diampunya
-        if ($user['role'] === 'guru') {
+        if ($isGuru) {
             $guruId = (int)$user['id'];
             $isAuthorized = JadwalPelajaran::isGuruTeaching($guruId, $kelasId, $mapelId);
             if (!$isAuthorized) {
@@ -196,7 +204,7 @@ class NilaiController
         }
 
         $_SESSION['flash_success'] = "Nilai mata pelajaran semester {$semesterKe} (Tugas, UH, UTS, UAS) berhasil disimpan dan dikalkulasi otomatis menjadi Nilai Rapor Jadi!";
-        $redirectUrl = ($user['role'] === 'guru') 
+        $redirectUrl = $isGuru 
             ? App::baseUrl("guru/nilai?kelas_id={$kelasId}&mapel_id={$mapelId}&semester_ke={$semesterKe}")
             : App::baseUrl("admin/nilai?kelas_id={$kelasId}&mapel_id={$mapelId}&semester_ke={$semesterKe}");
         App::redirect($redirectUrl);

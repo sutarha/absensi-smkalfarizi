@@ -2,7 +2,7 @@
 use App\Config\App;
 
 $activeNav = 'nilai';
-$isGuru = (($user['role'] ?? '') === 'guru');
+$isGuru = isset($isGuru) ? $isGuru : (($user['role'] ?? '') === 'guru');
 $filterUrl = $isGuru ? App::baseUrl('guru/nilai') : App::baseUrl('admin/nilai');
 $inputUrl = $isGuru 
     ? App::baseUrl("guru/nilai/input?kelas_id={$kelasId}&mapel_id={$mapelId}&semester_ke={$semesterKe}") 
