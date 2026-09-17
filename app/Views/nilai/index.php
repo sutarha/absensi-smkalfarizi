@@ -177,8 +177,8 @@ $inputUrl = $isGuru
                 </div>
 
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs text-slate-600">
-                        <thead class="bg-slate-50 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200">
+                    <table class="block xl:table w-full text-left text-xs text-slate-600">
+                        <thead class="hidden xl:table-header-group bg-slate-50 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200">
                             <tr>
                                 <th class="py-3 px-3 w-10 text-center">No</th>
                                 <th class="py-3 px-4 min-w-[170px]">Nama Siswa & NISN</th>
@@ -193,10 +193,10 @@ $inputUrl = $isGuru
                                 <th class="py-3 px-3 text-center">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100 font-medium">
+                        <tbody class="block xl:table-row-group divide-y divide-slate-200 xl:divide-slate-100 font-medium">
                             <?php if (empty($daftarNilai)): ?>
-                                <tr>
-                                    <td colspan="11" class="py-8 text-center text-slate-400">
+                                <tr class="block xl:table-row">
+                                    <td colspan="11" class="block xl:table-cell py-8 text-center text-slate-400">
                                         Tidak ada data siswa ditemukan di kelas ini.
                                     </td>
                                 </tr>
@@ -209,20 +209,43 @@ $inputUrl = $isGuru
                                     $naShow = ($dn['nilai_akhir'] > 0) ? number_format((float)$dn['nilai_akhir'], 1) : '-';
                                     $isManual = !empty($dn['is_manual']);
                                 ?>
-                                    <tr class="hover:bg-slate-50/70 transition">
-                                        <td class="py-3 px-3 text-center text-slate-400 font-mono"><?= $no++ ?></td>
-                                        <td class="py-3 px-4">
-                                            <div class="font-bold text-slate-900"><?= htmlspecialchars($dn['nama_siswa']) ?></div>
-                                            <div class="text-[11px] text-slate-400 font-mono">NISN: <?= htmlspecialchars($dn['nisn']) ?></div>
+                                    <tr class="block xl:table-row hover:bg-slate-50/70 transition p-4 xl:p-0 mb-4 xl:mb-0 bg-white xl:bg-transparent rounded-xl xl:rounded-none shadow-sm xl:shadow-none border border-slate-200 xl:border-none">
+                                        <td class="hidden xl:table-cell py-3 px-3 text-center text-slate-400 font-mono"><?= $no++ ?></td>
+                                        
+                                        <td class="block xl:table-cell py-3 px-4 xl:px-4 border-b border-slate-100 xl:border-none">
+                                            <div class="flex items-center xl:block gap-3">
+                                                <div class="xl:hidden w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-sm">
+                                                    <?= $no - 1 ?>
+                                                </div>
+                                                <div>
+                                                    <div class="font-bold text-slate-900 text-sm xl:text-xs"><?= htmlspecialchars($dn['nama_siswa']) ?></div>
+                                                    <div class="text-[11px] text-slate-400 font-mono">NISN: <?= htmlspecialchars($dn['nisn']) ?></div>
+                                                </div>
+                                            </div>
                                         </td>
-                                        <td class="py-3 px-2 text-center font-mono text-slate-700"><?= $tugasShow ?></td>
-                                        <td class="py-3 px-2 text-center font-mono text-slate-700"><?= $uhShow ?></td>
-                                        <td class="py-3 px-2 text-center font-mono text-slate-700"><?= $utsShow ?></td>
-                                        <td class="py-3 px-2 text-center font-mono text-slate-700"><?= $uasShow ?></td>
-                                        <td class="py-3 px-2 text-center font-mono font-black text-sm bg-slate-50/70 <?= ($dn['nilai_akhir'] >= 75) ? 'text-emerald-700' : 'text-slate-800' ?>">
-                                            <?= $naShow ?>
+
+                                        <td class="flex xl:table-cell justify-between items-center py-2 px-4 xl:px-2 text-center font-mono text-slate-700 border-b xl:border-none border-slate-50">
+                                            <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">Tugas/PR</span>
+                                            <span><?= $tugasShow ?></span>
                                         </td>
-                                        <td class="py-3 px-2 text-center">
+                                        <td class="flex xl:table-cell justify-between items-center py-2 px-4 xl:px-2 text-center font-mono text-slate-700 border-b xl:border-none border-slate-50">
+                                            <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">UH</span>
+                                            <span><?= $uhShow ?></span>
+                                        </td>
+                                        <td class="flex xl:table-cell justify-between items-center py-2 px-4 xl:px-2 text-center font-mono text-slate-700 border-b xl:border-none border-slate-50">
+                                            <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">UTS</span>
+                                            <span><?= $utsShow ?></span>
+                                        </td>
+                                        <td class="flex xl:table-cell justify-between items-center py-2 px-4 xl:px-2 text-center font-mono text-slate-700 border-b xl:border-none border-slate-50">
+                                            <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">UAS</span>
+                                            <span><?= $uasShow ?></span>
+                                        </td>
+                                        <td class="flex xl:table-cell justify-between items-center py-2 px-4 xl:px-2 text-center font-mono font-black text-sm xl:bg-slate-50/70 border-b xl:border-none border-slate-100 <?= ($dn['nilai_akhir'] >= 75) ? 'text-emerald-700' : 'text-slate-800' ?>">
+                                            <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">NA Rapor</span>
+                                            <span><?= $naShow ?></span>
+                                        </td>
+                                        <td class="flex xl:table-cell justify-between items-center py-2 px-4 xl:px-2 text-center border-b xl:border-none border-slate-50">
+                                            <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">Predikat</span>
                                             <?php
                                             $pred = $dn['predikat'] ?? '-';
                                             $pClass = match($pred) {
@@ -237,7 +260,8 @@ $inputUrl = $isGuru
                                                 <?= htmlspecialchars($pred) ?>
                                             </span>
                                         </td>
-                                        <td class="py-3 px-2 text-center">
+                                        <td class="flex xl:table-cell justify-between items-center py-2 px-4 xl:px-2 text-center border-b xl:border-none border-slate-50">
+                                            <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">Asal Nilai</span>
                                             <?php if ($isManual): ?>
                                                 <span class="px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 text-[10px] font-bold border border-amber-200" title="Diinput manual oleh Admin TU">
                                                     Manual TU
@@ -250,15 +274,19 @@ $inputUrl = $isGuru
                                                 <span class="text-slate-300 text-xs">-</span>
                                             <?php endif; ?>
                                         </td>
-                                        <td class="py-3 px-4 text-slate-500 text-[11px] max-w-xs truncate">
-                                            <?= htmlspecialchars($dn['capaian_kompetensi'] ?? 'Menunjukkan penguasaan yang baik dalam tujuan pembelajaran.') ?>
+                                        <td class="flex xl:table-cell flex-col xl:flex-row justify-between items-start xl:items-center py-3 xl:py-3 px-4 xl:px-4 text-slate-500 text-[11px] border-b xl:border-none border-slate-50">
+                                            <span class="xl:hidden font-semibold text-[11px] text-slate-500 mb-1.5">Capaian Kompetensi</span>
+                                            <div class="xl:max-w-xs xl:truncate">
+                                                <?= htmlspecialchars($dn['capaian_kompetensi'] ?? 'Menunjukkan penguasaan yang baik dalam tujuan pembelajaran.') ?>
+                                            </div>
                                         </td>
-                                        <td class="py-3 px-3 text-center whitespace-nowrap">
-                                            <div class="inline-flex items-center gap-1">
-                                                <a href="<?= App::baseUrl("admin/nilai/transkrip/{$dn['siswa_id']}") ?>" target="_blank" title="Cetak Transkrip Kumulatif Sem 1-6" class="inline-flex items-center gap-1 text-[11px] font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 px-2 py-1 rounded-lg transition border border-indigo-200">
+                                        <td class="flex xl:table-cell justify-between items-center py-4 xl:py-3 px-4 xl:px-3 text-center whitespace-nowrap bg-slate-50 xl:bg-transparent rounded-b-xl xl:rounded-none mt-2 xl:mt-0">
+                                            <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">Aksi Cetak</span>
+                                            <div class="inline-flex items-center gap-2 xl:gap-1 w-full xl:w-auto justify-end">
+                                                <a href="<?= App::baseUrl("admin/nilai/transkrip/{$dn['siswa_id']}") ?>" target="_blank" title="Cetak Transkrip Kumulatif Sem 1-6" class="inline-flex items-center gap-1 text-[11px] font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 xl:px-2 xl:py-1 rounded-lg transition border border-indigo-200 flex-1 xl:flex-auto justify-center">
                                                     Kumulatif
                                                 </a>
-                                                <a href="<?= App::baseUrl("admin/nilai/transkrip-ijazah/{$dn['siswa_id']}") ?>" target="_blank" title="Cetak Transkrip Ijazah Resmi" class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded-lg transition border border-emerald-200">
+                                                <a href="<?= App::baseUrl("admin/nilai/transkrip-ijazah/{$dn['siswa_id']}") ?>" target="_blank" title="Cetak Transkrip Ijazah Resmi" class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 xl:px-2 xl:py-1 rounded-lg transition border border-emerald-200 flex-1 xl:flex-auto justify-center">
                                                     Ijazah 🎓
                                                 </a>
                                             </div>

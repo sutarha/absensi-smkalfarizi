@@ -109,8 +109,8 @@ $backUrl = $isGuru
 
                 <div class="bg-white rounded-2xl border border-slate-200/80 shadow-soft-sm overflow-hidden">
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs text-slate-700">
-                            <thead class="bg-slate-50 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200">
+                        <table class="block xl:table w-full text-left text-xs text-slate-700">
+                            <thead class="hidden xl:table-header-group bg-slate-50 text-slate-500 uppercase tracking-wider font-semibold border-b border-slate-200">
                                 <tr>
                                     <th class="py-3 px-3 w-10 text-center">No</th>
                                     <th class="py-3 px-4 min-w-[180px]">Nama Siswa & NISN</th>
@@ -124,10 +124,10 @@ $backUrl = $isGuru
                                     <th class="py-3 px-4 min-w-[200px]">Capaian Kompetensi / Catatan</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-slate-100 font-medium">
+                            <tbody class="block xl:table-row-group divide-y divide-slate-200 xl:divide-slate-100 font-medium">
                                 <?php if (empty($daftarNilai)): ?>
-                                    <tr>
-                                        <td colspan="10" class="py-8 text-center text-slate-400">
+                                    <tr class="block xl:table-row">
+                                        <td colspan="10" class="block xl:table-cell py-8 text-center text-slate-400">
                                             Tidak ada data siswa ditemukan di kelas ini.
                                         </td>
                                     </tr>
@@ -141,36 +141,55 @@ $backUrl = $isGuru
                                         $naVal = ($dn['nilai_akhir'] > 0) ? number_format((float)$dn['nilai_akhir'], 1) : '-';
                                         $predVal = $dn['predikat'] ?? '-';
                                     ?>
-                                        <tr class="hover:bg-slate-50/70 transition" data-siswa-id="<?= $sid ?>">
-                                            <td class="py-2.5 px-3 text-center text-slate-400 font-mono"><?= $no++ ?></td>
-                                            <td class="py-2.5 px-4">
-                                                <div class="font-bold text-slate-900"><?= htmlspecialchars($dn['nama_siswa']) ?></div>
-                                                <div class="text-[11px] text-slate-400 font-mono">NISN: <?= htmlspecialchars($dn['nisn']) ?></div>
+                                        <tr class="block xl:table-row hover:bg-slate-50/70 transition p-4 xl:p-0 mb-4 xl:mb-0 bg-white xl:bg-transparent rounded-xl xl:rounded-none shadow-sm xl:shadow-none border border-slate-200 xl:border-none" data-siswa-id="<?= $sid ?>">
+                                            <td class="hidden xl:table-cell py-2.5 px-3 text-center text-slate-400 font-mono"><?= $no++ ?></td>
+                                            
+                                            <td class="block xl:table-cell py-2.5 px-4 xl:px-4 border-b border-slate-100 xl:border-none">
+                                                <div class="flex items-center xl:block gap-3">
+                                                    <div class="xl:hidden w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-sm">
+                                                        <?= $no - 1 ?>
+                                                    </div>
+                                                    <div>
+                                                        <div class="font-bold text-slate-900 text-sm xl:text-xs"><?= htmlspecialchars($dn['nama_siswa']) ?></div>
+                                                        <div class="text-[11px] text-slate-400 font-mono">NISN: <?= htmlspecialchars($dn['nisn']) ?></div>
+                                                    </div>
+                                                </div>
                                             </td>
-                                            <td class="py-2 px-2 text-center bg-sky-50/20">
+
+                                            <td class="flex xl:table-cell justify-between items-center py-2 px-4 xl:px-2 text-center xl:bg-sky-50/20 border-b xl:border-none border-slate-50">
+                                                <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">Tugas / PR</span>
                                                 <input type="number" step="0.1" min="0" max="100" name="nilai[<?= $sid ?>][tugas]" value="<?= $tugasVal ?>" placeholder="0" oninput="hitungRowNilai(<?= $sid ?>)" id="tugas-<?= $sid ?>" class="w-20 text-center font-mono py-1.5 px-1 bg-white border border-sky-300 rounded-lg text-xs text-sky-900 font-semibold focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
                                             </td>
-                                            <td class="py-2 px-2 text-center bg-sky-50/20">
+                                            <td class="flex xl:table-cell justify-between items-center py-2 px-4 xl:px-2 text-center xl:bg-sky-50/20 border-b xl:border-none border-slate-50">
+                                                <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">Ulangan Harian</span>
                                                 <input type="number" step="0.1" min="0" max="100" name="nilai[<?= $sid ?>][uh]" value="<?= $uhVal ?>" placeholder="0" oninput="hitungRowNilai(<?= $sid ?>)" id="uh-<?= $sid ?>" class="w-20 text-center font-mono py-1.5 px-1 bg-white border border-sky-300 rounded-lg text-xs text-sky-900 font-semibold focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
                                             </td>
-                                            <td class="py-2 px-2 text-center bg-slate-100/50 font-mono font-bold text-xs text-slate-700" id="rh-<?= $sid ?>">
-                                                -
+                                            <td class="flex xl:table-cell justify-between items-center py-2 px-4 xl:px-2 text-center bg-slate-50 xl:bg-slate-100/50 font-mono font-bold text-xs text-slate-700 border-b xl:border-none border-slate-100">
+                                                <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">R. Harian</span>
+                                                <span id="rh-<?= $sid ?>">-</span>
                                             </td>
-                                            <td class="py-2 px-2 text-center bg-indigo-50/20">
+
+                                            <td class="flex xl:table-cell justify-between items-center py-2 px-4 xl:px-2 text-center xl:bg-indigo-50/20 border-b xl:border-none border-slate-50">
+                                                <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">UTS / STS</span>
                                                 <input type="number" step="0.1" min="0" max="100" name="nilai[<?= $sid ?>][uts]" value="<?= $utsVal ?>" placeholder="0" oninput="hitungRowNilai(<?= $sid ?>)" id="uts-<?= $sid ?>" class="w-20 text-center font-mono py-1.5 px-1 bg-white border border-indigo-300 rounded-lg text-xs text-indigo-900 font-semibold focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                             </td>
-                                            <td class="py-2 px-2 text-center bg-indigo-50/20">
+                                            <td class="flex xl:table-cell justify-between items-center py-2 px-4 xl:px-2 text-center xl:bg-indigo-50/20 border-b xl:border-none border-slate-50">
+                                                <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">UAS / SAS</span>
                                                 <input type="number" step="0.1" min="0" max="100" name="nilai[<?= $sid ?>][uas]" value="<?= $uasVal ?>" placeholder="0" oninput="hitungRowNilai(<?= $sid ?>)" id="uas-<?= $sid ?>" class="w-20 text-center font-mono py-1.5 px-1 bg-white border border-indigo-300 rounded-lg text-xs text-indigo-900 font-semibold focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                                             </td>
-                                            <td class="py-2 px-2 text-center bg-emerald-50/60 font-mono font-black text-sm text-emerald-900" id="na-<?= $sid ?>">
-                                                <?= $naVal ?>
+
+                                            <td class="flex xl:table-cell justify-between items-center py-2 px-4 xl:px-2 text-center bg-emerald-50/30 xl:bg-emerald-50/60 font-mono font-black text-sm text-emerald-900 border-b xl:border-none border-emerald-100">
+                                                <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">NA Rapor</span>
+                                                <span id="na-<?= $sid ?>"><?= $naVal ?></span>
                                             </td>
-                                            <td class="py-2 px-2 text-center bg-emerald-50/60">
+                                            <td class="flex xl:table-cell justify-between items-center py-2 px-4 xl:px-2 text-center bg-emerald-50/30 xl:bg-emerald-50/60 border-b xl:border-none border-emerald-100">
+                                                <span class="xl:hidden font-semibold text-[11px] text-slate-500 w-1/3 text-left">Predikat</span>
                                                 <span id="pred-<?= $sid ?>" class="inline-flex items-center justify-center w-7 h-7 rounded-lg text-xs font-black border bg-white text-slate-700 border-slate-200">
                                                     <?= $predVal ?>
                                                 </span>
                                             </td>
-                                            <td class="py-2 px-3">
+                                            <td class="flex xl:table-cell flex-col xl:flex-row justify-between items-start xl:items-center py-3 xl:py-2 px-4 xl:px-3">
+                                                <span class="xl:hidden font-semibold text-[11px] text-slate-500 mb-1.5">Capaian Kompetensi / Catatan</span>
                                                 <input type="text" name="nilai[<?= $sid ?>][capaian]" value="<?= htmlspecialchars($dn['capaian_kompetensi'] ?? 'Menunjukkan penguasaan yang baik dalam capaian pembelajaran.') ?>" class="w-full py-1.5 px-2.5 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
                                             </td>
                                         </tr>
@@ -180,11 +199,11 @@ $backUrl = $isGuru
                         </table>
                     </div>
 
-                    <div class="p-5 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
-                        <div class="text-xs text-slate-500">
+                    <div class="p-5 bg-slate-50 border-t border-slate-100 flex flex-col md:flex-row gap-4 items-center justify-between">
+                        <div class="text-xs text-slate-500 text-center md:text-left">
                             💡 Data tersimpan otomatis ke <strong>Buku Induk Siswa</strong> dan <strong>Transkrip Ijazah</strong>.
                         </div>
-                        <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-3 w-full md:w-auto">
                             <a href="<?= $backUrl ?>" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-200 transition">
                                 Batal
                             </a>
