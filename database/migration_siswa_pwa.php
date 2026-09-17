@@ -3,11 +3,14 @@
 // Fase 1A: Menambahkan kolom auth siswa + tabel tabungan cicilan
 declare(strict_types=1);
 
+require_once __DIR__ . '/../app/Config/App.php';
 require_once __DIR__ . '/../app/Config/Database.php';
 
+use App\Config\App;
 use App\Config\Database;
 
 try {
+    App::init();
     $db = Database::getConnection();
     echo "✓ Terhubung ke database MySQL...\n";
 
