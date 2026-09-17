@@ -100,8 +100,8 @@ $backUrl = $isGuru
                 </div>
             </div>
 
-            <form id="form-input-nilai" method="POST" action="<?= $saveUrl ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>">
+            <form id="form-input-nilai" method="POST" action="<?= $saveUrl ?>">
+    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <input type="hidden" name="kelas_id" value="<?= $kelasId ?>">
                 <input type="hidden" name="mapel_id" value="<?= $mapelId ?>">
                 <input type="hidden" name="semester_ke" value="<?= $semesterKe ?>">

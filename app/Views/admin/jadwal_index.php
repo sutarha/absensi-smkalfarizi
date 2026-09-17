@@ -274,8 +274,8 @@ $hasFilterActive = !empty($selectedHari) || !empty($selectedKelasId) || !empty($
                 </button>
             </div>
 
-            <form id="jadwalForm" method="POST" action="<?= App::baseUrl('admin/jadwal/store') ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>" class="space-y-4">
+            <form id="jadwalForm" method="POST" action="<?= App::baseUrl('admin/jadwal/store') ?>" class="space-y-4">
+    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <input type="hidden" name="exclude_id" id="m_exclude_id" value="">
                 <input type="hidden" name="redirect_to" value="<?= htmlspecialchars($currentRedirectUrl) ?>">
 

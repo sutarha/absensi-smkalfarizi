@@ -125,6 +125,7 @@ $activeNav = 'kelas';
                                              </button>
                                              <form action="<?= App::baseUrl("admin/kelas/delete/{$k['id']}") ?>" method="POST"
                                                    onsubmit="return confirm('Menghapus kelas ini akan berdampak pada siswa di dalamnya. Yakin?')">
+                                                 <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                                                  <button type="submit" 
                                                          title="Hapus Kelas"
                                                          class="p-1.5 rounded-xl text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition border border-slate-200">
@@ -154,8 +155,8 @@ $activeNav = 'kelas';
                  </button>
              </div>
 
-             <form id="kelasForm" method="POST" action="<?= App::baseUrl('admin/kelas/store') ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>" class="space-y-4">
+             <form id="kelasForm" method="POST" action="<?= App::baseUrl('admin/kelas/store') ?>" class="space-y-4">
+                 <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                  <div>
                      <label class="block text-xs font-bold text-slate-700 mb-1">Nama Rombel / Kelas</label>
                      <input type="text" name="nama_kelas" id="m_nama_kelas" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition" placeholder="Contoh: X PPLG 1" required>

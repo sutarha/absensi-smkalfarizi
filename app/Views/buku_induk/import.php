@@ -75,8 +75,8 @@ $activeNav = 'buku_induk';
 
             <!-- Upload Card -->
             <div class="bg-white rounded-2xl border border-slate-200/80 p-8 shadow-soft-sm">
-                <form method="POST" action="<?= App::baseUrl('admin/buku-induk/import') ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>" enctype="multipart/form-data" class="space-y-6">
+                <form method="POST" action="<?= App::baseUrl('admin/buku-induk/import') ?>" enctype="multipart/form-data" class="space-y-6">
+    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                     <div>
                         <label class="block font-display font-bold text-slate-900 text-sm mb-2">Pilih Berkas Excel Data Pokok Siswa Dapodik</label>
                         <div class="border-2 border-dashed border-emerald-300 bg-emerald-50/20 rounded-2xl p-8 text-center hover:border-emerald-500 hover:bg-emerald-50/40 transition cursor-pointer relative group">

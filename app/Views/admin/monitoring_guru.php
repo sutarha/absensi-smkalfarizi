@@ -139,8 +139,8 @@ $activeNav = 'monitoring_guru';
                         <p class="text-[11px] text-slate-400 mt-0.5">Memantau catatan jam datang, jam pulang mandiri GPS, serta izin/tugas luar guru</p>
                     </div>
                     <div class="flex items-center gap-2">
-                        <form method="POST" action="<?= App::baseUrl('admin/monitoring/evaluasi-gerbang') ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>" onsubmit="return confirm('Jalankan audit evaluasi gerbang harian sekarang? Guru yang hanya tap datang tanpa tap pulang akan dikunci statusnya menjadi ALPHA.')">
+                        <form method="POST" action="<?= App::baseUrl('admin/monitoring/evaluasi-gerbang') ?>" onsubmit="return confirm('Jalankan audit evaluasi gerbang harian sekarang? Guru yang hanya tap datang tanpa tap pulang akan dikunci statusnya menjadi ALPHA.')">
+    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                             <input type="hidden" name="tanggal" value="<?= htmlspecialchars($tanggal) ?>">
                             <button type="submit" class="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs shadow-soft-sm transition flex items-center gap-1.5">
                                 <span>⚖️</span>

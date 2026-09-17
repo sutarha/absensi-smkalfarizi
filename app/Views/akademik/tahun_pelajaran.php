@@ -95,8 +95,8 @@ $activeNav = 'tapel';
                         Tambah Tahun Pelajaran
                     </h3>
 
-                    <form method="POST" action="<?= App::baseUrl('admin/akademik/tahun-pelajaran/store') ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>" class="space-y-4 text-xs">
+                    <form method="POST" action="<?= App::baseUrl('admin/akademik/tahun-pelajaran/store') ?>" class="space-y-4 text-xs">
+    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                         <div>
                             <label class="block font-semibold text-slate-600 mb-1">Tahun Ajaran</label>
                             <input type="text" name="tahun_ajaran" placeholder="Contoh: 2026/2027" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
@@ -188,8 +188,8 @@ $activeNav = 'tapel';
                                             </td>
                                             <td class="py-3.5 px-4 text-center">
                                                 <?php if ($t['is_aktif'] != 1): ?>
-                                                    <form method="POST" action="<?= App::baseUrl("admin/akademik/tahun-pelajaran/set-aktif/{$t['id']}") ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>" onsubmit="return confirm('Apakah Anda yakin ingin mengaktifkan Tahun Pelajaran <?= htmlspecialchars($t['tahun_ajaran']) ?> (<?= htmlspecialchars($t['semester']) ?>)?');">
+                                                    <form method="POST" action="<?= App::baseUrl("admin/akademik/tahun-pelajaran/set-aktif/{$t['id']}") ?>" onsubmit="return confirm('Apakah Anda yakin ingin mengaktifkan Tahun Pelajaran <?= htmlspecialchars($t['tahun_ajaran']) ?>
+    <?= \App\Helpers\CsrfHelper::getTokenInput() ?> (<?= htmlspecialchars($t['semester']) ?>)?');">
                                                         <button type="submit" class="inline-flex items-center gap-1 bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-700 font-semibold text-xs px-3 py-1 rounded-lg transition border border-slate-300">
                                                             Aktifkan
                                                         </button>

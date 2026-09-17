@@ -220,8 +220,8 @@ $selectedTingkat = $_GET['tingkat'] ?? '';
                 </button>
             </div>
             
-            <form id="mapelForm" method="POST" action="<?= App::baseUrl('admin/mapel/store') ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>" class="p-6 space-y-4">
+            <form id="mapelForm" method="POST" action="<?= App::baseUrl('admin/mapel/store') ?>" class="p-6 space-y-4">
+    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Kode Mata Pelajaran</label>
                     <input type="text" name="kode_mapel" id="m_kode_mapel" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition uppercase" placeholder="Contoh: PPLG-01, PAI, PJOK" required>

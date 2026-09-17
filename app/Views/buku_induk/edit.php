@@ -43,8 +43,8 @@ $activeNav = 'buku_induk';
         <!-- Body Form -->
         <div class="p-8 max-w-5xl w-full mx-auto space-y-6">
 
-            <form id="form-edit-buku-induk" method="POST" action="<?= App::baseUrl("admin/buku-induk/update/{$siswa['id']}") ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>" class="space-y-6">
+            <form id="form-edit-buku-induk" method="POST" action="<?= App::baseUrl("admin/buku-induk/update/{$siswa['id']}") ?>" class="space-y-6">
+    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
 
                 <!-- SECTION 1: Identitas Pribadi -->
                 <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-soft-sm">

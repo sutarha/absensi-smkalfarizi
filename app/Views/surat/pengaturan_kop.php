@@ -64,8 +64,8 @@ $activeNav = 'kop_surat';
             </div>
 
             <!-- Form Edit KOP -->
-            <form id="form-kop" method="POST" action="<?= App::baseUrl('admin/surat/simpan-kop') ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>" enctype="multipart/form-data" class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-soft-sm space-y-5">
+            <form id="form-kop" method="POST" action="<?= App::baseUrl('admin/surat/simpan-kop') ?>" enctype="multipart/form-data" class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-soft-sm space-y-5">
+    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <h3 class="font-display font-bold text-slate-900 text-sm border-b border-slate-100 pb-3">Rincian Identitas KOP Surat</h3>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">

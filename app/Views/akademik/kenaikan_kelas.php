@@ -92,8 +92,8 @@ $activeNav = 'kenaikan';
             </div>
 
             <!-- Form Proses Roll-over Siswa -->
-            <form method="POST" action="<?= App::baseUrl('admin/akademik/kenaikan-kelas/process') ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>" onsubmit="return confirm('Apakah Anda yakin ingin memproses status kenaikan kelas untuk seluruh siswa terpilih? Data riwayat kelas siswa akan tercatat permanen.');">
+            <form method="POST" action="<?= App::baseUrl('admin/akademik/kenaikan-kelas/process') ?>" onsubmit="return confirm('Apakah Anda yakin ingin memproses status kenaikan kelas untuk seluruh siswa terpilih? Data riwayat kelas siswa akan tercatat permanen.');">
+    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <input type="hidden" name="kelas_asal_id" value="<?= $kelasAsalId ?>">
                 <input type="hidden" name="tapel_tujuan_id" value="<?= $tapelTujuanId ?>">
 

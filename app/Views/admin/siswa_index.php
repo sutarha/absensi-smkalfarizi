@@ -99,8 +99,8 @@ $kelasId = isset($_GET['kelas_id']) && $_GET['kelas_id'] !== '' ? (int)$_GET['ke
             </div>
 
             <!-- Form Bulk Assign Kelas (Ceklis Massal) -->
-            <form id="bulkAssignForm" method="POST" action="<?= App::baseUrl('admin/siswa/bulk-assign-kelas') ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>">
+            <form id="bulkAssignForm" method="POST" action="<?= App::baseUrl('admin/siswa/bulk-assign-kelas') ?>">
+    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <input type="hidden" name="return_url" value="<?= htmlspecialchars($_SERVER['REQUEST_URI'] ?? App::baseUrl('admin/siswa')) ?>">
 
                 <!-- Table Siswa -->
@@ -253,8 +253,8 @@ $kelasId = isset($_GET['kelas_id']) && $_GET['kelas_id'] !== '' ? (int)$_GET['ke
                 </button>
             </div>
 
-            <form id="siswaForm" method="POST" action="<?= App::baseUrl('admin/siswa/store') ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>" class="space-y-4">
+            <form id="siswaForm" method="POST" action="<?= App::baseUrl('admin/siswa/store') ?>" class="space-y-4">
+    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">NISN (Nomor Induk Siswa Nasional)</label>
                     <input type="text" name="nisn" id="m_nisn" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition" placeholder="10 digit nomor NISN" required oninput="autoGenBarcode(this.value)">
