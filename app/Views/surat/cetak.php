@@ -10,14 +10,15 @@ $jenis = $surat['jenis_surat'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($surat['nomor_surat']) ?> - <?= htmlspecialchars($surat['perihal']) ?></title>
     <style>
+        /* A4 Standard Print Margins */
         @page {
             size: A4 portrait;
-            margin: 15mm 20mm;
+            margin: 10mm 20mm 20mm 25mm; /* Top margin reduced to move layout up */
         }
         body {
             font-family: 'Times New Roman', Times, serif;
-            font-size: 11pt;
-            line-height: 1.4;
+            font-size: 12pt; /* Standard official letter size */
+            line-height: 1.45; /* Slightly tighter line height to save space */
             color: #000;
             background: #fff;
             margin: 0;
@@ -25,10 +26,12 @@ $jenis = $surat['jenis_surat'];
         }
         .page-container {
             width: 100%;
-            max-width: 210mm;
+            max-width: 100%;
             margin: 0 auto;
             box-sizing: border-box;
         }
+        
+        /* Print Utility Bar */
         .print-btn-bar {
             background: #1e293b;
             padding: 12px 20px;
@@ -48,64 +51,109 @@ $jenis = $surat['jenis_surat'];
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
+            transition: background 0.2s;
         }
         .print-btn:hover {
             background: #1d4ed8;
         }
+
+        /* Typography & Spacing */
+        p {
+            text-align: justify;
+            margin: 10px 0; /* Reduced margin */
+        }
+        .indented-paragraph {
+            text-indent: 40px;
+        }
+        
         .title-doc {
             text-align: center;
             font-weight: bold;
             font-size: 13pt;
             text-decoration: underline;
-            margin: 10px 0 2px 0;
+            margin: 15px 0 5px 0; /* Reduced top margin from 25px to 15px */
             letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
         .nomor-surat {
             text-align: center;
-            font-size: 11pt;
-            margin-bottom: 18px;
+            font-size: 12pt;
+            margin-bottom: 25px;
         }
+
+        /* Tables */
         .table-border {
             width: 100%;
             border-collapse: collapse;
-            font-size: 10pt;
-            margin-top: 10px;
+            font-size: 11pt; /* Slightly smaller for dense tables to fit well */
+            margin-top: 15px;
+            margin-bottom: 15px;
         }
         .table-border th, .table-border td {
             border: 1px solid #000;
-            padding: 5px 8px;
+            padding: 6px 10px;
             vertical-align: top;
+            line-height: 1.4;
         }
         .table-border th {
             background: #f1f5f9;
             text-align: center;
         }
+
         .table-no-border {
-            width: 100%;
+            width: 90%;
             border-collapse: collapse;
-            font-size: 11pt;
-            margin: 10px 0;
+            font-size: 12pt;
+            margin: 10px 0 10px 40px; /* Aligned with text indent */
         }
         .table-no-border td {
-            padding: 2.5px 4px;
+            padding: 4px 6px;
             vertical-align: top;
         }
+        .col-label {
+            width: 35%; /* Fixed width for labels */
+        }
+        .col-separator {
+            width: 3%;
+            text-align: center;
+        }
+        .col-value {
+            width: 62%;
+        }
+
+        /* Signature Block */
         .ttd-box {
-            margin-top: 30px;
+            margin-top: 40px;
             width: 100%;
             display: flex;
             justify-content: flex-end;
             page-break-inside: avoid;
         }
+        .ttd-content {
+            text-align: center;
+            width: 300px;
+        }
+        .ttd-signature-space {
+            height: 70px; /* Ample space for stamp and signature */
+        }
+        .ttd-name {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        
+        /* Print Breaks */
         .page-break {
             page-break-before: always;
             margin-top: 30px;
         }
+
         @media print {
             .print-btn-bar { display: none !important; }
             body { margin: 0; }
-            .page-break { page-break-before: always; }
-            .table-border th { background: #f0f0f0 !important; -webkit-print-color-adjust: exact; }
+            .page-break { page-break-before: always; margin-top: 0; }
+            .table-border th { background: #e5e5e5 !important; -webkit-print-color-adjust: exact; color-adjust: exact; }
+            /* Force table borders to be solid black */
+            .table-border th, .table-border td { border: 1pt solid #000 !important; }
         }
     </style>
 </head>
@@ -133,15 +181,15 @@ $jenis = $surat['jenis_surat'];
             <div class="title-doc">SURAT PERINTAH TUGAS (SPT)</div>
             <div class="nomor-surat">Nomor: <?= htmlspecialchars($surat['nomor_surat']) ?></div>
 
-            <p style="text-align: justify; text-indent: 30px;">
+            <p class="indented-paragraph">
                 Yang bertanda tangan di bawah ini, Kepala <?= htmlspecialchars($config['nama_sekolah']) ?>, dengan ini memberikan tugas kedinasan kepada:
             </p>
 
-            <table class="table-no-border" style="margin-left: 20px;">
+            <table class="table-no-border">
                 <tr>
-                    <td style="width: 170px;">Nama Pegawai</td>
-                    <td style="width: 15px;">:</td>
-                    <td><strong><?= htmlspecialchars($surat['nama_penerima'] ?? '-') ?></strong></td>
+                    <td class="col-label">Nama Pegawai</td>
+                    <td class="col-separator">:</td>
+                    <td class="col-value"><strong><?= htmlspecialchars($surat['nama_penerima'] ?? '-') ?></strong></td>
                 </tr>
                 <tr>
                     <td>NIP / NUPTK</td>
@@ -167,15 +215,15 @@ $jenis = $surat['jenis_surat'];
                 <?php endif; ?>
             </table>
 
-            <p style="text-align: justify; text-indent: 30px; margin-top: 10px;">
+            <p class="indented-paragraph">
                 Untuk melaksanakan tugas kedinasan dalam rangka: <strong><?= htmlspecialchars($surat['keperluan'] ?? $surat['perihal']) ?></strong>, yang bertempat di:
             </p>
 
-            <table class="table-no-border" style="margin-left: 20px;">
+            <table class="table-no-border">
                 <tr>
-                    <td style="width: 170px;">Tempat / Instansi Tujuan</td>
-                    <td style="width: 15px;">:</td>
-                    <td><strong><?= htmlspecialchars($surat['instansi_tujuan'] ?? $surat['tempat_tujuan']) ?></strong> (<?= htmlspecialchars($surat['tempat_tujuan']) ?>)</td>
+                    <td class="col-label">Tempat / Instansi Tujuan</td>
+                    <td class="col-separator">:</td>
+                    <td class="col-value"><strong><?= htmlspecialchars($surat['instansi_tujuan'] ?? $surat['tempat_tujuan']) ?></strong> (<?= htmlspecialchars($surat['tempat_tujuan']) ?>)</td>
                 </tr>
                 <tr>
                     <td>Dasar Penugasan</td>
@@ -199,17 +247,17 @@ $jenis = $surat['jenis_surat'];
                 </tr>
             </table>
 
-            <p style="text-align: justify; text-indent: 30px; margin-top: 10px;">
+            <p class="indented-paragraph">
                 Demikian Surat Perintah Tugas ini dibuat untuk dilaksanakan dengan penuh rasa tanggung jawab dan menyampaikan laporan hasil pelaksanaan tugas setelah selesai.
             </p>
 
             <!-- TTD Kepala Sekolah SPT -->
             <div class="ttd-box">
-                <div style="text-align: center; width: 230px;">
+                <div class="ttd-content">
                     <div>Pagelaran, <?= date('d F Y', strtotime($surat['tanggal_surat'])) ?></div>
                     <div style="margin-top: 4px;">Kepala Sekolah,</div>
-                    <div style="height: 60px;"></div>
-                    <div style="font-weight: bold; text-decoration: underline;"><?= htmlspecialchars($surat['pejabat_penandatangan'] ?? $config['kepala_sekolah']) ?></div>
+                    <div class="ttd-signature-space"></div>
+                    <div class="ttd-name"><?= htmlspecialchars($surat['pejabat_penandatangan'] ?? $config['kepala_sekolah']) ?></div>
                     <div>NIP. <?= htmlspecialchars($config['nip_kepala_sekolah'] ?? '-') ?></div>
                 </div>
             </div>
@@ -223,9 +271,9 @@ $jenis = $surat['jenis_surat'];
 
             <table class="table-border">
                 <tr>
-                    <td style="width: 30px; text-align: center;">1.</td>
-                    <td style="width: 220px;">Pejabat Pembuat Komitmen / Pemberi Perintah</td>
-                    <td>Kepala <?= htmlspecialchars($config['nama_sekolah']) ?></td>
+                    <td style="width: 5%; text-align: center;">1.</td>
+                    <td style="width: 40%;">Pejabat Pembuat Komitmen / Pemberi Perintah</td>
+                    <td style="width: 55%;">Kepala <?= htmlspecialchars($config['nama_sekolah']) ?></td>
                 </tr>
                 <tr>
                     <td style="text-align: center;">2.</td>
@@ -289,12 +337,12 @@ $jenis = $surat['jenis_surat'];
             </table>
 
             <div class="ttd-box">
-                <div style="text-align: center; width: 230px;">
+                <div class="ttd-content">
                     <div>Dikeluarkan di: Pagelaran</div>
                     <div>Pada tanggal: <?= date('d F Y', strtotime($surat['tanggal_surat'])) ?></div>
                     <div style="margin-top: 4px;">Kepala Sekolah,</div>
-                    <div style="height: 60px;"></div>
-                    <div style="font-weight: bold; text-decoration: underline;"><?= htmlspecialchars($surat['pejabat_penandatangan'] ?? $config['kepala_sekolah']) ?></div>
+                    <div class="ttd-signature-space"></div>
+                    <div class="ttd-name"><?= htmlspecialchars($surat['pejabat_penandatangan'] ?? $config['kepala_sekolah']) ?></div>
                     <div>NIP. <?= htmlspecialchars($config['nip_kepala_sekolah'] ?? '-') ?></div>
                 </div>
             </div>
@@ -313,15 +361,15 @@ $jenis = $surat['jenis_surat'];
             <div class="title-doc">SURAT PERINTAH TUGAS (SPT)</div>
             <div class="nomor-surat">Nomor: <?= htmlspecialchars($surat['nomor_surat']) ?></div>
 
-            <p style="text-align: justify; text-indent: 30px;">
+            <p class="indented-paragraph">
                 Yang bertanda tangan di bawah ini, Kepala <?= htmlspecialchars($config['nama_sekolah']) ?>, dengan ini menugaskan kepada:
             </p>
 
-            <table class="table-no-border" style="margin-left: 20px;">
+            <table class="table-no-border">
                 <tr>
-                    <td style="width: 170px;">Nama Pegawai</td>
-                    <td style="width: 15px;">:</td>
-                    <td><strong><?= htmlspecialchars($surat['nama_penerima'] ?? '-') ?></strong></td>
+                    <td class="col-label">Nama Pegawai</td>
+                    <td class="col-separator">:</td>
+                    <td class="col-value"><strong><?= htmlspecialchars($surat['nama_penerima'] ?? '-') ?></strong></td>
                 </tr>
                 <tr>
                     <td>NIP / NUPTK</td>
@@ -335,15 +383,15 @@ $jenis = $surat['jenis_surat'];
                 </tr>
             </table>
 
-            <p style="text-align: justify; text-indent: 30px; margin-top: 10px;">
+            <p class="indented-paragraph">
                 Untuk melaksanakan tugas: <strong><?= htmlspecialchars($surat['keperluan'] ?? $surat['perihal']) ?></strong>, yang dilaksanakan pada:
             </p>
 
-            <table class="table-no-border" style="margin-left: 20px;">
+            <table class="table-no-border">
                 <tr>
-                    <td style="width: 170px;">Hari / Tanggal</td>
-                    <td style="width: 15px;">:</td>
-                    <td><?= !empty($surat['tanggal_berangkat']) ? date('d F Y', strtotime($surat['tanggal_berangkat'])) : date('d F Y', strtotime($surat['tanggal_surat'])) ?></td>
+                    <td class="col-label">Hari / Tanggal</td>
+                    <td class="col-separator">:</td>
+                    <td class="col-value"><?= !empty($surat['tanggal_berangkat']) ? date('d F Y', strtotime($surat['tanggal_berangkat'])) : date('d F Y', strtotime($surat['tanggal_surat'])) ?></td>
                 </tr>
                 <tr>
                     <td>Tempat Pelaksanaan</td>
@@ -359,16 +407,16 @@ $jenis = $surat['jenis_surat'];
                 <?php endif; ?>
             </table>
 
-            <p style="text-align: justify; text-indent: 30px; margin-top: 10px;">
+            <p class="indented-paragraph">
                 Demikian Surat Perintah Tugas ini diberikan agar dapat dilaksanakan dengan penuh dedikasi dan rasa tanggung jawab.
             </p>
 
             <div class="ttd-box">
-                <div style="text-align: center; width: 230px;">
+                <div class="ttd-content">
                     <div>Pagelaran, <?= date('d F Y', strtotime($surat['tanggal_surat'])) ?></div>
                     <div style="margin-top: 4px;">Kepala Sekolah,</div>
-                    <div style="height: 60px;"></div>
-                    <div style="font-weight: bold; text-decoration: underline;"><?= htmlspecialchars($surat['pejabat_penandatangan'] ?? $config['kepala_sekolah']) ?></div>
+                    <div class="ttd-signature-space"></div>
+                    <div class="ttd-name"><?= htmlspecialchars($surat['pejabat_penandatangan'] ?? $config['kepala_sekolah']) ?></div>
                     <div>NIP. <?= htmlspecialchars($config['nip_kepala_sekolah'] ?? '-') ?></div>
                 </div>
             </div>
@@ -383,15 +431,15 @@ $jenis = $surat['jenis_surat'];
             <div class="title-doc"><?= strtoupper(htmlspecialchars($surat['perihal'])) ?></div>
             <div class="nomor-surat">Nomor: <?= htmlspecialchars($surat['nomor_surat']) ?></div>
 
-            <p style="text-align: justify; text-indent: 30px;">
+            <p class="indented-paragraph">
                 Yang bertanda tangan di bawah ini, Kepala <?= htmlspecialchars($config['nama_sekolah']) ?>, menerangkan dengan sebenarnya bahwa:
             </p>
 
-            <table class="table-no-border" style="margin-left: 20px;">
+            <table class="table-no-border">
                 <tr>
-                    <td style="width: 170px;">Nama Lengkap</td>
-                    <td style="width: 15px;">:</td>
-                    <td><strong><?= htmlspecialchars($surat['nama_penerima'] ?? '-') ?></strong></td>
+                    <td class="col-label">Nama Lengkap</td>
+                    <td class="col-separator">:</td>
+                    <td class="col-value"><strong><?= htmlspecialchars($surat['nama_penerima'] ?? '-') ?></strong></td>
                 </tr>
                 <tr>
                     <td>NISN / NIS</td>
@@ -425,26 +473,26 @@ $jenis = $surat['jenis_surat'];
                 </tr>
             </table>
 
-            <p style="text-align: justify; text-indent: 30px; margin-top: 15px;">
+            <p class="indented-paragraph">
                 Adalah benar siswa tersebut di atas terdaftar dan <strong>AKTIF</strong> mengikuti kegiatan belajar mengajar pada Tahun Pelajaran <?= date('Y') . '/' . (date('Y') + 1) ?> di <?= htmlspecialchars($config['nama_sekolah']) ?>.
             </p>
 
             <?php if (!empty($surat['keperluan'])): ?>
-                <p style="text-align: justify; text-indent: 30px;">
+                <p class="indented-paragraph">
                     Surat keterangan ini diberikan kepada yang bersangkutan untuk keperluan: <strong><?= htmlspecialchars($surat['keperluan']) ?></strong>.
                 </p>
             <?php endif; ?>
 
-            <p style="text-align: justify; text-indent: 30px; margin-top: 10px;">
+            <p class="indented-paragraph">
                 Demikian surat keterangan ini kami buat dengan sebenarnya agar dapat dipergunakan sebagaimana mestinya.
             </p>
 
             <div class="ttd-box">
-                <div style="text-align: center; width: 230px;">
+                <div class="ttd-content">
                     <div>Pagelaran, <?= date('d F Y', strtotime($surat['tanggal_surat'])) ?></div>
                     <div style="margin-top: 4px;">Kepala Sekolah,</div>
-                    <div style="height: 60px;"></div>
-                    <div style="font-weight: bold; text-decoration: underline;"><?= htmlspecialchars($surat['pejabat_penandatangan'] ?? $config['kepala_sekolah']) ?></div>
+                    <div class="ttd-signature-space"></div>
+                    <div class="ttd-name"><?= htmlspecialchars($surat['pejabat_penandatangan'] ?? $config['kepala_sekolah']) ?></div>
                     <div>NIP. <?= htmlspecialchars($config['nip_kepala_sekolah'] ?? '-') ?></div>
                 </div>
             </div>
