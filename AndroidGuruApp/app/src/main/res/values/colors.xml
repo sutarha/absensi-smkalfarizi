@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand Colors -->
+    <color name="primary">#1565C0</color>        <!-- Biru tua sekolah -->
+    <color name="primary_dark">#0D47A1</color>
+    <color name="primary_light">#E3F2FD</color>
+    <color name="accent">#FF6F00</color>          <!-- Orange untuk CTA -->
+
+    <!-- Status Badge Colors -->
+    <color name="status_akan_datang">#78909C</color>    <!-- Abu-abu -->
+    <color name="status_siap_checkin">#2E7D32</color>  <!-- Hijau -->
+    <color name="status_sedang_mengajar">#1565C0</color> <!-- Biru -->
+    <color name="status_selesai">#558B2F</color>        <!-- Hijau gelap -->
+    <color name="status_tidak_hadir">#C62828</color>    <!-- Merah -->
+
+    <!-- Neutral -->
+    <color name="background">#F5F7FA</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_primary">#1A1A2E</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="error">#C62828</color>
+    <color name="success">#2E7D32</color>
+    <color name="divider">#E5E7EB</color>
+</resources>

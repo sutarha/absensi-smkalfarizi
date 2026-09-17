@@ -1,0 +1,16 @@
+/vendor/
+.env
+/database/*.sqlite
+/database/*.db
+/public/uploads/*
+!/public/uploads/index.html
+/scratch/
+*.log
+*.tmp
+*.bak
+*fetch*
+*exec*
+*test_*.php
+update_*.php
+AndroidGuruApp/build/
+AndroidGuruApp/.gradle/

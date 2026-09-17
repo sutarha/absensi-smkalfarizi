@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema utama (tanpa ActionBar) -->
+    <style name="Theme.GuruApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#2563EB</item>
+        <item name="colorPrimaryVariant">#1D4ED8</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorSecondary">#3B82F6</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:statusBarColor">#1E293B</item>
+        <item name="android:navigationBarColor">#0F172A</item>
+    </style>
+
+    <!-- Tema Splash (layar gelap saat loading) -->
+    <style name="Theme.GuruApp.Splash" parent="Theme.GuruApp">
+        <item name="android:windowBackground">#0F172A</item>
+        <item name="android:statusBarColor">#0F172A</item>
+        <item name="android:navigationBarColor">#0F172A</item>
+    </style>
+</resources>

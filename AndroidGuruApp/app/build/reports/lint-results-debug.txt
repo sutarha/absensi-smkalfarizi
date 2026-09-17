@@ -1,0 +1,695 @@
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\build.gradle.kts:17: Warning: Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details. [OldTargetApi]
+        targetSdk = 35
+        ~~~~~~~~~~~~~~
+
+   Explanation for issues of type "OldTargetApi":
+   When your application or sdk runs on a version of Android that is more
+   recent than your targetSdkVersion specifies that it has been tested with,
+   various compatibility modes kick in. This ensures that your application
+   continues to work, but it may look out of place. For example, if the
+   targetSdkVersion is less than 14, your app may get an option button in the
+   UI.
+
+   To fix this issue, set the targetSdkVersion to the highest available value.
+   Then test your app to make sure everything works correctly. You may want to
+   consult the compatibility notes to see what changes apply to each version
+   you are adding support for:
+   https://developer.android.com/reference/android/os/Build.VERSION_CODES.html
+   as well as follow this guide:
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.
+   html
+
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.html
+
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:2: Warning: A newer version of com.android.application than 8.13.2 is available: 9.4.0 [AndroidGradlePluginVersion]
+agp = "8.13.2"
+      ~~~~~~~~
+
+   Explanation for issues of type "AndroidGradlePluginVersion":
+   This detector looks for usage of the Android Gradle Plugin where the
+   version you are using is not the current stable release. Using older
+   versions is fine, and there are cases where you deliberately want to stick
+   with an older version. However, you may simply not be aware that a more
+   recent version is available, and that is what this lint check helps find.
+
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\build.gradle.kts:12: Warning: A newer version of compileSdkVersion than 35 is available: 36 [GradleDependency]
+    compileSdk = 35
+    ~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:4: Warning: A newer version of androidx.core:core-ktx than 1.13.1 is available: 1.19.0 [GradleDependency]
+coreKtx = "1.13.1"
+          ~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:5: Warning: A newer version of androidx.appcompat:appcompat than 1.7.0 is available: 1.8.0 [GradleDependency]
+appcompat = "1.7.0"
+            ~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:6: Warning: A newer version of com.google.android.material:material than 1.12.0 is available: 1.14.0 [GradleDependency]
+material = "1.12.0"
+           ~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:7: Warning: A newer version of androidx.constraintlayout:constraintlayout than 2.1.4 is available: 2.2.2 [GradleDependency]
+constraintlayout = "2.1.4"
+                   ~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:8: Warning: A newer version of androidx.lifecycle:lifecycle-livedata-ktx than 2.8.4 is available: 2.11.0 [GradleDependency]
+lifecycle = "2.8.4"
+            ~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:8: Warning: A newer version of androidx.lifecycle:lifecycle-runtime-ktx than 2.8.4 is available: 2.11.0 [GradleDependency]
+lifecycle = "2.8.4"
+            ~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:8: Warning: A newer version of androidx.lifecycle:lifecycle-viewmodel-ktx than 2.8.4 is available: 2.11.0 [GradleDependency]
+lifecycle = "2.8.4"
+            ~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:9: Warning: A newer version of androidx.navigation:navigation-fragment-ktx than 2.7.7 is available: 2.10.1 [GradleDependency]
+navigation = "2.7.7"
+             ~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:9: Warning: A newer version of androidx.navigation:navigation-ui-ktx than 2.7.7 is available: 2.10.1 [GradleDependency]
+navigation = "2.7.7"
+             ~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:14: Warning: A newer version of androidx.security:security-crypto than 1.1.0-alpha06 is available: 1.1.0 [GradleDependency]
+securityCrypto = "1.1.0-alpha06"
+                 ~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:15: Warning: A newer version of com.google.android.gms:play-services-location than 21.3.0 is available: 21.4.0 [GradleDependency]
+playServicesLocation = "21.3.0"
+                       ~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:16: Warning: A newer version of androidx.swiperefreshlayout:swiperefreshlayout than 1.1.0 is available: 1.2.0 [GradleDependency]
+swiperefreshlayout = "1.1.0"
+                     ~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:3: Warning: A newer version of org.jetbrains.kotlin.android than 2.0.21 is available: 2.4.20 [NewerVersionAvailable]
+kotlin = "2.0.21"
+         ~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:10: Warning: A newer version of com.squareup.retrofit2:converter-gson than 2.11.0 is available: 3.0.0 [NewerVersionAvailable]
+retrofit = "2.11.0"
+           ~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:10: Warning: A newer version of com.squareup.retrofit2:retrofit than 2.11.0 is available: 3.0.0 [NewerVersionAvailable]
+retrofit = "2.11.0"
+           ~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:11: Warning: A newer version of com.squareup.okhttp3:logging-interceptor than 4.12.0 is available: 5.5.0 [NewerVersionAvailable]
+okhttp = "4.12.0"
+         ~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:11: Warning: A newer version of com.squareup.okhttp3:okhttp than 4.12.0 is available: 5.5.0 [NewerVersionAvailable]
+okhttp = "4.12.0"
+         ~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:12: Warning: A newer version of com.google.code.gson:gson than 2.11.0 is available: 2.14.0 [NewerVersionAvailable]
+gson = "2.11.0"
+       ~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\gradle\libs.versions.toml:13: Warning: A newer version of org.jetbrains.kotlinx:kotlinx-coroutines-android than 1.8.1 is available: 1.11.0 [NewerVersionAvailable]
+coroutines = "1.8.1"
+             ~~~~~~~
+
+   Explanation for issues of type "NewerVersionAvailable":
+   This detector checks with a central repository to see if there are newer
+   versions available for the dependencies used by this project. This is
+   similar to the GradleDependency check, which checks for newer versions
+   available in the Android SDK tools and libraries, but this works with any
+   MavenCentral dependency, and connects to the library every time, which
+   makes it more flexible but also much slower.
+
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:131: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged()
+        ~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\honor\HonorFragment.kt:104: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged()
+        ~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\presensi\PresensiFragment.kt:142: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged()
+        ~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "NotifyDataSetChanged":
+   The RecyclerView adapter's onNotifyDataSetChanged method does not specify
+   what about the data set has changed, forcing any observers to assume that
+   all existing items and structure may no longer be valid. `LayoutManager`s
+   will be forced to fully rebind and relayout all visible views.
+
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\activity_login.xml:13: Warning: Possible overdraw: Root element paints background @color/background with a theme that also paints a background (inferred theme is @style/Theme.GuruApp) [Overdraw]
+    android:background="@color/background">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "Overdraw":
+   If you set a background drawable on a root view, then you should use a
+   custom theme where the theme background is null. Otherwise, the theme
+   background will be painted first, only to have your custom background
+   completely cover it; this is called "overdraw".
+
+   NOTE: This detector relies on figuring out which layouts are associated
+   with which activities based on scanning the Java code, and it's currently
+   doing that using an inexact pattern matching algorithm. Therefore, it can
+   incorrectly conclude which activity the layout is associated with and then
+   wrongly complain that a background-theme is hidden.
+
+   If you want your custom background on multiple pages, then you should
+   consider making a custom theme with your custom background and just using
+   that theme instead of a root element background.
+
+   Of course it's possible that your custom drawable is translucent and you
+   want it to be mixed with the background. However, you will get better
+   performance if you pre-mix the background with your drawable and use that
+   resulting image or color as a custom theme background instead.
+
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\drawable\bg_badge_default.xml:2: Warning: The resource R.drawable.bg_badge_default appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\drawable\bg_badge_selesai.xml:2: Warning: The resource R.drawable.bg_badge_selesai appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\colors.xml:6: Warning: The resource R.color.primary_light appears to be unused [UnusedResources]
+    <color name="primary_light">#E3F2FD</color>
+           ~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\colors.xml:10: Warning: The resource R.color.status_akan_datang appears to be unused [UnusedResources]
+    <color name="status_akan_datang">#78909C</color>    <!-- Abu-abu -->
+           ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\colors.xml:11: Warning: The resource R.color.status_siap_checkin appears to be unused [UnusedResources]
+    <color name="status_siap_checkin">#2E7D32</color>  <!-- Hijau -->
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\colors.xml:12: Warning: The resource R.color.status_sedang_mengajar appears to be unused [UnusedResources]
+    <color name="status_sedang_mengajar">#1565C0</color> <!-- Biru -->
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\colors.xml:13: Warning: The resource R.color.status_selesai appears to be unused [UnusedResources]
+    <color name="status_selesai">#558B2F</color>        <!-- Hijau gelap -->
+           ~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\colors.xml:14: Warning: The resource R.color.status_tidak_hadir appears to be unused [UnusedResources]
+    <color name="status_tidak_hadir">#C62828</color>    <!-- Merah -->
+           ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\colors.xml:19: Warning: The resource R.color.text_primary appears to be unused [UnusedResources]
+    <color name="text_primary">#1A1A2E</color>
+           ~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\colors.xml:22: Warning: The resource R.color.success appears to be unused [UnusedResources]
+    <color name="success">#2E7D32</color>
+           ~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\colors.xml:23: Warning: The resource R.color.divider appears to be unused [UnusedResources]
+    <color name="divider">#E5E7EB</color>
+           ~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\strings.xml:4: Warning: The resource R.string.login appears to be unused [UnusedResources]
+    <string name="login">Masuk</string>
+            ~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\strings.xml:5: Warning: The resource R.string.logout appears to be unused [UnusedResources]
+    <string name="logout">Keluar</string>
+            ~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\strings.xml:6: Warning: The resource R.string.loading appears to be unused [UnusedResources]
+    <string name="loading">Memuat...</string>
+            ~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\strings.xml:7: Warning: The resource R.string.error_network appears to be unused [UnusedResources]
+    <string name="error_network">Tidak dapat terhubung ke server</string>
+            ~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\strings.xml:8: Warning: The resource R.string.checkin_success appears to be unused [UnusedResources]
+    <string name="checkin_success">Check-in berhasil!</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\strings.xml:9: Warning: The resource R.string.checkin_failed appears to be unused [UnusedResources]
+    <string name="checkin_failed">Check-in gagal</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\strings.xml:10: Warning: The resource R.string.presensi_saved appears to be unused [UnusedResources]
+    <string name="presensi_saved">Presensi berhasil disimpan</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests =true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests =true.
+   ,
+
+   Available options:
+
+   **skip-libraries** (default is true):
+   Whether the unused resource check should skip reporting unused resources in libraries.
+
+   Many libraries will declare resources that are part of the library surface; other modules depending on the library will also reference the resources. To avoid reporting all these resources as unused (in the context of a library), the unused resource check normally skips reporting unused resources in libraries. Instead, run the unused resource check on the consuming app module (along with `checkDependencies=true`).
+
+   However, there are cases where you want to check that all the resources declared in a library are used; in that case, you can disable the skip option.
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UnusedResources">
+           <option name="skip-libraries" value="true" />
+       </issue>
+   </lint>
+   ```
+
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\values\strings.xml:6: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+    <string name="loading">Memuat...</string>
+                           ~~~~~~~~~
+
+   Explanation for issues of type "TypographyEllipsis":
+   You can replace the string "..." with a dedicated ellipsis character,
+   ellipsis character (u2026, &#8230;). This can help make the text more
+   readable.
+
+   https://en.wikipedia.org/wiki/Ellipsis
+
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\data\api\RetrofitClient.kt:77: Warning: Use the KTX extension function SharedPreferences.edit instead? [UseKtx]
+    fun saveToken(token: String) = prefs.edit().putString(KEY_TOKEN, token).apply()
+                                   ~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\data\api\RetrofitClient.kt:84: Warning: Use the KTX extension function SharedPreferences.edit instead? [UseKtx]
+        prefs.edit()
+        ~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\data\api\RetrofitClient.kt:99: Warning: Use the KTX extension function SharedPreferences.edit instead? [UseKtx]
+    fun clear() = prefs.edit().clear().apply()
+                  ~~~~~~~~~~~~
+
+   Explanation for issues of type "UseKtx":
+   The Android KTX libraries decorates the Android platform SDK as well as
+   various libraries with more convenient extension functions available from
+   Kotlin, allowing you to use default parameters, named parameters, and
+   more.
+
+   Available options:
+
+   **remove-defaults** (default is true):
+   Whether to skip arguments that match the defaults provided by the extension.
+
+   Extensions often provide default values for some of the parameters. For example:
+   ```kotlin
+   fun Path.readLines(charset: Charset = Charsets.UTF_8): List<String> { return Files.readAllLines(this, charset) }
+   ```
+   This lint check will by default automatically omit parameters that match the default, so if your code was calling
+
+   ```kotlin
+   Files.readAllLines(file, Charset.UTF_8)
+   ```
+   lint would replace this with
+   ```kotlin
+   file.readLines()
+   ```
+   rather than
+
+   ```kotlin
+   file.readLines(Charset.UTF_8
+   ```
+   You can turn this behavior off using this option.
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UseKtx">
+           <option name="remove-defaults" value="true" />
+       </issue>
+   </lint>
+   ```
+
+   **require-present** (default is true):
+   Whether to only offer extensions already available.
+
+   This option lets you only have lint suggest extension replacements if those extensions are already available on the class path (in other words, you're already depending on the library containing the extension method.)
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UseKtx">
+           <option name="require-present" value="true" />
+       </issue>
+   </lint>
+   ```
+
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\checkin\CheckInFragment.kt:65: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        binding.tvInfoJadwal.text = "Jadwal ID: $jadwalId"
+                                    ~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\checkin\CheckInFragment.kt:65: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        binding.tvInfoJadwal.text = "Jadwal ID: $jadwalId"
+                                     ~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\checkin\CheckInFragment.kt:92: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            binding.tvGpsStatus.text = "Mengambil posisi GPS terkini..."
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\checkin\CheckInFragment.kt:97: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                    binding.tvGpsStatus.text = "GPS Aktif: Lat $currentLat, Lng $currentLng"
+                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\checkin\CheckInFragment.kt:97: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.tvGpsStatus.text = "GPS Aktif: Lat $currentLat, Lng $currentLng"
+                                                ~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\checkin\CheckInFragment.kt:97: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.tvGpsStatus.text = "GPS Aktif: Lat $currentLat, Lng $currentLng"
+                                                                          ~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\checkin\CheckInFragment.kt:99: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.tvGpsStatus.text = "Lokasi GPS belum tersedia, menggunakan titik default."
+                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\checkin\CheckInFragment.kt:102: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                binding.tvGpsStatus.text = "Gagal mendapatkan GPS: ${it.message}"
+                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\checkin\CheckInFragment.kt:102: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                binding.tvGpsStatus.text = "Gagal mendapatkan GPS: ${it.message}"
+                                            ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\checkin\CheckInFragment.kt:105: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            binding.tvGpsStatus.text = "Izin lokasi ditolak."
+                                        ~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\checkin\CheckInFragment.kt:131: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                            binding.tvDistance.text = "Jarak Anda dari sekolah: ${it.toInt()} meter (Maksimal radius sekolah)"
+                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\checkin\CheckInFragment.kt:131: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                            binding.tvDistance.text = "Jarak Anda dari sekolah: ${it.toInt()} meter (Maksimal radius sekolah)"
+                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\checkin\CheckInFragment.kt:131: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                            binding.tvDistance.text = "Jarak Anda dari sekolah: ${it.toInt()} meter (Maksimal radius sekolah)"
+                                                                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:48: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        binding.tvWelcome.text = "Selamat Datang, ${tokenManager.getUserName() ?: "Guru"}"
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:48: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        binding.tvWelcome.text = "Selamat Datang, ${tokenManager.getUserName() ?: "Guru"}"
+                                  ~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:82: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                        binding.tvTanggal.text = "${data.hari}, ${data.tanggal}"
+                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:87: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                        binding.tvDetailHonorSummary.text = "${data.ringkasanHonor.jumlahSesi} Sesi | Telat: ${data.ringkasanHonor.totalTelatMenit} mnt (Denda: ${formatRupiah.format(data.ringkasanHonor.totalDenda)})"
+                                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:87: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.tvDetailHonorSummary.text = "${data.ringkasanHonor.jumlahSesi} Sesi | Telat: ${data.ringkasanHonor.totalTelatMenit} mnt (Denda: ${formatRupiah.format(data.ringkasanHonor.totalDenda)})"
+                                                                                              ~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:87: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.tvDetailHonorSummary.text = "${data.ringkasanHonor.jumlahSesi} Sesi | Telat: ${data.ringkasanHonor.totalTelatMenit} mnt (Denda: ${formatRupiah.format(data.ringkasanHonor.totalDenda)})"
+                                                                                                                                                   ~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:91: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                            binding.tvGerbangStatus.text = "Datang: ${gerbang.waktuDatang ?: "-"} | Pulang: ${gerbang.waktuPulang ?: "-"} | Status: ${gerbang.status ?: "-"}"
+                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:91: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                            binding.tvGerbangStatus.text = "Datang: ${gerbang.waktuDatang ?: "-"} | Pulang: ${gerbang.waktuPulang ?: "-"} | Status: ${gerbang.status ?: "-"}"
+                                                            ~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:91: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                            binding.tvGerbangStatus.text = "Datang: ${gerbang.waktuDatang ?: "-"} | Pulang: ${gerbang.waktuPulang ?: "-"} | Status: ${gerbang.status ?: "-"}"
+                                                                                                 ~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:91: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                            binding.tvGerbangStatus.text = "Datang: ${gerbang.waktuDatang ?: "-"} | Pulang: ${gerbang.waktuPulang ?: "-"} | Status: ${gerbang.status ?: "-"}"
+                                                                                                                                         ~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:93: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                            binding.tvGerbangStatus.text = "Belum tap presensi gerbang"
+                                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:148: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            binding.tvKelas.text = "Kelas: ${item.namaKelas} (${item.tingkat})"
+                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:148: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            binding.tvKelas.text = "Kelas: ${item.namaKelas} (${item.tingkat})"
+                                    ~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:149: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            binding.tvJam.text = "Pukul: ${item.jamMulai} - ${item.jamSelesai} (${item.jumlahJp} JP)"
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:149: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            binding.tvJam.text = "Pukul: ${item.jamMulai} - ${item.jamSelesai} (${item.jumlahJp} JP)"
+                                  ~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\dashboard\DashboardFragment.kt:149: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            binding.tvJam.text = "Pukul: ${item.jamMulai} - ${item.jamSelesai} (${item.jumlahJp} JP)"
+                                                                                                ~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\honor\HonorFragment.kt:70: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                        binding.tvRingkasanDetail.text = "Honor KBM: ${formatRupiah.format(ringkasan.totalHonorKbm)} | Tunjangan: ${formatRupiah.format(ringkasan.tunjanganTugas)}\nTotal JP: ${ringkasan.totalJp} | Denda Telat: ${formatRupiah.format(ringkasan.totalDenda)}"
+                                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\honor\HonorFragment.kt:70: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.tvRingkasanDetail.text = "Honor KBM: ${formatRupiah.format(ringkasan.totalHonorKbm)} | Tunjangan: ${formatRupiah.format(ringkasan.tunjanganTugas)}\nTotal JP: ${ringkasan.totalJp} | Denda Telat: ${formatRupiah.format(ringkasan.totalDenda)}"
+                                                          ~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\honor\HonorFragment.kt:70: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.tvRingkasanDetail.text = "Honor KBM: ${formatRupiah.format(ringkasan.totalHonorKbm)} | Tunjangan: ${formatRupiah.format(ringkasan.tunjanganTugas)}\nTotal JP: ${ringkasan.totalJp} | Denda Telat: ${formatRupiah.format(ringkasan.totalDenda)}"
+                                                                                                                    ~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\honor\HonorFragment.kt:70: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.tvRingkasanDetail.text = "Honor KBM: ${formatRupiah.format(ringkasan.totalHonorKbm)} | Tunjangan: ${formatRupiah.format(ringkasan.tunjanganTugas)}\nTotal JP: ${ringkasan.totalJp} | Denda Telat: ${formatRupiah.format(ringkasan.totalDenda)}"
+                                                                                                                                                                                    ~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\honor\HonorFragment.kt:70: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.tvRingkasanDetail.text = "Honor KBM: ${formatRupiah.format(ringkasan.totalHonorKbm)} | Tunjangan: ${formatRupiah.format(ringkasan.tunjanganTugas)}\nTotal JP: ${ringkasan.totalJp} | Denda Telat: ${formatRupiah.format(ringkasan.totalDenda)}"
+                                                                                                                                                                                                                  ~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\honor\HonorFragment.kt:121: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            binding.tvTanggalMapel.text = "${item.tanggal} — ${item.namaMapel} (${item.namaKelas})"
+                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\honor\HonorFragment.kt:123: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            binding.tvDetailHonor.text = "${item.jumlahJp} JP | Telat: ${item.menitTerlambat} mnt (Denda: ${formatRupiah.format(item.potonganDenda)}) | Status: ${item.statusVerifikasi}"
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\honor\HonorFragment.kt:123: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            binding.tvDetailHonor.text = "${item.jumlahJp} JP | Telat: ${item.menitTerlambat} mnt (Denda: ${formatRupiah.format(item.potonganDenda)}) | Status: ${item.statusVerifikasi}"
+                                                          ~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\honor\HonorFragment.kt:123: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            binding.tvDetailHonor.text = "${item.jumlahJp} JP | Telat: ${item.menitTerlambat} mnt (Denda: ${formatRupiah.format(item.potonganDenda)}) | Status: ${item.statusVerifikasi}"
+                                                                                             ~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\honor\HonorFragment.kt:123: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            binding.tvDetailHonor.text = "${item.jumlahJp} JP | Telat: ${item.menitTerlambat} mnt (Denda: ${formatRupiah.format(item.potonganDenda)}) | Status: ${item.statusVerifikasi}"
+                                                                                                                                                    ~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\presensi\PresensiFragment.kt:76: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                        binding.tvSesiInfo.text = "${data.sesi.namaMapel} — ${data.sesi.namaKelas} (${data.totalSizeOrCount()})"
+                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\presensi\PresensiFragment.kt:173: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            binding.tvNamaSiswa.text = "${item.namaSiswa} (${item.nisn})"
+                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:57: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                        binding.tvNikNip.text = "NIK / NIP: ${user.nikNip}"
+                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:57: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.tvNikNip.text = "NIK / NIP: ${user.nikNip}"
+                                                 ~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:58: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                        binding.tvUsername.text = "Username: ${user.username}"
+                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:58: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.tvUsername.text = "Username: ${user.username}"
+                                                   ~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:59: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                        binding.tvRole.text = "Role: ${user.role}"
+                                              ~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:59: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.tvRole.text = "Role: ${user.role}"
+                                               ~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:60: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                        binding.tvTugas.text = "Tugas Tambahan: ${user.tugasTambahan ?: "Tidak ada"}"
+                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:60: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.tvTugas.text = "Tugas Tambahan: ${user.tugasTambahan ?: "Tidak ada"}"
+                                                ~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:63: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                        binding.tvTunjangan.text = "Tunjangan Tugas: ${formatRupiah.format(user.tunjanganTugas)}"
+                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:63: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.tvTunjangan.text = "Tunjangan Tugas: ${formatRupiah.format(user.tunjanganTugas)}"
+                                                    ~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:67: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                        binding.tvUsername.text = "Username: ${tokenManager.getUsername() ?: "-"}"
+                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:67: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.tvUsername.text = "Username: ${tokenManager.getUsername() ?: "-"}"
+                                                   ~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:68: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                        binding.tvRole.text = "Role: ${tokenManager.getUserRole() ?: "GURU"}"
+                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:68: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        binding.tvRole.text = "Role: ${tokenManager.getUserRole() ?: "GURU"}"
+                                               ~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:74: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                    binding.tvUsername.text = "Username: ${tokenManager.getUsername() ?: "-"}"
+                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:74: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.tvUsername.text = "Username: ${tokenManager.getUsername() ?: "-"}"
+                                               ~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:75: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                    binding.tvRole.text = "Role: ${tokenManager.getUserRole() ?: "GURU"}"
+                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\java\com\smkalfarizi\guru\ui\profile\ProfileFragment.kt:75: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    binding.tvRole.text = "Role: ${tokenManager.getUserRole() ?: "GURU"}"
+                                           ~~~~~~
+
+   Explanation for issues of type "SetTextI18n":
+   When calling TextView#setText
+   * Never call Number#toString() to format numbers; it will not handle
+   fraction separators and locale-specific digits properly. Consider using
+   String#format with proper format specifications (%d or %f) instead.
+   * Do not pass a string literal (e.g. "Hello") to display text. Hardcoded
+   text can not be properly translated to other languages. Consider using
+   Android resource strings instead.
+   * Do not build messages by concatenating text chunks. Such messages can not
+   be properly translated.
+
+   https://developer.android.com/guide/topics/resources/localization.html
+
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\activity_login.xml:19: Warning: Hardcoded string "🏫", should use @string resource [HardcodedText]
+        android:text="🏫"
+        ~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\activity_login.xml:26: Warning: Hardcoded string "SMK AL-FARIZI", should use @string resource [HardcodedText]
+        android:text="SMK AL-FARIZI"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\activity_login.xml:35: Warning: Hardcoded string "Aplikasi Guru", should use @string resource [HardcodedText]
+        android:text="Aplikasi Guru"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\activity_login.xml:56: Warning: Hardcoded string "Username", should use @string resource [HardcodedText]
+                android:hint="Username"
+                ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\activity_login.xml:71: Warning: Hardcoded string "Password", should use @string resource [HardcodedText]
+                android:hint="Password"
+                ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\activity_login.xml:108: Warning: Hardcoded string "MASUK", should use @string resource [HardcodedText]
+                android:text="MASUK"
+                ~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\activity_login.xml:117: Warning: Hardcoded string "SI Presensi Cerdas v1.0", should use @string resource [HardcodedText]
+        android:text="SI Presensi Cerdas v1.0"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\menu\bottom_nav_menu.xml:6: Warning: Hardcoded string "Dashboard", should use @string resource [HardcodedText]
+        android:title="Dashboard" />
+        ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\menu\bottom_nav_menu.xml:10: Warning: Hardcoded string "Honor", should use @string resource [HardcodedText]
+        android:title="Honor" />
+        ~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\menu\bottom_nav_menu.xml:14: Warning: Hardcoded string "Profil", should use @string resource [HardcodedText]
+        android:title="Profil" />
+        ~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_checkin.xml:12: Warning: Hardcoded string "Check-in KBM", should use @string resource [HardcodedText]
+        android:text="Check-in KBM"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_checkin.xml:34: Warning: Hardcoded string "Memuat informasi jadwal...", should use @string resource [HardcodedText]
+                android:text="Memuat informasi jadwal..."
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_checkin.xml:43: Warning: Hardcoded string "Mendeteksi lokasi GPS Anda...", should use @string resource [HardcodedText]
+                android:text="Mendeteksi lokasi GPS Anda..."
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_checkin.xml:52: Warning: Hardcoded string "Jarak ke sekolah: -", should use @string resource [HardcodedText]
+                android:text="Jarak ke sekolah: -"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_checkin.xml:64: Warning: Hardcoded string "Kirim Check-in (Validasi GPS)", should use @string resource [HardcodedText]
+        android:text="Kirim Check-in (Validasi GPS)"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_dashboard.xml:23: Warning: Hardcoded string "Selamat Datang, Guru", should use @string resource [HardcodedText]
+                android:text="Selamat Datang, Guru"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_dashboard.xml:33: Warning: Hardcoded string "Senin, 13 September 2026", should use @string resource [HardcodedText]
+                android:text="Senin, 13 September 2026"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_dashboard.xml:54: Warning: Hardcoded string "Ringkasan Honor Bulan Ini", should use @string resource [HardcodedText]
+                        android:text="Ringkasan Honor Bulan Ini"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_dashboard.xml:64: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                        android:text="Rp 0"
+                        ~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_dashboard.xml:74: Warning: Hardcoded string "0 Sesi | Telat: 0 menit (Denda: Rp 0)", should use @string resource [HardcodedText]
+                        android:text="0 Sesi | Telat: 0 menit (Denda: Rp 0)"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_dashboard.xml:96: Warning: Hardcoded string "Presensi Gerbang Sekolah", should use @string resource [HardcodedText]
+                        android:text="Presensi Gerbang Sekolah"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_dashboard.xml:106: Warning: Hardcoded string "Belum tap presensi gerbang", should use @string resource [HardcodedText]
+                        android:text="Belum tap presensi gerbang"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_dashboard.xml:117: Warning: Hardcoded string "Jadwal Mengajar Hari Ini", should use @string resource [HardcodedText]
+                android:text="Jadwal Mengajar Hari Ini"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_dashboard.xml:134: Warning: Hardcoded string "Tidak ada jadwal mengajar hari ini.", should use @string resource [HardcodedText]
+                android:text="Tidak ada jadwal mengajar hari ini."
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_honor.xml:22: Warning: Hardcoded string "Dompet & Riwayat Honor", should use @string resource [HardcodedText]
+                android:text="Dompet &amp; Riwayat Honor"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_honor.xml:45: Warning: Hardcoded string "Total Take Home Pay", should use @string resource [HardcodedText]
+                        android:text="Total Take Home Pay"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_honor.xml:55: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                        android:text="Rp 0"
+                        ~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_honor.xml:65: Warning: Hardcoded string "Honor KBM: Rp 0 | Tunjangan: Rp 0nTotal JP: 0 | Denda Telat: Rp 0", should use @string resource [HardcodedText]
+                        android:text="Honor KBM: Rp 0 | Tunjangan: Rp 0\nTotal JP: 0 | Denda Telat: Rp 0"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_honor.xml:76: Warning: Hardcoded string "Riwayat Sesi Mengajar", should use @string resource [HardcodedText]
+                android:text="Riwayat Sesi Mengajar"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_honor.xml:93: Warning: Hardcoded string "Belum ada riwayat honor bulan ini.", should use @string resource [HardcodedText]
+                android:text="Belum ada riwayat honor bulan ini."
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_presensi.xml:12: Warning: Hardcoded string "Presensi Siswa & Checkout", should use @string resource [HardcodedText]
+        android:text="Presensi Siswa &amp; Checkout"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_presensi.xml:22: Warning: Hardcoded string "Memuat sesi...", should use @string resource [HardcodedText]
+        android:text="Memuat sesi..."
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_presensi.xml:44: Warning: Hardcoded string "Simpan Presensi", should use @string resource [HardcodedText]
+            android:text="Simpan Presensi"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_presensi.xml:53: Warning: Hardcoded string "Selesaikan KBM (Checkout)", should use @string resource [HardcodedText]
+            android:text="Selesaikan KBM (Checkout)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_profile.xml:12: Warning: Hardcoded string "Profil Guru", should use @string resource [HardcodedText]
+        android:text="Profil Guru"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_profile.xml:34: Warning: Hardcoded string "Nama Lengkap", should use @string resource [HardcodedText]
+                android:text="Nama Lengkap"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_profile.xml:44: Warning: Hardcoded string "NIK / NIP: -", should use @string resource [HardcodedText]
+                android:text="NIK / NIP: -"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_profile.xml:53: Warning: Hardcoded string "Username: -", should use @string resource [HardcodedText]
+                android:text="Username: -"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_profile.xml:62: Warning: Hardcoded string "Role: GURU", should use @string resource [HardcodedText]
+                android:text="Role: GURU"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_profile.xml:71: Warning: Hardcoded string "Tugas Tambahan: -", should use @string resource [HardcodedText]
+                android:text="Tugas Tambahan: -"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_profile.xml:80: Warning: Hardcoded string "Tunjangan Tugas: Rp 0", should use @string resource [HardcodedText]
+                android:text="Tunjangan Tugas: Rp 0"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\fragment_profile.xml:92: Warning: Hardcoded string "Keluar (Logout)", should use @string resource [HardcodedText]
+        android:text="Keluar (Logout)"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_honor.xml:26: Warning: Hardcoded string "13 Sep 2026 — Matematika (XII RPL 1)", should use @string resource [HardcodedText]
+                android:text="13 Sep 2026 — Matematika (XII RPL 1)"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_honor.xml:35: Warning: Hardcoded string "Rp 150.000", should use @string resource [HardcodedText]
+                android:text="Rp 150.000"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_honor.xml:46: Warning: Hardcoded string "3 JP | Telat: 0 mnt (Denda: Rp 0)", should use @string resource [HardcodedText]
+            android:text="3 JP | Telat: 0 mnt (Denda: Rp 0)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_jadwal.xml:28: Warning: Hardcoded string "Matematika", should use @string resource [HardcodedText]
+                android:text="Matematika"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_jadwal.xml:40: Warning: Hardcoded string "SIAP CHECK-IN", should use @string resource [HardcodedText]
+                android:text="SIAP CHECK-IN"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_jadwal.xml:51: Warning: Hardcoded string "Kelas: XII RPL 1 (Tingkat XII)", should use @string resource [HardcodedText]
+            android:text="Kelas: XII RPL 1 (Tingkat XII)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_jadwal.xml:60: Warning: Hardcoded string "Pukul: 07:00 - 09:30 (3 JP)", should use @string resource [HardcodedText]
+            android:text="Pukul: 07:00 - 09:30 (3 JP)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_jadwal.xml:75: Warning: Hardcoded string "Check-in KBM", should use @string resource [HardcodedText]
+                android:text="Check-in KBM"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_jadwal.xml:83: Warning: Hardcoded string "Input Presensi", should use @string resource [HardcodedText]
+                android:text="Input Presensi"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_siswa_presensi.xml:20: Warning: Hardcoded string "Ahmad Fauzi (00123456)", should use @string resource [HardcodedText]
+            android:text="Ahmad Fauzi (00123456)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_siswa_presensi.xml:36: Warning: Hardcoded string "Hadir", should use @string resource [HardcodedText]
+                android:text="Hadir"
+                ~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_siswa_presensi.xml:44: Warning: Hardcoded string "Sakit", should use @string resource [HardcodedText]
+                android:text="Sakit" />
+                ~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_siswa_presensi.xml:51: Warning: Hardcoded string "Izin", should use @string resource [HardcodedText]
+                android:text="Izin" />
+                ~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_siswa_presensi.xml:58: Warning: Hardcoded string "Alpha", should use @string resource [HardcodedText]
+                android:text="Alpha" />
+                ~~~~~~~~~~~~~~~~~~~~
+C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res\layout\item_siswa_presensi.xml:66: Warning: Hardcoded string "Catatan (opsional)", should use @string resource [HardcodedText]
+            android:hint="Catatan (opsional)">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "HardcodedText":
+   Hardcoding text attributes directly in layout files is bad for several
+   reasons:
+
+   * When creating configuration variations (for example for landscape or
+   portrait) you have to repeat the actual text (and keep it up to date when
+   making changes)
+
+   * The application cannot be translated to other languages by just adding
+   new translations for existing string resources.
+
+   There are quickfixes to automatically extract this hardcoded string into a
+   resource lookup.
+
+0 errors, 164 warnings

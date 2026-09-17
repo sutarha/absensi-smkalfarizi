@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirect all requests to public/
+    RewriteRule ^$ public/ [L]
+    RewriteRule (.*) public/$1 [L]
+</IfModule>
+
+# Security: Deny access to sensitive directories and files
+<FilesMatch "^\.env|composer\.json|composer\.lock|readme\.md|README\.md">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_authz_core.c>
+    <DirectoryMatch "^(app|database|tests|cron|vendor)/">
+        Require all denied
+    </DirectoryMatch>
+</IfModule>

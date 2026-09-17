@@ -1,0 +1,6 @@
+{
+    "require": {
+        "chillerlan/php-qrcode": "^6.0",
+        "firebase/php-jwt": "^7.1"
+    }
+}

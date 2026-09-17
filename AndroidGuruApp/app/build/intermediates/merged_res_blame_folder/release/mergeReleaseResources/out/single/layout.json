@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "com.smkalfarizi.guru.app-mergeReleaseResources-51:/layout/fragment_dashboard.xml",
+        "source": "com.smkalfarizi.guru.app-main-53:/layout/fragment_dashboard.xml"
+    },
+    {
+        "merged": "com.smkalfarizi.guru.app-mergeReleaseResources-51:/layout/fragment_honor.xml",
+        "source": "com.smkalfarizi.guru.app-main-53:/layout/fragment_honor.xml"
+    },
+    {
+        "merged": "com.smkalfarizi.guru.app-mergeReleaseResources-51:/layout/item_honor.xml",
+        "source": "com.smkalfarizi.guru.app-main-53:/layout/item_honor.xml"
+    },
+    {
+        "merged": "com.smkalfarizi.guru.app-mergeReleaseResources-51:/layout/item_siswa_presensi.xml",
+        "source": "com.smkalfarizi.guru.app-main-53:/layout/item_siswa_presensi.xml"
+    },
+    {
+        "merged": "com.smkalfarizi.guru.app-mergeReleaseResources-51:/layout/activity_main.xml",
+        "source": "com.smkalfarizi.guru.app-main-53:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.smkalfarizi.guru.app-mergeReleaseResources-51:/layout/fragment_presensi.xml",
+        "source": "com.smkalfarizi.guru.app-main-53:/layout/fragment_presensi.xml"
+    },
+    {
+        "merged": "com.smkalfarizi.guru.app-mergeReleaseResources-51:/layout/fragment_checkin.xml",
+        "source": "com.smkalfarizi.guru.app-main-53:/layout/fragment_checkin.xml"
+    },
+    {
+        "merged": "com.smkalfarizi.guru.app-mergeReleaseResources-51:/layout/activity_login.xml",
+        "source": "com.smkalfarizi.guru.app-main-53:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.smkalfarizi.guru.app-mergeReleaseResources-51:/layout/fragment_profile.xml",
+        "source": "com.smkalfarizi.guru.app-main-53:/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "com.smkalfarizi.guru.app-mergeReleaseResources-51:/layout/item_jadwal.xml",
+        "source": "com.smkalfarizi.guru.app-main-53:/layout/item_jadwal.xml"
+    }
+]

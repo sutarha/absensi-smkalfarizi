@@ -1,0 +1,39 @@
+com.smkalfarizi.guru.app-material-1.12.0-0 C:\Users\USER\.gradle\caches\9.3.0\transforms\0151c29cfc90d692568fdf060a0aace7\workspace\transformed\material-1.12.0\res
+com.smkalfarizi.guru.app-lifecycle-livedata-2.8.4-1 C:\Users\USER\.gradle\caches\9.3.0\transforms\157df44804b886d32a3460d251ad8ae6\workspace\transformed\lifecycle-livedata-2.8.4\res
+com.smkalfarizi.guru.app-core-1.13.1-2 C:\Users\USER\.gradle\caches\9.3.0\transforms\28e7095811a5d9ef2fe7bf60f5fb9556\workspace\transformed\core-1.13.1\res
+com.smkalfarizi.guru.app-lifecycle-livedata-core-2.8.4-3 C:\Users\USER\.gradle\caches\9.3.0\transforms\2affa9c47f8803518683f1d02c65f442\workspace\transformed\lifecycle-livedata-core-2.8.4\res
+com.smkalfarizi.guru.app-jetified-savedstate-1.2.1-4 C:\Users\USER\.gradle\caches\9.3.0\transforms\2bc2c182662f7e0e7af9f6efa4317f2a\workspace\transformed\jetified-savedstate-1.2.1\res
+com.smkalfarizi.guru.app-cardview-1.0.0-5 C:\Users\USER\.gradle\caches\9.3.0\transforms\2cb7546a426aff80fec8715d11c83583\workspace\transformed\cardview-1.0.0\res
+com.smkalfarizi.guru.app-transition-1.5.0-6 C:\Users\USER\.gradle\caches\9.3.0\transforms\38370b38c055d033b53183b1ed4e1fdc\workspace\transformed\transition-1.5.0\res
+com.smkalfarizi.guru.app-jetified-viewpager2-1.0.0-7 C:\Users\USER\.gradle\caches\9.3.0\transforms\3c476a1fb27a8c6883a3ba7ee39fd161\workspace\transformed\jetified-viewpager2-1.0.0\res
+com.smkalfarizi.guru.app-constraintlayout-2.1.4-8 C:\Users\USER\.gradle\caches\9.3.0\transforms\4ea6655bf0bc7bd8f9301ff177162915\workspace\transformed\constraintlayout-2.1.4\res
+com.smkalfarizi.guru.app-jetified-activity-1.8.0-9 C:\Users\USER\.gradle\caches\9.3.0\transforms\51cbbdb4281ce4601c129a4c2ea48833\workspace\transformed\jetified-activity-1.8.0\res
+com.smkalfarizi.guru.app-jetified-play-services-base-18.5.0-10 C:\Users\USER\.gradle\caches\9.3.0\transforms\54436c2d6a5a7a4bae3433a7105c507a\workspace\transformed\jetified-play-services-base-18.5.0\res
+com.smkalfarizi.guru.app-jetified-emoji2-views-helper-1.3.0-11 C:\Users\USER\.gradle\caches\9.3.0\transforms\6389ad7dd3a038e9c797734df049bea8\workspace\transformed\jetified-emoji2-views-helper-1.3.0\res
+com.smkalfarizi.guru.app-jetified-core-ktx-1.13.1-12 C:\Users\USER\.gradle\caches\9.3.0\transforms\679a8988fe115ce62e254f53531dd36a\workspace\transformed\jetified-core-ktx-1.13.1\res
+com.smkalfarizi.guru.app-drawerlayout-1.1.1-13 C:\Users\USER\.gradle\caches\9.3.0\transforms\6da7037fc5cfa8b706c3ae747578a157\workspace\transformed\drawerlayout-1.1.1\res
+com.smkalfarizi.guru.app-jetified-startup-runtime-1.1.1-14 C:\Users\USER\.gradle\caches\9.3.0\transforms\765aa07eed15b3a9ac94de2e548ef783\workspace\transformed\jetified-startup-runtime-1.1.1\res
+com.smkalfarizi.guru.app-jetified-annotation-experimental-1.4.0-15 C:\Users\USER\.gradle\caches\9.3.0\transforms\7749c84a63940cf401fca4a7462f6290\workspace\transformed\jetified-annotation-experimental-1.4.0\res
+com.smkalfarizi.guru.app-jetified-lifecycle-livedata-core-ktx-2.8.4-16 C:\Users\USER\.gradle\caches\9.3.0\transforms\7d01a10c2b1fdc464904535aa44e653a\workspace\transformed\jetified-lifecycle-livedata-core-ktx-2.8.4\res
+com.smkalfarizi.guru.app-appcompat-1.7.0-17 C:\Users\USER\.gradle\caches\9.3.0\transforms\7dd3242de4a9d8db904c4958edc24d19\workspace\transformed\appcompat-1.7.0\res
+com.smkalfarizi.guru.app-fragment-1.5.4-18 C:\Users\USER\.gradle\caches\9.3.0\transforms\800e3a56a2962596b038ac7d323429a7\workspace\transformed\fragment-1.5.4\res
+com.smkalfarizi.guru.app-jetified-appcompat-resources-1.7.0-19 C:\Users\USER\.gradle\caches\9.3.0\transforms\a3b91ce97693aba2a9cb11bec24e2ac3\workspace\transformed\jetified-appcompat-resources-1.7.0\res
+com.smkalfarizi.guru.app-jetified-lifecycle-process-2.8.4-20 C:\Users\USER\.gradle\caches\9.3.0\transforms\a3fe9541a94d53a06d44d80ef94e2526\workspace\transformed\jetified-lifecycle-process-2.8.4\res
+com.smkalfarizi.guru.app-jetified-emoji2-1.3.0-21 C:\Users\USER\.gradle\caches\9.3.0\transforms\adbe888955b1143169370288ea771f88\workspace\transformed\jetified-emoji2-1.3.0\res
+com.smkalfarizi.guru.app-jetified-lifecycle-runtime-ktx-release-22 C:\Users\USER\.gradle\caches\9.3.0\transforms\b503f1d0fed66fa6a4a6e63edc3a554f\workspace\transformed\jetified-lifecycle-runtime-ktx-release\res
+com.smkalfarizi.guru.app-jetified-profileinstaller-1.3.1-23 C:\Users\USER\.gradle\caches\9.3.0\transforms\c29212dd4a12cafe3b162d3457bd9acd\workspace\transformed\jetified-profileinstaller-1.3.1\res
+com.smkalfarizi.guru.app-coordinatorlayout-1.1.0-24 C:\Users\USER\.gradle\caches\9.3.0\transforms\c867cec3717c5fd0b52c55b70eb88903\workspace\transformed\coordinatorlayout-1.1.0\res
+com.smkalfarizi.guru.app-jetified-lifecycle-runtime-release-25 C:\Users\USER\.gradle\caches\9.3.0\transforms\c93098762c324eb4e9a8fc701badcd1c\workspace\transformed\jetified-lifecycle-runtime-release\res
+com.smkalfarizi.guru.app-recyclerview-1.1.0-26 C:\Users\USER\.gradle\caches\9.3.0\transforms\cab6d6319a10f6c83c3f59f8c17a25ab\workspace\transformed\recyclerview-1.1.0\res
+com.smkalfarizi.guru.app-jetified-play-services-basement-18.4.0-27 C:\Users\USER\.gradle\caches\9.3.0\transforms\ce4dc4c68b21daf6fdbca4487d3df5e7\workspace\transformed\jetified-play-services-basement-18.4.0\res
+com.smkalfarizi.guru.app-jetified-lifecycle-viewmodel-savedstate-2.8.4-28 C:\Users\USER\.gradle\caches\9.3.0\transforms\ee4d69f0251fca5508a7fa73a413f3df\workspace\transformed\jetified-lifecycle-viewmodel-savedstate-2.8.4\res
+com.smkalfarizi.guru.app-jetified-lifecycle-viewmodel-release-29 C:\Users\USER\.gradle\caches\9.3.0\transforms\fa1bc68620eeaa0779dd304fb019f1cf\workspace\transformed\jetified-lifecycle-viewmodel-release\res
+com.smkalfarizi.guru.app-core-runtime-2.2.0-30 C:\Users\USER\.gradle\caches\9.3.0\transforms\fc4b903355260770ea283f06b4385fd6\workspace\transformed\core-runtime-2.2.0\res
+com.smkalfarizi.guru.app-pngs-31 C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\build\generated\res\pngs\debug
+com.smkalfarizi.guru.app-resValues-32 C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\build\generated\res\resValues\debug
+com.smkalfarizi.guru.app-updated_navigation_xml-33 C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\build\generated\updated_navigation_xml\debug
+com.smkalfarizi.guru.app-packageDebugResources-34 C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.smkalfarizi.guru.app-packageDebugResources-35 C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.smkalfarizi.guru.app-debug-36 C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\build\intermediates\merged_res\debug\mergeDebugResources
+com.smkalfarizi.guru.app-debug-37 C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\debug\res
+com.smkalfarizi.guru.app-main-38 C:\Users\USER\Documents\app sekolah\Absensi_smk_smkalfarizi\AndroidGuruApp\app\src\main\res

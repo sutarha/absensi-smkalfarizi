@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    network_security_config.xml
+    Mengizinkan HTTP (non-HTTPS) ke localhost dan IP lokal untuk development.
+    PENTING: Untuk production, gunakan HTTPS dan hapus cleartext-permitted.
+-->
+<network-security-config>
+    <!-- Izinkan HTTP ke server development lokal -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">10.0.2.2</domain>   <!-- Android emulator localhost -->
+        <domain includeSubdomains="true">192.168.1.0</domain><!-- Jaringan lokal WiFi -->
+        <domain includeSubdomains="true">127.0.0.1</domain>
+        <domain includeSubdomains="true">localhost</domain>
+        <!-- Tambahkan IP server sekolah di sini, contoh: -->
+        <!-- <domain includeSubdomains="true">192.168.100.5</domain> -->
+    </domain-config>
+</network-security-config>

@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\drawable_ic_person.xml.flat",
+        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\drawable\\ic_person.xml"
+    },
+    {
+        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\drawable_bg_badge_siap.xml.flat",
+        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\drawable\\bg_badge_siap.xml"
+    },
+    {
+        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\xml_network_security_config.xml.flat",
+        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\xml\\network_security_config.xml"
+    },
+    {
+        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\drawable_ic_wallet.xml.flat",
+        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\drawable\\ic_wallet.xml"
+    },
+    {
+        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\drawable_bg_badge_default.xml.flat",
+        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\drawable\\bg_badge_default.xml"
+    },
+    {
+        "merged": "com.smkalfarizi.guru.app-debug-35:/layout_activity_main.xml.flat",
+        "source": "com.smkalfarizi.guru.app-main-37:/layout/activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\layout_activity_splash.xml.flat",
+        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\layout\\activity_splash.xml"
+    },
+    {
+        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\drawable_bg_badge_selesai.xml.flat",
+        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\drawable\\bg_badge_selesai.xml"
+    },
+    {
+        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\drawable_ic_home.xml.flat",
+        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\drawable\\ic_home.xml"
+    }
+]

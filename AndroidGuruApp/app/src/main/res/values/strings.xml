@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SI Presensi SMK Al-Farizi</string>
+    <string name="offline_title">Tidak Ada Koneksi</string>
+    <string name="offline_desc">Periksa koneksi internet Anda lalu coba lagi.</string>
+    <string name="btn_retry">Coba Lagi</string>
+</resources>

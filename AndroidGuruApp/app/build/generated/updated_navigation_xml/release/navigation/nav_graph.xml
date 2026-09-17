@@ -1,0 +1,47 @@
+<navigation
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/nav_graph"
+app:startDestination="@id/nav_dashboard" >
+<fragment
+    android:id="@+id/nav_dashboard"
+    android:name="com.smkalfarizi.guru.ui.dashboard.DashboardFragment"
+    android:icon="@drawable/ic_home"
+    android:label="Dashboard" >
+
+    <!-- Aksi menuju layar Check-in -->
+    <action
+        android:id="@+id/action_dashboard_to_checkin"
+        app:destination="@id/nav_checkin" />
+
+    <!-- Aksi menuju layar Presensi Siswa -->
+    <action
+        android:id="@+id/action_dashboard_to_presensi"
+        app:destination="@id/nav_presensi" />
+
+</fragment>
+<fragment
+    android:id="@+id/nav_honor"
+    android:name="com.smkalfarizi.guru.ui.honor.HonorFragment"
+    android:icon="@drawable/ic_wallet"
+    android:label="Dompet Honor" />
+<fragment
+    android:id="@+id/nav_profile"
+    android:name="com.smkalfarizi.guru.ui.profile.ProfileFragment"
+    android:icon="@drawable/ic_person"
+    android:label="Profil" />
+<fragment
+    android:id="@+id/nav_checkin"
+    android:name="com.smkalfarizi.guru.ui.checkin.CheckInFragment"
+    android:label="Check-in KBM" />
+<fragment
+    android:id="@+id/nav_presensi"
+    android:name="com.smkalfarizi.guru.ui.presensi.PresensiFragment"
+    android:label="Presensi Siswa" >
+
+    <argument
+        android:name="sesiId"
+        app:argType="integer" />
+
+</fragment>
+</navigation>

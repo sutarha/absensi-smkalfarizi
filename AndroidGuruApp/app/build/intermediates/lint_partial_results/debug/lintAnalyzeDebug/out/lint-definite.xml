@@ -1,0 +1,2407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.13.2" type="incidents">
+
+    <incident
+        id="OldTargetApi"
+        severity="warning"
+        message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the `android.os.Build.VERSION_CODES` javadoc for details.">
+        <fix-replace
+            description="Update targetSdkVersion to 37"
+            oldString="35"
+            replacement="37"
+            priority="0"/>
+        <location
+            file="${:app*projectDir}/build.gradle.kts"
+            line="17"
+            column="9"
+            startOffset="518"
+            endLine="17"
+            endColumn="23"
+            endOffset="532"/>
+    </incident>
+
+    <incident
+        id="AndroidGradlePluginVersion"
+        severity="warning"
+        message="A newer version of com.android.application than 8.13.2 is available: 9.4.0">
+        <fix-replace
+            description="Replace with 9.4.0"
+            family="Update versions"
+            oldString="8.13.2"
+            replacement="9.4.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="2"
+            column="7"
+            startOffset="17"
+            endLine="2"
+            endColumn="15"
+            endOffset="25"/>
+        <map>
+            <entry
+                name="coordinate"
+                string="com.android.application"/>
+            <entry
+                name="revision"
+                string="9.4.0"/>
+        </map>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of `compileSdkVersion` than 35 is available: 36">
+        <fix-replace
+            description="Set compileSdkVersion to 36"
+            oldString="35"
+            replacement="36"
+            priority="0"/>
+        <location
+            file="${:app*projectDir}/build.gradle.kts"
+            line="12"
+            column="5"
+            startOffset="343"
+            endLine="12"
+            endColumn="20"
+            endOffset="358"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.core:core-ktx than 1.13.1 is available: 1.19.0">
+        <fix-replace
+            description="Change to 1.19.0"
+            family="Update versions"
+            oldString="1.13.1"
+            replacement="1.19.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="4"
+            column="11"
+            startOffset="54"
+            endLine="4"
+            endColumn="19"
+            endOffset="62"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.appcompat:appcompat than 1.7.0 is available: 1.8.0">
+        <fix-replace
+            description="Change to 1.8.0"
+            family="Update versions"
+            oldString="1.7.0"
+            replacement="1.8.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="5"
+            column="13"
+            startOffset="75"
+            endLine="5"
+            endColumn="20"
+            endOffset="82"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of com.google.android.material:material than 1.12.0 is available: 1.14.0">
+        <fix-replace
+            description="Change to 1.14.0"
+            family="Update versions"
+            oldString="1.12.0"
+            replacement="1.14.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="6"
+            column="12"
+            startOffset="94"
+            endLine="6"
+            endColumn="20"
+            endOffset="102"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.constraintlayout:constraintlayout than 2.1.4 is available: 2.2.2">
+        <fix-replace
+            description="Change to 2.2.2"
+            family="Update versions"
+            oldString="2.1.4"
+            replacement="2.2.2"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="7"
+            column="20"
+            startOffset="122"
+            endLine="7"
+            endColumn="27"
+            endOffset="129"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.lifecycle:lifecycle-livedata-ktx than 2.8.4 is available: 2.11.0">
+        <fix-replace
+            description="Change to 2.11.0"
+            family="Update versions"
+            oldString="2.8.4"
+            replacement="2.11.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="8"
+            column="13"
+            startOffset="142"
+            endLine="8"
+            endColumn="20"
+            endOffset="149"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.lifecycle:lifecycle-runtime-ktx than 2.8.4 is available: 2.11.0">
+        <fix-replace
+            description="Change to 2.11.0"
+            family="Update versions"
+            oldString="2.8.4"
+            replacement="2.11.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="8"
+            column="13"
+            startOffset="142"
+            endLine="8"
+            endColumn="20"
+            endOffset="149"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.lifecycle:lifecycle-viewmodel-ktx than 2.8.4 is available: 2.11.0">
+        <fix-replace
+            description="Change to 2.11.0"
+            family="Update versions"
+            oldString="2.8.4"
+            replacement="2.11.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="8"
+            column="13"
+            startOffset="142"
+            endLine="8"
+            endColumn="20"
+            endOffset="149"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.navigation:navigation-fragment-ktx than 2.7.7 is available: 2.10.1">
+        <fix-replace
+            description="Change to 2.10.1"
+            family="Update versions"
+            oldString="2.7.7"
+            replacement="2.10.1"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="9"
+            column="14"
+            startOffset="163"
+            endLine="9"
+            endColumn="21"
+            endOffset="170"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.navigation:navigation-ui-ktx than 2.7.7 is available: 2.10.1">
+        <fix-replace
+            description="Change to 2.10.1"
+            family="Update versions"
+            oldString="2.7.7"
+            replacement="2.10.1"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="9"
+            column="14"
+            startOffset="163"
+            endLine="9"
+            endColumn="21"
+            endOffset="170"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.security:security-crypto than 1.1.0-alpha06 is available: 1.1.0">
+        <fix-replace
+            description="Change to 1.1.0"
+            family="Update versions"
+            oldString="1.1.0-alpha06"
+            replacement="1.1.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="14"
+            column="18"
+            startOffset="263"
+            endLine="14"
+            endColumn="33"
+            endOffset="278"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of com.google.android.gms:play-services-location than 21.3.0 is available: 21.4.0">
+        <fix-replace
+            description="Change to 21.4.0"
+            family="Update versions"
+            oldString="21.3.0"
+            replacement="21.4.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="15"
+            column="24"
+            startOffset="302"
+            endLine="15"
+            endColumn="32"
+            endOffset="310"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.swiperefreshlayout:swiperefreshlayout than 1.1.0 is available: 1.2.0">
+        <fix-replace
+            description="Change to 1.2.0"
+            family="Update versions"
+            oldString="1.1.0"
+            replacement="1.2.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="16"
+            column="22"
+            startOffset="332"
+            endLine="16"
+            endColumn="29"
+            endOffset="339"/>
+    </incident>
+
+    <incident
+        id="NewerVersionAvailable"
+        severity="warning"
+        message="A newer version of org.jetbrains.kotlin.android than 2.0.21 is available: 2.4.20">
+        <fix-replace
+            description="Change to 2.4.20"
+            family="Update versions"
+            oldString="2.0.21"
+            replacement="2.4.20"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="3"
+            column="10"
+            startOffset="35"
+            endLine="3"
+            endColumn="18"
+            endOffset="43"/>
+    </incident>
+
+    <incident
+        id="NewerVersionAvailable"
+        severity="warning"
+        message="A newer version of com.squareup.retrofit2:converter-gson than 2.11.0 is available: 3.0.0">
+        <fix-replace
+            description="Change to 3.0.0"
+            family="Update versions"
+            oldString="2.11.0"
+            replacement="3.0.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="10"
+            column="12"
+            startOffset="182"
+            endLine="10"
+            endColumn="20"
+            endOffset="190"/>
+    </incident>
+
+    <incident
+        id="NewerVersionAvailable"
+        severity="warning"
+        message="A newer version of com.squareup.retrofit2:retrofit than 2.11.0 is available: 3.0.0">
+        <fix-replace
+            description="Change to 3.0.0"
+            family="Update versions"
+            oldString="2.11.0"
+            replacement="3.0.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="10"
+            column="12"
+            startOffset="182"
+            endLine="10"
+            endColumn="20"
+            endOffset="190"/>
+    </incident>
+
+    <incident
+        id="NewerVersionAvailable"
+        severity="warning"
+        message="A newer version of com.squareup.okhttp3:logging-interceptor than 4.12.0 is available: 5.5.0">
+        <fix-replace
+            description="Change to 5.5.0"
+            family="Update versions"
+            oldString="4.12.0"
+            replacement="5.5.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="11"
+            column="10"
+            startOffset="200"
+            endLine="11"
+            endColumn="18"
+            endOffset="208"/>
+    </incident>
+
+    <incident
+        id="NewerVersionAvailable"
+        severity="warning"
+        message="A newer version of com.squareup.okhttp3:okhttp than 4.12.0 is available: 5.5.0">
+        <fix-replace
+            description="Change to 5.5.0"
+            family="Update versions"
+            oldString="4.12.0"
+            replacement="5.5.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="11"
+            column="10"
+            startOffset="200"
+            endLine="11"
+            endColumn="18"
+            endOffset="208"/>
+    </incident>
+
+    <incident
+        id="NewerVersionAvailable"
+        severity="warning"
+        message="A newer version of com.google.code.gson:gson than 2.11.0 is available: 2.14.0">
+        <fix-replace
+            description="Change to 2.14.0"
+            family="Update versions"
+            oldString="2.11.0"
+            replacement="2.14.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="12"
+            column="8"
+            startOffset="216"
+            endLine="12"
+            endColumn="16"
+            endOffset="224"/>
+    </incident>
+
+    <incident
+        id="NewerVersionAvailable"
+        severity="warning"
+        message="A newer version of org.jetbrains.kotlinx:kotlinx-coroutines-android than 1.8.1 is available: 1.11.0">
+        <fix-replace
+            description="Change to 1.11.0"
+            family="Update versions"
+            oldString="1.8.1"
+            replacement="1.11.0"
+            priority="0"/>
+        <location
+            file="$HOME/Documents/app sekolah/Absensi_smk_smkalfarizi/AndroidGuruApp/gradle/libs.versions.toml"
+            line="13"
+            column="14"
+            startOffset="238"
+            endLine="13"
+            endColumn="21"
+            endOffset="245"/>
+    </incident>
+
+    <incident
+        id="NotifyDataSetChanged"
+        severity="warning"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="131"
+            column="9"
+            startOffset="5497"
+            endLine="131"
+            endColumn="31"
+            endOffset="5519"/>
+    </incident>
+
+    <incident
+        id="NotifyDataSetChanged"
+        severity="warning"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/honor/HonorFragment.kt"
+            line="104"
+            column="9"
+            startOffset="4054"
+            endLine="104"
+            endColumn="31"
+            endOffset="4076"/>
+    </incident>
+
+    <incident
+        id="NotifyDataSetChanged"
+        severity="warning"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/presensi/PresensiFragment.kt"
+            line="142"
+            column="9"
+            startOffset="5228"
+            endLine="142"
+            endColumn="31"
+            endOffset="5250"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `@color/background` with a theme that also paints a background (inferred theme is `@style/Theme.GuruApp`)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="13"
+            column="5"
+            startOffset="467"
+            endLine="13"
+            endColumn="43"
+            endOffset="505"/>
+    </incident>
+
+    <incident
+        id="TypographyEllipsis"
+        severity="warning"
+        message="Replace &quot;...&quot; with ellipsis character (…, &amp;#8230;) ?">
+        <fix-replace
+            description="Replace with …"
+            oldString="..."
+            replacement="…"
+            priority="0"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/values/strings.xml"
+            line="6"
+            column="28"
+            startOffset="212"
+            endLine="6"
+            endColumn="37"
+            endOffset="221"/>
+    </incident>
+
+    <incident
+        id="UseKtx"
+        severity="warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?">
+        <fix-composite
+            description="Replace with the edit extension function"
+            family="Replace with the edit extension function"
+            robot="true"
+            independent="true">
+            <fix-replace
+                description="Replace with edit"
+                robot="true"
+                independent="true"
+                oldString="edit("
+                replacement="edit"
+                reformat="value"
+                imports="androidx.core.content.edit"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="2637"
+                    endOffset="2642"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with  {"
+                robot="true"
+                independent="true"
+                oldString=")"
+                replacement=" {"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="2642"
+                    endOffset="2643"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;.&quot;"
+                robot="true"
+                independent="true"
+                oldString="."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="2643"
+                    endOffset="2644"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with }"
+                robot="true"
+                independent="true"
+                oldString=".apply()"
+                replacement="}"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="2671"
+                    endOffset="2679"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+            line="77"
+            column="36"
+            startOffset="2631"
+            endLine="77"
+            endColumn="48"
+            endOffset="2643"/>
+    </incident>
+
+    <incident
+        id="UseKtx"
+        severity="warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?">
+        <fix-composite
+            description="Replace with the edit extension function"
+            family="Replace with the edit extension function"
+            robot="true"
+            independent="true">
+            <fix-replace
+                description="Replace with edit"
+                robot="true"
+                independent="true"
+                oldString="edit("
+                replacement="edit"
+                reformat="value"
+                imports="androidx.core.content.edit"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="2909"
+                    endOffset="2914"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with  {"
+                robot="true"
+                independent="true"
+                oldString=")"
+                replacement=" {"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="2914"
+                    endOffset="2915"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;.&quot;"
+                robot="true"
+                independent="true"
+                oldString="."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="2928"
+                    endOffset="2929"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with }"
+                robot="true"
+                independent="true"
+                oldString=".apply()"
+                replacement="}"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="3107"
+                    endOffset="3115"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="2916"
+                    endOffset="2916"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="2953"
+                    endOffset="2953"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="3004"
+                    endOffset="3004"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with     "
+                robot="true"
+                independent="true"
+                oldString=""
+                replacement="    "
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="3051"
+                    endOffset="3051"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+            line="84"
+            column="9"
+            startOffset="2903"
+            endLine="84"
+            endColumn="21"
+            endOffset="2915"/>
+    </incident>
+
+    <incident
+        id="UseKtx"
+        severity="warning"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?">
+        <fix-composite
+            description="Replace with the edit extension function"
+            family="Replace with the edit extension function"
+            robot="true"
+            independent="true">
+            <fix-replace
+                description="Replace with edit"
+                robot="true"
+                independent="true"
+                oldString="edit("
+                replacement="edit"
+                reformat="value"
+                imports="androidx.core.content.edit"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="3465"
+                    endOffset="3470"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with  {"
+                robot="true"
+                independent="true"
+                oldString=")"
+                replacement=" {"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="3470"
+                    endOffset="3471"/>
+            </fix-replace>
+            <fix-replace
+                description="Delete &quot;.&quot;"
+                robot="true"
+                independent="true"
+                oldString="."
+                replacement=""
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="3471"
+                    endOffset="3472"/>
+            </fix-replace>
+            <fix-replace
+                description="Replace with }"
+                robot="true"
+                independent="true"
+                oldString=".apply()"
+                replacement="}"
+                priority="0">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+                    startOffset="3479"
+                    endOffset="3487"/>
+            </fix-replace>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/data/api/RetrofitClient.kt"
+            line="99"
+            column="19"
+            startOffset="3459"
+            endLine="99"
+            endColumn="31"
+            endOffset="3471"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/checkin/CheckInFragment.kt"
+            line="65"
+            column="37"
+            startOffset="2738"
+            endLine="65"
+            endColumn="59"
+            endOffset="2760"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/checkin/CheckInFragment.kt"
+            line="65"
+            column="38"
+            startOffset="2739"
+            endLine="65"
+            endColumn="49"
+            endOffset="2750"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/checkin/CheckInFragment.kt"
+            line="92"
+            column="41"
+            startOffset="3667"
+            endLine="92"
+            endColumn="72"
+            endOffset="3698"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/checkin/CheckInFragment.kt"
+            line="97"
+            column="48"
+            startOffset="3970"
+            endLine="97"
+            endColumn="93"
+            endOffset="4015"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/checkin/CheckInFragment.kt"
+            line="97"
+            column="49"
+            startOffset="3971"
+            endLine="97"
+            endColumn="64"
+            endOffset="3986"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/checkin/CheckInFragment.kt"
+            line="97"
+            column="75"
+            startOffset="3997"
+            endLine="97"
+            endColumn="81"
+            endOffset="4003"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/checkin/CheckInFragment.kt"
+            line="99"
+            column="49"
+            startOffset="4089"
+            endLine="99"
+            endColumn="102"
+            endOffset="4142"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/checkin/CheckInFragment.kt"
+            line="102"
+            column="44"
+            startOffset="4242"
+            endLine="102"
+            endColumn="82"
+            endOffset="4280"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/checkin/CheckInFragment.kt"
+            line="102"
+            column="45"
+            startOffset="4243"
+            endLine="102"
+            endColumn="68"
+            endOffset="4266"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/checkin/CheckInFragment.kt"
+            line="105"
+            column="41"
+            startOffset="4376"
+            endLine="105"
+            endColumn="61"
+            endOffset="4396"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/checkin/CheckInFragment.kt"
+            line="131"
+            column="55"
+            startOffset="5607"
+            endLine="131"
+            endColumn="127"
+            endOffset="5679"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/checkin/CheckInFragment.kt"
+            line="131"
+            column="56"
+            startOffset="5608"
+            endLine="131"
+            endColumn="81"
+            endOffset="5633"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/checkin/CheckInFragment.kt"
+            line="131"
+            column="94"
+            startOffset="5646"
+            endLine="131"
+            endColumn="126"
+            endOffset="5678"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="48"
+            column="34"
+            startOffset="1807"
+            endLine="48"
+            endColumn="91"
+            endOffset="1864"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="48"
+            column="35"
+            startOffset="1808"
+            endLine="48"
+            endColumn="51"
+            endOffset="1824"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="82"
+            column="50"
+            startOffset="3214"
+            endLine="82"
+            endColumn="81"
+            endOffset="3245"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="87"
+            column="61"
+            startOffset="3565"
+            endLine="87"
+            endColumn="217"
+            endOffset="3721"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="87"
+            column="95"
+            startOffset="3599"
+            endLine="87"
+            endColumn="110"
+            endOffset="3614"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="87"
+            column="148"
+            startOffset="3652"
+            endLine="87"
+            endColumn="161"
+            endOffset="3665"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="91"
+            column="60"
+            startOffset="3903"
+            endLine="91"
+            endColumn="174"
+            endOffset="4017"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="91"
+            column="61"
+            startOffset="3904"
+            endLine="91"
+            endColumn="69"
+            endOffset="3912"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="91"
+            column="98"
+            startOffset="3941"
+            endLine="91"
+            endColumn="109"
+            endOffset="3952"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="91"
+            column="138"
+            startOffset="3981"
+            endLine="91"
+            endColumn="149"
+            endOffset="3992"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="93"
+            column="61"
+            startOffset="4111"
+            endLine="93"
+            endColumn="87"
+            endOffset="4137"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="148"
+            column="36"
+            startOffset="6268"
+            endLine="148"
+            endColumn="80"
+            endOffset="6312"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="148"
+            column="37"
+            startOffset="6269"
+            endLine="148"
+            endColumn="44"
+            endOffset="6276"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="149"
+            column="34"
+            startOffset="6346"
+            endLine="149"
+            endColumn="102"
+            endOffset="6414"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="149"
+            column="35"
+            startOffset="6347"
+            endLine="149"
+            endColumn="42"
+            endOffset="6354"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/dashboard/DashboardFragment.kt"
+            line="149"
+            column="97"
+            startOffset="6409"
+            endLine="149"
+            endColumn="101"
+            endOffset="6413"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/honor/HonorFragment.kt"
+            line="70"
+            column="58"
+            startOffset="2645"
+            endLine="70"
+            endColumn="272"
+            endOffset="2859"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/honor/HonorFragment.kt"
+            line="70"
+            column="59"
+            startOffset="2646"
+            endLine="70"
+            endColumn="70"
+            endOffset="2657"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/honor/HonorFragment.kt"
+            line="70"
+            column="117"
+            startOffset="2704"
+            endLine="70"
+            endColumn="131"
+            endOffset="2718"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/honor/HonorFragment.kt"
+            line="70"
+            column="181"
+            startOffset="2768"
+            endLine="70"
+            endColumn="191"
+            endOffset="2778"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/honor/HonorFragment.kt"
+            line="70"
+            column="211"
+            startOffset="2798"
+            endLine="70"
+            endColumn="227"
+            endOffset="2814"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/honor/HonorFragment.kt"
+            line="121"
+            column="43"
+            startOffset="4759"
+            endLine="121"
+            endColumn="100"
+            endOffset="4816"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/honor/HonorFragment.kt"
+            line="123"
+            column="42"
+            startOffset="4937"
+            endLine="123"
+            endColumn="186"
+            endOffset="5081"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/honor/HonorFragment.kt"
+            line="123"
+            column="59"
+            startOffset="4954"
+            endLine="123"
+            endColumn="72"
+            endOffset="4967"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/honor/HonorFragment.kt"
+            line="123"
+            column="94"
+            startOffset="4989"
+            endLine="123"
+            endColumn="107"
+            endOffset="5002"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/honor/HonorFragment.kt"
+            line="123"
+            column="149"
+            startOffset="5044"
+            endLine="123"
+            endColumn="161"
+            endOffset="5056"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/presensi/PresensiFragment.kt"
+            line="76"
+            column="51"
+            startOffset="2725"
+            endLine="76"
+            endColumn="129"
+            endOffset="2803"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/presensi/PresensiFragment.kt"
+            line="173"
+            column="40"
+            startOffset="6316"
+            endLine="173"
+            endColumn="74"
+            endOffset="6350"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="57"
+            column="49"
+            startOffset="2007"
+            endLine="57"
+            endColumn="76"
+            endOffset="2034"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="57"
+            column="50"
+            startOffset="2008"
+            endLine="57"
+            endColumn="61"
+            endOffset="2019"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="58"
+            column="51"
+            startOffset="2085"
+            endLine="58"
+            endColumn="79"
+            endOffset="2113"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="58"
+            column="52"
+            startOffset="2086"
+            endLine="58"
+            endColumn="62"
+            endOffset="2096"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="59"
+            column="47"
+            startOffset="2160"
+            endLine="59"
+            endColumn="67"
+            endOffset="2180"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="59"
+            column="48"
+            startOffset="2161"
+            endLine="59"
+            endColumn="54"
+            endOffset="2167"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="60"
+            column="48"
+            startOffset="2228"
+            endLine="60"
+            endColumn="102"
+            endOffset="2282"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="60"
+            column="49"
+            startOffset="2229"
+            endLine="60"
+            endColumn="65"
+            endOffset="2245"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="63"
+            column="52"
+            startOffset="2431"
+            endLine="63"
+            endColumn="114"
+            endOffset="2493"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="63"
+            column="53"
+            startOffset="2432"
+            endLine="63"
+            endColumn="70"
+            endOffset="2449"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="67"
+            column="51"
+            startOffset="2708"
+            endLine="67"
+            endColumn="99"
+            endOffset="2756"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="67"
+            column="52"
+            startOffset="2709"
+            endLine="67"
+            endColumn="62"
+            endOffset="2719"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="68"
+            column="47"
+            startOffset="2803"
+            endLine="68"
+            endColumn="94"
+            endOffset="2850"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="68"
+            column="48"
+            startOffset="2804"
+            endLine="68"
+            endColumn="54"
+            endOffset="2810"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="74"
+            column="47"
+            startOffset="3095"
+            endLine="74"
+            endColumn="95"
+            endOffset="3143"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="74"
+            column="48"
+            startOffset="3096"
+            endLine="74"
+            endColumn="58"
+            endOffset="3106"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="75"
+            column="43"
+            startOffset="3186"
+            endLine="75"
+            endColumn="90"
+            endOffset="3233"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/smkalfarizi/guru/ui/profile/ProfileFragment.kt"
+            line="75"
+            column="44"
+            startOffset="3187"
+            endLine="75"
+            endColumn="50"
+            endOffset="3193"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;🏫&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="19"
+            column="9"
+            startOffset="646"
+            endLine="19"
+            endColumn="26"
+            endOffset="663"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;SMK AL-FARIZI&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="26"
+            column="9"
+            startOffset="853"
+            endLine="26"
+            endColumn="37"
+            endOffset="881"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Aplikasi Guru&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="35"
+            column="9"
+            startOffset="1142"
+            endLine="35"
+            endColumn="37"
+            endOffset="1170"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Username&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="56"
+            column="17"
+            startOffset="1925"
+            endLine="56"
+            endColumn="40"
+            endOffset="1948"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Password&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="71"
+            column="17"
+            startOffset="2693"
+            endLine="71"
+            endColumn="40"
+            endOffset="2716"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;MASUK&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="108"
+            column="17"
+            startOffset="4314"
+            endLine="108"
+            endColumn="37"
+            endOffset="4334"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;SI Presensi Cerdas v1.0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="117"
+            column="9"
+            startOffset="4615"
+            endLine="117"
+            endColumn="47"
+            endOffset="4653"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Dashboard&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/menu/bottom_nav_menu.xml"
+            line="6"
+            column="9"
+            startOffset="204"
+            endLine="6"
+            endColumn="34"
+            endOffset="229"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Honor&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/menu/bottom_nav_menu.xml"
+            line="10"
+            column="9"
+            startOffset="330"
+            endLine="10"
+            endColumn="30"
+            endOffset="351"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Profil&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/menu/bottom_nav_menu.xml"
+            line="14"
+            column="9"
+            startOffset="454"
+            endLine="14"
+            endColumn="31"
+            endOffset="476"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Check-in KBM&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_checkin.xml"
+            line="12"
+            column="9"
+            startOffset="435"
+            endLine="12"
+            endColumn="36"
+            endOffset="462"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Memuat informasi jadwal...&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_checkin.xml"
+            line="34"
+            column="17"
+            startOffset="1246"
+            endLine="34"
+            endColumn="58"
+            endOffset="1287"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Mendeteksi lokasi GPS Anda...&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_checkin.xml"
+            line="43"
+            column="17"
+            startOffset="1635"
+            endLine="43"
+            endColumn="61"
+            endOffset="1679"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Jarak ke sekolah: -&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_checkin.xml"
+            line="52"
+            column="17"
+            startOffset="2031"
+            endLine="52"
+            endColumn="51"
+            endOffset="2065"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Kirim Check-in (Validasi GPS)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_checkin.xml"
+            line="64"
+            column="9"
+            startOffset="2519"
+            endLine="64"
+            endColumn="53"
+            endOffset="2563"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Selamat Datang, Guru&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_dashboard.xml"
+            line="23"
+            column="17"
+            startOffset="901"
+            endLine="23"
+            endColumn="52"
+            endOffset="936"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Senin, 13 September 2026&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_dashboard.xml"
+            line="33"
+            column="17"
+            startOffset="1323"
+            endLine="33"
+            endColumn="56"
+            endOffset="1362"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Ringkasan Honor Bulan Ini&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_dashboard.xml"
+            line="54"
+            column="25"
+            startOffset="2257"
+            endLine="54"
+            endColumn="65"
+            endOffset="2297"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_dashboard.xml"
+            line="64"
+            column="25"
+            startOffset="2746"
+            endLine="64"
+            endColumn="44"
+            endOffset="2765"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;0 Sesi | Telat: 0 menit (Denda: Rp 0)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_dashboard.xml"
+            line="74"
+            column="25"
+            startOffset="3222"
+            endLine="74"
+            endColumn="77"
+            endOffset="3274"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Presensi Gerbang Sekolah&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_dashboard.xml"
+            line="96"
+            column="25"
+            startOffset="4214"
+            endLine="96"
+            endColumn="64"
+            endOffset="4253"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Belum tap presensi gerbang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_dashboard.xml"
+            line="106"
+            column="25"
+            startOffset="4718"
+            endLine="106"
+            endColumn="66"
+            endOffset="4759"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Jadwal Mengajar Hari Ini&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_dashboard.xml"
+            line="117"
+            column="17"
+            startOffset="5232"
+            endLine="117"
+            endColumn="56"
+            endOffset="5271"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Tidak ada jadwal mengajar hari ini.&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_dashboard.xml"
+            line="134"
+            column="17"
+            startOffset="5973"
+            endLine="134"
+            endColumn="67"
+            endOffset="6023"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Dompet &amp; Riwayat Honor&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_honor.xml"
+            line="22"
+            column="17"
+            startOffset="856"
+            endLine="22"
+            endColumn="58"
+            endOffset="897"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Total Take Home Pay&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_honor.xml"
+            line="45"
+            column="25"
+            startOffset="1871"
+            endLine="45"
+            endColumn="59"
+            endOffset="1905"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_honor.xml"
+            line="55"
+            column="25"
+            startOffset="2357"
+            endLine="55"
+            endColumn="44"
+            endOffset="2376"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Honor KBM: Rp 0 | Tunjangan: Rp 0\nTotal JP: 0 | Denda Telat: Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_honor.xml"
+            line="65"
+            column="25"
+            startOffset="2830"
+            endLine="65"
+            endColumn="106"
+            endOffset="2911"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Riwayat Sesi Mengajar&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_honor.xml"
+            line="76"
+            column="17"
+            startOffset="3365"
+            endLine="76"
+            endColumn="53"
+            endOffset="3401"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Belum ada riwayat honor bulan ini.&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_honor.xml"
+            line="93"
+            column="17"
+            startOffset="4101"
+            endLine="93"
+            endColumn="66"
+            endOffset="4150"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Presensi Siswa &amp; Checkout&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_presensi.xml"
+            line="12"
+            column="9"
+            startOffset="435"
+            endLine="12"
+            endColumn="53"
+            endOffset="479"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Memuat sesi...&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_presensi.xml"
+            line="22"
+            column="9"
+            startOffset="795"
+            endLine="22"
+            endColumn="38"
+            endOffset="824"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Simpan Presensi&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_presensi.xml"
+            line="44"
+            column="13"
+            startOffset="1610"
+            endLine="44"
+            endColumn="43"
+            endOffset="1640"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Selesaikan KBM (Checkout)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_presensi.xml"
+            line="53"
+            column="13"
+            startOffset="1973"
+            endLine="53"
+            endColumn="53"
+            endOffset="2013"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Profil Guru&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_profile.xml"
+            line="12"
+            column="9"
+            startOffset="435"
+            endLine="12"
+            endColumn="35"
+            endOffset="461"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Nama Lengkap&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_profile.xml"
+            line="34"
+            column="17"
+            startOffset="1239"
+            endLine="34"
+            endColumn="44"
+            endOffset="1266"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;NIK / NIP: -&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_profile.xml"
+            line="44"
+            column="17"
+            startOffset="1652"
+            endLine="44"
+            endColumn="44"
+            endOffset="1679"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Username: -&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_profile.xml"
+            line="53"
+            column="17"
+            startOffset="2031"
+            endLine="53"
+            endColumn="43"
+            endOffset="2057"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Role: GURU&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_profile.xml"
+            line="62"
+            column="17"
+            startOffset="2405"
+            endLine="62"
+            endColumn="42"
+            endOffset="2430"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Tugas Tambahan: -&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_profile.xml"
+            line="71"
+            column="17"
+            startOffset="2779"
+            endLine="71"
+            endColumn="49"
+            endOffset="2811"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Tunjangan Tugas: Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_profile.xml"
+            line="80"
+            column="17"
+            startOffset="3158"
+            endLine="80"
+            endColumn="53"
+            endOffset="3194"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Keluar (Logout)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_profile.xml"
+            line="92"
+            column="9"
+            startOffset="3645"
+            endLine="92"
+            endColumn="39"
+            endOffset="3675"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;13 Sep 2026 — Matematika (XII RPL 1)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_honor.xml"
+            line="26"
+            column="17"
+            startOffset="980"
+            endLine="26"
+            endColumn="68"
+            endOffset="1031"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 150.000&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_honor.xml"
+            line="35"
+            column="17"
+            startOffset="1374"
+            endLine="35"
+            endColumn="42"
+            endOffset="1399"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;3 JP | Telat: 0 mnt (Denda: Rp 0)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_honor.xml"
+            line="46"
+            column="13"
+            startOffset="1778"
+            endLine="46"
+            endColumn="61"
+            endOffset="1826"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Matematika&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_jadwal.xml"
+            line="28"
+            column="17"
+            startOffset="1059"
+            endLine="28"
+            endColumn="42"
+            endOffset="1084"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;SIAP CHECK-IN&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_jadwal.xml"
+            line="40"
+            column="17"
+            startOffset="1586"
+            endLine="40"
+            endColumn="45"
+            endOffset="1614"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Kelas: XII RPL 1 (Tingkat XII)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_jadwal.xml"
+            line="51"
+            column="13"
+            startOffset="2000"
+            endLine="51"
+            endColumn="58"
+            endOffset="2045"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Pukul: 07:00 - 09:30 (3 JP)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_jadwal.xml"
+            line="60"
+            column="13"
+            startOffset="2360"
+            endLine="60"
+            endColumn="55"
+            endOffset="2402"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Check-in KBM&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_jadwal.xml"
+            line="75"
+            column="17"
+            startOffset="2990"
+            endLine="75"
+            endColumn="44"
+            endOffset="3017"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Input Presensi&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_jadwal.xml"
+            line="83"
+            column="17"
+            startOffset="3349"
+            endLine="83"
+            endColumn="46"
+            endOffset="3378"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Ahmad Fauzi (00123456)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_siswa_presensi.xml"
+            line="20"
+            column="13"
+            startOffset="752"
+            endLine="20"
+            endColumn="50"
+            endOffset="789"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Hadir&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_siswa_presensi.xml"
+            line="36"
+            column="17"
+            startOffset="1370"
+            endLine="36"
+            endColumn="37"
+            endOffset="1390"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Sakit&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_siswa_presensi.xml"
+            line="44"
+            column="17"
+            startOffset="1679"
+            endLine="44"
+            endColumn="37"
+            endOffset="1699"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Izin&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_siswa_presensi.xml"
+            line="51"
+            column="17"
+            startOffset="1947"
+            endLine="51"
+            endColumn="36"
+            endOffset="1966"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Alpha&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_siswa_presensi.xml"
+            line="58"
+            column="17"
+            startOffset="2215"
+            endLine="58"
+            endColumn="37"
+            endOffset="2235"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Catatan (opsional)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_siswa_presensi.xml"
+            line="66"
+            column="13"
+            startOffset="2566"
+            endLine="66"
+            endColumn="46"
+            endOffset="2599"/>
+    </incident>
+
+</incidents>
