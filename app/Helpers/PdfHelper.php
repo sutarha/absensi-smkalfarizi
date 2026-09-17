@@ -83,51 +83,7 @@ class PdfHelper
             font-size: 13px;
             line-height: 1.6;
         }
-        .kop-surat {
-            border-bottom: 3px double #1e293b;
-            padding-bottom: 14px;
-            margin-bottom: 22px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .kop-logo {
-            width: 76px;
-            height: 76px;
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 26px;
-            font-weight: 800;
-            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
-        }
-        .kop-text {
-            flex: 1;
-            text-align: center;
-        }
-        .kop-text h2 {
-            margin: 0;
-            font-size: 13.5px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #475569;
-            font-weight: 600;
-        }
-        .kop-text h1 {
-            margin: 2px 0;
-            font-size: 22px;
-            color: #0f172a;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-        }
-        .kop-text p {
-            margin: 2px 0;
-            font-size: 11.5px;
-            color: #64748b;
-        }
+
         .doc-title {
             text-align: center;
             margin: 15px 0 22px;
@@ -238,15 +194,7 @@ class PdfHelper
 <body>
     <button class="no-print" onclick="window.print()">🖨️ Cetak / Unduh PDF</button>
 
-    <div class="kop-surat">
-        <div class="kop-logo">SMK</div>
-        <div class="kop-text">
-            <h2>YAYASAN PENDIDIKAN ISLAM AL-FARIZI</h2>
-            <h1><?= htmlspecialchars($config['nama_sekolah']) ?></h1>
-            <p><?= htmlspecialchars($config['alamat_sekolah']) ?> | NSS/NPSN: 40205600123</p>
-            <p>Email: tu@smkalfarizi.sch.id | Website: https://smkalfarizi.sch.id</p>
-        </div>
-    </div>
+    <?= \App\Helpers\SuratHelper::renderKopSuratHtml($config) ?>
 
     <div class="doc-title">
         <h3>SLIP HONORARIUM MENGAJAR & TUNJANGAN GURU</h3>
