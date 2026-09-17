@@ -90,7 +90,7 @@ $activeNav = 'surat';
                                 <option value="">-- Pilih Guru / Pegawai --</option>
                                 <?php foreach ($allGuru as $gr): ?>
                                     <option value="<?= $gr['id'] ?>">
-                                        <?= htmlspecialchars($gr['nama_guru']) ?> (NIP: <?= htmlspecialchars($gr['nip'] ?? '-') ?> - <?= htmlspecialchars($gr['jabatan'] ?? 'Guru') ?>)
+                                        <?= htmlspecialchars($gr['nama_lengkap'] ?? 'Tanpa Nama') ?> (NIP/NIK: <?= htmlspecialchars($gr['nik_nip'] ?? '-') ?> - <?= htmlspecialchars(strtoupper($gr['role'] ?? 'Guru')) ?>)
                                     </option>
                                 <?php endforeach; ?>
                             </select>
