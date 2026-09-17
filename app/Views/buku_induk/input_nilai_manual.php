@@ -96,8 +96,8 @@ $activeNav = 'buku_induk';
             </div>
 
             <!-- Form Table -->
-            <form id="form-input-manual" method="POST" action="<?= App::baseUrl("admin/buku-induk/input-nilai-manual/{$siswa['id']}") ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>">
+            <form id="form-input-manual" method="POST" action="<?= App::baseUrl("admin/buku-induk/input-nilai-manual/{$siswa['id']}") ?>">
+                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <input type="hidden" name="semester_ke" value="<?= $semesterKe ?>">
 
                 <div class="bg-white rounded-2xl border border-slate-200/80 shadow-soft-sm overflow-hidden">

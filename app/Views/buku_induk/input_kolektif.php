@@ -140,8 +140,8 @@ $activeNav = 'buku_induk';
                 </div>
 
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
-                    <form method="POST" action="<?= App::baseUrl('admin/buku-induk/input-kolektif') ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>">
+                    <form method="POST" action="<?= App::baseUrl('admin/buku-induk/input-kolektif') ?>">
+                        <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                         <input type="hidden" name="kelas_id" value="<?= $kelasId ?>">
                         <input type="hidden" name="semester_ke" value="<?= $semesterKe ?>">
                         <?php foreach ($mapelIds as $mid): ?>
@@ -218,8 +218,8 @@ $activeNav = 'buku_induk';
                 <h3 class="text-lg font-bold text-slate-800">Buat Mata Pelajaran Baru</h3>
                 <p class="text-sm text-slate-500">Mata pelajaran yang ditambahkan akan tersedia untuk dipilih pada input kolektif semester lampau.</p>
             </div>
-            <form method="POST" action="<?= App::baseUrl('admin/mapel/store') ?>
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>" class="p-6 space-y-4">
+            <form method="POST" action="<?= App::baseUrl('admin/mapel/store') ?>" class="p-6 space-y-4">
+                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <input type="hidden" name="redirect_to" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
                 
                 <div>
