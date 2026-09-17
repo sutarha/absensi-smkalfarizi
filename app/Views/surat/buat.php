@@ -97,6 +97,11 @@ $activeNav = 'surat';
                         </div>
 
                         <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Nomor Surat</label>
+                            <input type="text" name="nomor_surat" placeholder="Misal: 421.5/025/SMK-AF/IX/2026" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold focus:ring-2 focus:ring-brand-500">
+                        </div>
+
+                        <div>
                             <label class="block font-semibold text-slate-700 mb-1">Tanggal Surat Diterbitkan</label>
                             <input type="date" name="tanggal_surat" value="<?= date('Y-m-d') ?>" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold focus:ring-2 focus:ring-brand-500">
                         </div>

@@ -58,11 +58,12 @@ class SuratController
         $tanggalSurat = !empty($_POST['tanggal_surat']) ? $_POST['tanggal_surat'] : date('Y-m-d');
         $perihal = trim($_POST['perihal'] ?? 'Surat Keterangan');
         $keperluan = trim($_POST['keperluan'] ?? '');
+        $nomorSurat = trim($_POST['nomor_surat'] ?? '');
 
-        // Auto Generate Nomor Surat Dinas
-        $tahun = (int)date('Y', strtotime($tanggalSurat));
-        $urutan = ArsipSurat::getNextUrutan($jenisSurat, $tahun);
-        $nomorSurat = SuratHelper::generateNomorSurat($jenisSurat, $urutan, $tanggalSurat);
+        // Fallback jika kosong (meskipun form required)
+        if (empty($nomorSurat)) {
+            $nomorSurat = "B./SMK-AF/" . date('Y');
+        }
 
         // Data khusus SPPD & Surat Tugas
         $dasarPenugasan = trim($_POST['dasar_penugasan'] ?? '');
