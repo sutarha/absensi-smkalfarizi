@@ -189,6 +189,7 @@ $selectedTingkat = $_GET['tingkat'] ?? '';
                                             </button>
                                             <form action="<?= App::baseUrl("admin/mapel/delete/{$m['id']}") ?>" method="POST"
                                                   onsubmit="return confirm('Hapus mata pelajaran <?= addslashes($m['nama_mapel']) ?>? Nilai siswa terkait mungkin terdampak.')">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                                                 <button type="submit" 
                                                         title="Hapus Mata Pelajaran"
                                                         class="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition">
