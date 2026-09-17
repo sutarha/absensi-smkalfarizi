@@ -13,7 +13,7 @@ $jenis = $surat['jenis_surat'];
         /* A4 Standard Print Margins */
         @page {
             size: A4 portrait;
-            margin: 10mm 20mm 20mm 25mm; /* Top margin reduced to move layout up */
+            margin: 20mm 20mm 20mm 25mm; /* Top exactly 2cm (20mm) */
         }
         body {
             font-family: 'Times New Roman', Times, serif;
