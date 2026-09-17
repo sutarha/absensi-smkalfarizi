@@ -947,6 +947,17 @@ try {
     http_response_code(500);
     error_log("[SI Presensi Error] " . $e->getMessage() . " in " . $e->getFile() . ":" . $e->getLine());
     
+    $isApi = (strpos($path, 'api/v1/') === 0);
+    
+    if ($isApi) {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode([
+            'success' => false,
+            'message' => App::isDevMode() ? $e->getMessage() : 'Terjadi kendala sistem internal.'
+        ]);
+        exit;
+    }
+
     if (App::isDevMode()) {
         echo "<h1>Terjadi Kesalahan Sistem (Mode Pengembang)</h1>";
         echo "<p><strong>Pesan:</strong> " . htmlspecialchars($e->getMessage()) . "</p>";
