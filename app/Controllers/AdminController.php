@@ -36,12 +36,12 @@ class AdminController
         $role = $this->user['role'];
         if ($role === 'admin') return;
 
-        $path = trim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH), '/');
+        $uriPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
         $baseDir = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
-        if (!empty($baseDir) && strpos($path, $baseDir) === 0) {
-            $path = substr($path, strlen($baseDir));
+        if (!empty($baseDir) && strpos($uriPath, $baseDir) === 0) {
+            $uriPath = substr($uriPath, strlen($baseDir));
         }
-        $path = trim($path, '/');
+        $path = trim($uriPath, '/');
 
         $allowedPaths = [
             'admin/dashboard' => ['kepala_sekolah', 'wakasek_kurikulum', 'bendahara'],
