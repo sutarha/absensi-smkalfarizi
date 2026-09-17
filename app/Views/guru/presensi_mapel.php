@@ -117,6 +117,7 @@ $isTimeReached = ($nowTime >= $sesi['jam_selesai']);
             </div>
 
             <form action="<?= App::baseUrl("guru/presensi/{$sesi['id']}") ?>" method="POST" id="presensiForm" class="space-y-3">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <div class="flex justify-between items-center px-1">
                     <span class="font-outfit font-bold text-xs uppercase tracking-wider text-slate-700">
                         Daftar Siswa (<?= count($siswaList) ?> Orang)
@@ -190,6 +191,7 @@ $isTimeReached = ($nowTime >= $sesi['jam_selesai']);
             <div class="mt-6 pt-4 border-t border-dashed border-slate-200">
                 <form action="<?= App::baseUrl("guru/selesai/{$sesi['id']}") ?>" method="POST" id="formSelesaiKbm"
                       onsubmit="return confirm('Apakah Anda yakin sudah selesai mengajar? Saldo honor akan dihitung final.')">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                     <button type="submit" id="btnSelesaiKbm"
                             class="w-full py-3 px-4 rounded-2xl font-bold text-xs transition-all duration-200 flex items-center justify-center gap-2 <?= $isTimeReached ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-glow-emerald cursor-pointer' : 'bg-slate-200 text-slate-500 border border-slate-300 cursor-not-allowed' ?>"
                             <?= !$isTimeReached ? 'disabled' : '' ?>>

@@ -136,6 +136,7 @@ $activeNav = 'guru';
                                             </button>
                                             <form action="<?= App::baseUrl("admin/guru/delete/{$g['id']}") ?>" method="POST" 
                                                   onsubmit="return confirm('Yakin ingin menghapus guru ini?')">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                                                 <button type="submit" 
                                                         title="Hapus Guru"
                                                         class="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition">

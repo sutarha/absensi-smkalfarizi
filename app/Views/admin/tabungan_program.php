@@ -89,6 +89,7 @@ $activeNav = 'tabungan_program';
                 <div class="flex gap-2">
                     <button onclick="editProgram(<?= htmlspecialchars(json_encode($p)) ?>)" class="flex-1 bg-gray-100 text-gray-700 py-2 rounded font-medium hover:bg-gray-200 text-sm">Edit</button>
                     <form action="<?= \App\Config\App::baseUrl('admin/tabungan/program/delete/' . $p['id']) ?>" method="POST" class="flex-1" onsubmit="return confirm('Hapus program ini?')">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                         <button type="submit" class="w-full bg-red-50 text-red-600 py-2 rounded font-medium hover:bg-red-100 text-sm">Hapus</button>
                     </form>
                 </div>
@@ -102,6 +103,7 @@ $activeNav = 'tabungan_program';
 <div id="modalTambah" class="fixed inset-0 z-50 hidden bg-gray-900 bg-opacity-50 flex justify-center items-center p-4">
     <div class="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-screen overflow-y-auto">
         <form action="<?= \App\Config\App::baseUrl('admin/tabungan/program/store') ?>" method="POST" enctype="multipart/form-data">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
             <div class="p-6 border-b border-gray-200 flex justify-between items-center">
                 <h3 class="text-lg font-bold text-gray-800">Tambah Program Tabungan</h3>
                 <button type="button" onclick="document.getElementById('modalTambah').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">

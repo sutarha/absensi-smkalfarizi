@@ -111,6 +111,7 @@ $activeNav = 'reset_data';
                         </div>
                         <form action="<?= App::baseUrl('admin/reset-data/execute') ?>" method="POST" class="mt-4"
                               onsubmit="return confirm('Apakah Anda yakin ingin mengosongkan SELURUH riwayat presensi gerbang, sesi guru, dan absensi mapel?')">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                             <input type="hidden" name="action" value="presensi">
                             <button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-soft-sm transition">
                                 🧹 Kosongkan Data Presensi (<?= (int)$counts['presensi_gerbang'] + (int)$counts['presensi_mapel'] ?> Record)
@@ -136,6 +137,7 @@ $activeNav = 'reset_data';
                         </div>
                         <form action="<?= App::baseUrl('admin/reset-data/execute') ?>" method="POST" class="mt-4"
                               onsubmit="return confirm('Apakah Anda yakin ingin mengosongkan SELURUH nilai raport semester siswa?')">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                             <input type="hidden" name="action" value="nilai">
                             <button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-soft-sm transition">
                                 📊 Kosongkan Data Nilai Raport (<?= (int)$counts['nilai_siswa'] ?> Nilai)
@@ -161,6 +163,7 @@ $activeNav = 'reset_data';
                         </div>
                         <form action="<?= App::baseUrl('admin/reset-data/execute') ?>" method="POST" class="mt-4"
                               onsubmit="return confirm('PERINGATAN: Semua data siswa dummy akan dihapus permanen. Lanjutkan?')">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                             <input type="hidden" name="action" value="siswa">
                             <button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-soft-sm transition">
                                 🗑️ Hapus Semua Data Siswa (<?= (int)$counts['siswa'] ?> Siswa)
@@ -186,6 +189,7 @@ $activeNav = 'reset_data';
                         </div>
                         <form action="<?= App::baseUrl('admin/reset-data/execute') ?>" method="POST" class="mt-4"
                               onsubmit="return confirm('Apakah Anda yakin ingin menghapus semua akun guru dummy non-admin?')">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                             <input type="hidden" name="action" value="guru">
                             <button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-soft-sm transition">
                                 👨‍🏫 Hapus Guru Non-Admin (<?= (int)$counts['guru_non_admin'] ?> Guru)
@@ -218,6 +222,7 @@ $activeNav = 'reset_data';
 
                         <form action="<?= App::baseUrl('admin/reset-data/execute') ?>" method="POST" class="mt-4 flex items-center gap-3 flex-wrap"
                               onsubmit="return confirmResetTotal()">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                             <input type="hidden" name="action" value="all">
                             <div class="flex items-center gap-2">
                                 <label class="text-xs font-bold text-slate-700 whitespace-nowrap">Ketik kata <span class="text-rose-600 font-mono bg-rose-100 px-1.5 py-0.5 rounded">BERSIHKAN</span>:</label>

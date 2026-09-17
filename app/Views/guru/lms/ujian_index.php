@@ -95,12 +95,14 @@ use App\Config\App;
                                 <div class="flex items-center gap-1">
                                     <!-- Toggle Aktif -->
                                     <form action="<?= App::baseUrl("guru/lms/ujian/toggle/{$u['id']}/{$kelasInfo['id']}/{$mapelInfo['id']}") ?>" method="POST">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                                         <button type="submit" class="w-8 h-8 rounded-lg <?= (int)$u['is_aktif'] === 1 ? 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100' : 'bg-slate-100 text-slate-400 hover:bg-slate-200' ?> flex items-center justify-center transition" title="Ubah Status Aktif">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                                         </button>
                                     </form>
                                     <!-- Hapus -->
                                     <form action="<?= App::baseUrl("guru/lms/ujian/delete/{$u['id']}/{$kelasInfo['id']}/{$mapelInfo['id']}") ?>" method="POST" onsubmit="return confirm('Hapus tes/kuis ini beserta seluruh soal dan data pengerjaan?')">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                                         <button type="submit" class="w-8 h-8 rounded-lg bg-rose-50 text-rose-500 hover:bg-rose-100 flex items-center justify-center transition" title="Hapus Ujian">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                                         </button>
@@ -158,6 +160,7 @@ use App\Config\App;
             </div>
             <div class="overflow-y-auto p-5">
                 <form action="<?= App::baseUrl("guru/lms/ujian/store/{$kelasInfo['id']}/{$mapelInfo['id']}") ?>" method="POST" class="space-y-4">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                     <div>
                         <label class="block mb-1 text-xs font-bold text-slate-700">Judul Tes / Ujian</label>
                         <input type="text" name="judul" required placeholder="Contoh: Kuis Harian 1 / UTS Semester Ganjil" class="bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-brand-500 focus:border-brand-500 block w-full p-2.5">

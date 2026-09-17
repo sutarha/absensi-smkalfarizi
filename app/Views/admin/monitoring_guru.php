@@ -707,6 +707,7 @@ $activeNav = 'monitoring_guru';
                 <button type="button" onclick="closeModalEditSesi()" class="text-slate-400 hover:text-slate-600">✖</button>
             </div>
             <form action="<?= App::baseUrl('admin/monitoring/guru/update-manual') ?>" method="POST" class="p-6 space-y-4">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <input type="hidden" name="jadwal_id" id="edit_jadwal_id">
                 <input type="hidden" name="guru_id" id="edit_guru_id">
                 <input type="hidden" name="tanggal" value="<?= htmlspecialchars($tanggal) ?>">
@@ -758,6 +759,7 @@ $activeNav = 'monitoring_guru';
                 <button type="button" onclick="closeModalEditGerbang()" class="text-slate-400 hover:text-slate-600">✖</button>
             </div>
             <form action="<?= App::baseUrl('admin/monitoring/guru/gerbang-update-manual') ?>" method="POST">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <div class="p-6 space-y-4">
                     <input type="hidden" name="guru_id" id="edit_gerbang_guru_id">
                     <input type="hidden" name="tanggal" value="<?= htmlspecialchars($tanggal) ?>">

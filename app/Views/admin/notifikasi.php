@@ -112,6 +112,7 @@ $activeNav = 'notifikasi';
                     </div>
 
                     <form action="<?= App::baseUrl('admin/notifikasi/store') ?>" method="POST" class="space-y-4">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                         
                         <!-- Judul Notifikasi -->
                         <div>
@@ -314,6 +315,7 @@ $activeNav = 'notifikasi';
                                     <div class="flex-shrink-0">
                                         <form action="<?= App::baseUrl('admin/notifikasi/delete/' . $b['id']) ?>" method="POST" 
                                               onsubmit="return confirm('Apakah Anda yakin ingin menghapus notifikasi ini? Seluruh pesan yang terdistribusi ke Guru/Siswa juga akan terhapus.')">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                                             <button type="submit" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-400 hover:text-rose-600 flex items-center justify-center text-xs transition" title="Hapus Notifikasi">
                                                 🗑️
                                             </button>

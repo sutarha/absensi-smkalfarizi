@@ -108,6 +108,7 @@ use App\Config\App;
 
                             <!-- Form Penilaian Essay -->
                             <form action="<?= App::baseUrl("guru/lms/ujian/nilai-essay/{$detail['id']}") ?>" method="POST" class="bg-purple-50/70 p-3 rounded-xl border border-purple-100 space-y-2.5">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                                 <input type="hidden" name="soal_id" value="<?= $item['id'] ?>">
                                 
                                 <div class="flex items-center justify-between">

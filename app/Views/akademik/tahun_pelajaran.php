@@ -190,6 +190,7 @@ $activeNav = 'tapel';
                                                 <?php if ($t['is_aktif'] != 1): ?>
                                                     <form method="POST" action="<?= App::baseUrl("admin/akademik/tahun-pelajaran/set-aktif/{$t['id']}") ?>" onsubmit="return confirm('Apakah Anda yakin ingin mengaktifkan Tahun Pelajaran <?= htmlspecialchars($t['tahun_ajaran']) ?>
     <?= \App\Helpers\CsrfHelper::getTokenInput() ?> (<?= htmlspecialchars($t['semester']) ?>)?');">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                                                         <button type="submit" class="inline-flex items-center gap-1 bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-700 font-semibold text-xs px-3 py-1 rounded-lg transition border border-slate-300">
                                                             Aktifkan
                                                         </button>

@@ -96,6 +96,7 @@ use App\Config\App;
                                     <span class="text-[11px] text-slate-500 font-semibold">Bobot: <?= number_format($s['bobot_nilai'], 1) ?></span>
                                 </div>
                                 <form action="<?= App::baseUrl("guru/lms/ujian/soal/delete/{$s['id']}/{$ujian['id']}") ?>" method="POST" onsubmit="return confirm('Hapus butir soal no <?= $idx + 1 ?>?')">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                                     <button type="submit" class="w-7 h-7 rounded-lg bg-rose-50 text-rose-500 hover:bg-rose-100 flex items-center justify-center transition" title="Hapus Soal">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                                     </button>
@@ -154,6 +155,7 @@ use App\Config\App;
             </div>
             <div class="overflow-y-auto p-5">
                 <form action="<?= App::baseUrl("guru/lms/ujian/soal/store/{$ujian['id']}") ?>" method="POST" enctype="multipart/form-data" class="space-y-4">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                     
                     <!-- Pilihan Tipe Soal -->
                     <div>

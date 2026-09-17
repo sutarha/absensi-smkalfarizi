@@ -526,6 +526,7 @@ $activeNav = 'buku_induk';
                                     </div>
                                 </div>
                                 <form action="<?= App::baseUrl('admin/buku-induk/catatan/delete/' . $catatan['id']) ?>" method="POST" onsubmit="return confirm('Hapus catatan ini?');">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                                     <input type="hidden" name="siswa_id" value="<?= $siswa['id'] ?>">
                                     <button type="submit" class="text-red-500 hover:text-red-700 p-1">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
@@ -550,6 +551,7 @@ $activeNav = 'buku_induk';
                 </button>
             </div>
             <form action="<?= App::baseUrl('admin/buku-induk/catatan/save') ?>" method="POST" class="p-5 space-y-4">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <input type="hidden" name="siswa_id" value="<?= $siswa['id'] ?>">
                 
                 <div class="grid grid-cols-2 gap-4">

@@ -51,6 +51,7 @@ if (!empty($siswaRincianMapel)) {
                 <!-- Tombol Eksekusi Audit Evaluasi Gerbang Sore -->
                 <form action="<?= App::baseUrl('admin/monitoring/evaluasi-gerbang') ?>" method="POST"
                       onsubmit="return confirm('Kunci status siswa yang tidak melakukan Tap-Out pulang hari ini menjadi ALPHA secara permanen?')">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                     <input type="hidden" name="tanggal" value="<?= htmlspecialchars($tanggal) ?>">
                     <button type="submit" class="inline-flex items-center gap-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs px-4 py-2 rounded-xl shadow-soft-sm hover:shadow-glow-rose transition">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>

@@ -242,6 +242,7 @@ $hasFilterActive = !empty($selectedHari) || !empty($selectedKelasId) || !empty($
                                             </button>
                                             <form action="<?= App::baseUrl("admin/jadwal/delete/{$j['id']}") ?>" method="POST"
                                                   onsubmit="return confirm('Yakin ingin menghapus jadwal ini?')">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                                                 <button type="submit" 
                                                         title="Hapus Jadwal"
                                                         class="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition">

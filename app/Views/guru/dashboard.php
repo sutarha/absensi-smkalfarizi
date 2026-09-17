@@ -509,6 +509,7 @@ use App\Helpers\TimeHelper;
                             </div>
                                 <form action="<?= App::baseUrl("guru/selesai/{$j['sesi_id']}") ?>" method="POST" class="flex-1" 
                                       onsubmit="return confirm('Akhiri sesi mengajar ini? Honor akan dihitung final.')">
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                                     <button type="submit" 
                                             class="w-full py-2.5 px-3 rounded-xl font-semibold text-xs shadow-soft-sm transition-all duration-150 flex items-center justify-center gap-1 <?= $isFinishTimeReached ? 'bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer' : 'bg-slate-200 text-slate-400 border border-slate-300 cursor-not-allowed' ?>"
                                             <?= !$isFinishTimeReached ? 'disabled' : '' ?>
