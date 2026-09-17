@@ -34,7 +34,7 @@ use App\Config\App;
 
         <!-- Form Login -->
         <form action="<?= App::baseUrl('login') ?>" method="POST" class="space-y-4">
-            <?= \App\Helpers\CsrfHelper::getField() ?>
+            <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
             <div>
                 <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5" for="username">
                     Username / NISN Siswa
