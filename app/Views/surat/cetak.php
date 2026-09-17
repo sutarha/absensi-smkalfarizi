@@ -2,6 +2,23 @@
 use App\Helpers\SuratHelper;
 
 $jenis = $surat['jenis_surat'];
+
+// MAPPING DATA PENERIMA
+if (($surat['penerima_tipe'] ?? '') === 'GURU') {
+    $surat['nama_penerima'] = $surat['nama_guru'] ?? '';
+    $surat['nip_penerima'] = $surat['nik_nip'] ?? '';
+    $surat['jabatan_penerima'] = !empty($surat['tugas_tambahan']) ? $surat['tugas_tambahan'] : 'Guru / Pegawai';
+} else {
+    $surat['nama_penerima'] = $surat['nama_siswa'] ?? '';
+    $surat['nisn_penerima'] = $surat['nisn'] ?? '';
+    $surat['nis_penerima'] = $surat['nis'] ?? '';
+    $surat['nama_kelas_penerima'] = $surat['nama_kelas'] ?? '';
+    $surat['jurusan_penerima'] = $surat['jurusan'] ?? '';
+    $surat['tempat_lahir_penerima'] = $surat['tempat_lahir'] ?? '';
+    $surat['tanggal_lahir_penerima'] = $surat['tanggal_lahir'] ?? '';
+    $surat['nama_ayah_penerima'] = $surat['nama_ayah'] ?? '';
+    $surat['alamat_penerima'] = $surat['alamat_jalan'] ?? '';
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -13,12 +30,12 @@ $jenis = $surat['jenis_surat'];
         /* A4 Standard Print Margins */
         @page {
             size: A4 portrait;
-            margin: 20mm 20mm 20mm 25mm; /* Top exactly 2cm (20mm) */
+            margin: 20mm 20mm 15mm 25mm; /* Reduce bottom margin slightly to prevent blank page */
         }
         body {
             font-family: 'Times New Roman', Times, serif;
-            font-size: 12pt; /* Standard official letter size */
-            line-height: 1.45; /* Slightly tighter line height to save space */
+            font-size: 12pt;
+            line-height: 1.45;
             color: #000;
             background: #fff;
             margin: 0;
@@ -29,6 +46,7 @@ $jenis = $surat['jenis_surat'];
             max-width: 100%;
             margin: 0 auto;
             box-sizing: border-box;
+            padding-bottom: 1px; /* Prevent margin collapse at bottom */
         }
         
         /* Print Utility Bar */
