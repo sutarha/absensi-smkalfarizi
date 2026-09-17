@@ -54,6 +54,7 @@ $activeNav = 'geofence';
             <?php endif; ?>
 
             <form action="<?= App::baseUrl('admin/geofence') ?>" method="POST" enctype="multipart/form-data" id="geofence-form">
+                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     
                     <!-- Left Column: Interactive Map & Coordinates (7 cols) -->
