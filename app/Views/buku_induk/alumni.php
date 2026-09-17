@@ -1,7 +1,7 @@
 <?php
 use App\Config\App;
 
-$activeNav = 'buku_induk';
+$activeNav = 'alumni';
 ?>
 <!DOCTYPE html>
 <html lang="id" class="h-full">

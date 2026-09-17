@@ -104,7 +104,7 @@ class BukuInduk
                    COALESCE(b.status_siswa, 'AKTIF') as status_siswa
             FROM `siswa` s
             LEFT JOIN `buku_induk_siswa` b ON s.id = b.siswa_id
-            WHERE s.kelas_id IS NULL OR COALESCE(b.status_siswa, 'AKTIF') != 'AKTIF'
+            WHERE COALESCE(b.status_siswa, 'AKTIF') != 'AKTIF'
         ";
         $params = [];
 
@@ -131,7 +131,7 @@ class BukuInduk
             SELECT COUNT(*)
             FROM `siswa` s
             LEFT JOIN `buku_induk_siswa` b ON s.id = b.siswa_id
-            WHERE s.kelas_id IS NULL OR COALESCE(b.status_siswa, 'AKTIF') != 'AKTIF'
+            WHERE COALESCE(b.status_siswa, 'AKTIF') != 'AKTIF'
         ";
         $params = [];
 

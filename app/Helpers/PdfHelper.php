@@ -401,20 +401,22 @@ class PdfHelper
             color: #0f172a;
         }
         .page-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            max-width: 820px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            max-width: 800px;
             margin: 0 auto;
         }
         .card-pelajar {
             background: #ffffff;
-            border: 1.5px dashed #94a3b8;
-            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
             position: relative;
             box-shadow: 0 2px 5px rgba(0,0,0,0.04);
             page-break-inside: avoid;
-            height: 205px;
+            width: 85.6mm;
+            height: 53.98mm;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -429,17 +431,14 @@ class PdfHelper
             gap: 10px;
         }
         .card-logo {
-            width: 32px;
-            height: 32px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+            width: 34px;
+            height: 34px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 800;
             font-size: 13px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
         }
         .card-header-text h4 {
             margin: 0;
@@ -457,8 +456,8 @@ class PdfHelper
         }
         .card-body {
             display: flex;
-            padding: 10px 14px;
-            gap: 12px;
+            padding: 8px 12px;
+            gap: 10px;
             flex: 1;
             align-items: center;
         }
@@ -477,15 +476,16 @@ class PdfHelper
         }
         .card-info {
             flex: 1;
-            font-size: 11px;
-            line-height: 1.45;
+            font-size: 10px;
+            line-height: 1.3;
             min-width: 0;
         }
         .card-info .name {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 800;
             color: #0f172a;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -577,7 +577,13 @@ class PdfHelper
         <?php foreach ($siswaList as $s): ?>
         <div class="card-pelajar">
             <div class="card-header">
-                <div class="card-logo">SMK</div>
+            <div class="card-logo">
+            <?php if (!empty($config['logo_kop'])): ?>
+                <img src="<?= \App\Config\App::baseUrl('uploads/' . $config['logo_kop']) ?>" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;">
+            <?php else: ?>
+                SMK
+            <?php endif; ?>
+        </div>
                 <div class="card-header-text">
                     <h4>KARTU IDENTITAS SISWA</h4>
                     <h3><?= htmlspecialchars($config['nama_sekolah']) ?></h3>

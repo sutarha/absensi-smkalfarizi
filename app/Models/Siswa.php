@@ -10,18 +10,22 @@ class Siswa
     {
         $db = Database::getConnection();
         if ($kelasId) {
-            $stmt = $db->prepare("SELECT s.*, k.nama_kelas, k.tingkat, k.jurusan, g.nama_lengkap as nama_wali_kelas 
+            $stmt = $db->prepare("SELECT s.*, k.nama_kelas, k.tingkat, k.jurusan, g.nama_lengkap as nama_wali_kelas,
+                                  COALESCE(b.tanggal_lahir, s.tanggal_lahir) as tanggal_lahir 
                                   FROM siswa s 
                                   JOIN kelas k ON k.id = s.kelas_id 
                                   LEFT JOIN guru g ON k.wali_kelas_guru_id = g.id
+                                  LEFT JOIN buku_induk_siswa b ON b.siswa_id = s.id
                                   WHERE s.kelas_id = :kid 
                                   ORDER BY s.nama_siswa ASC");
             $stmt->execute([':kid' => $kelasId]);
         } else {
-            $stmt = $db->query("SELECT s.*, k.nama_kelas, k.tingkat, k.jurusan, g.nama_lengkap as nama_wali_kelas 
+            $stmt = $db->query("SELECT s.*, k.nama_kelas, k.tingkat, k.jurusan, g.nama_lengkap as nama_wali_kelas,
+                                COALESCE(b.tanggal_lahir, s.tanggal_lahir) as tanggal_lahir 
                                 FROM siswa s 
                                 JOIN kelas k ON k.id = s.kelas_id 
                                 LEFT JOIN guru g ON k.wali_kelas_guru_id = g.id
+                                LEFT JOIN buku_induk_siswa b ON b.siswa_id = s.id
                                 ORDER BY k.tingkat ASC, k.nama_kelas ASC, s.nama_siswa ASC");
         }
         return $stmt->fetchAll();
@@ -30,10 +34,12 @@ class Siswa
     public static function findById(int $id): ?array
     {
         $db = Database::getConnection();
-        $stmt = $db->prepare("SELECT s.*, k.nama_kelas, k.tingkat, k.jurusan, g.nama_lengkap as nama_wali_kelas 
+        $stmt = $db->prepare("SELECT s.*, k.nama_kelas, k.tingkat, k.jurusan, g.nama_lengkap as nama_wali_kelas,
+                              COALESCE(b.tanggal_lahir, s.tanggal_lahir) as tanggal_lahir 
                               FROM siswa s 
                               JOIN kelas k ON k.id = s.kelas_id 
                               LEFT JOIN guru g ON k.wali_kelas_guru_id = g.id
+                              LEFT JOIN buku_induk_siswa b ON b.siswa_id = s.id
                               WHERE s.id = :id LIMIT 1");
         $stmt->execute([':id' => $id]);
         $res = $stmt->fetch();

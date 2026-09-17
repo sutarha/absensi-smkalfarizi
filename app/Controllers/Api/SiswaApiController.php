@@ -40,9 +40,10 @@ class SiswaApiController extends ApiController
 
         $db   = Database::getConnection();
         $stmt = $db->prepare("
-            SELECT s.*, k.nama_kelas, k.tingkat, k.jurusan
+            SELECT s.*, k.nama_kelas, k.tingkat, k.jurusan, b.tanggal_lahir as tgl_lahir_induk
             FROM   siswa s
             LEFT JOIN kelas k ON k.id = s.kelas_id
+            LEFT JOIN buku_induk_siswa b ON b.siswa_id = s.id
             WHERE  s.nisn = :nisn
             LIMIT  1
         ");
@@ -54,7 +55,7 @@ class SiswaApiController extends ApiController
         }
 
         // Verifikasi tanggal lahir
-        $tglLahirDb = $siswa['tanggal_lahir'] ?? null;
+        $tglLahirDb = $siswa['tgl_lahir_induk'] ?? $siswa['tanggal_lahir'] ?? null;
         if ($tglLahirDb === null || $tglLahirDb !== $tglLahir) {
             self::json(['success' => false, 'message' => 'Tanggal lahir tidak sesuai.'], 401);
         }
@@ -85,9 +86,10 @@ class SiswaApiController extends ApiController
 
         $db   = Database::getConnection();
         $stmt = $db->prepare("
-            SELECT s.*, k.nama_kelas, k.tingkat, k.jurusan
+            SELECT s.*, k.nama_kelas, k.tingkat, k.jurusan, b.tanggal_lahir as tgl_lahir_induk
             FROM   siswa s
             LEFT JOIN kelas k ON k.id = s.kelas_id
+            LEFT JOIN buku_induk_siswa b ON b.siswa_id = s.id
             WHERE  s.id = :id
             LIMIT  1
         ");
@@ -449,7 +451,7 @@ class SiswaApiController extends ApiController
             'nama_kelas'  => $s['nama_kelas'],
             'tingkat'     => $s['tingkat'],
             'jurusan'     => $s['jurusan'],
-            'tanggal_lahir' => $s['tanggal_lahir'],
+            'tanggal_lahir' => $s['tgl_lahir_induk'] ?? $s['tanggal_lahir'],
             'no_hp_ortu'  => $s['no_hp_ortu'] ?? null,
             'alamat'      => $s['alamat'] ?? null,
             'last_login'  => $s['last_login_pwa'] ?? null,
