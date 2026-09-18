@@ -145,8 +145,8 @@ class MainActivity : AppCompatActivity() {
                 val url = request?.url?.toString() ?: return false
                 val targetHost = try { request.url?.host } catch (e: Exception) { null }
 
-                // Jika domain sama dengan server kita (atau trycloudflare.com), buka tetap di dalam WebView
-                return if (targetHost != null && (targetHost == baseHost || targetHost.endsWith("trycloudflare.com"))) {
+                // Jika domain sama dengan server kita (absensismkalfarizi.my.id / trycloudflare.com), buka tetap di dalam WebView
+                return if (targetHost != null && (targetHost == baseHost || targetHost.endsWith("absensismkalfarizi.my.id") || targetHost.endsWith("trycloudflare.com"))) {
                     false // Buka di dalam WebView
                 } else if (url.startsWith("http://") || url.startsWith("https://")) {
                     try {

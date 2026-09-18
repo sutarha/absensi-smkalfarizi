@@ -10,5 +10,5 @@ public final class BuildConfig {
   public static final int VERSION_CODE = 1;
   public static final String VERSION_NAME = "1.0.0";
   // Field from build type: debug
-  public static final String WEB_BASE_URL = "https://challenge-muslim-survival-specially.trycloudflare.com/login";
+  public static final String WEB_BASE_URL = "https://absensismkalfarizi.my.id";
 }

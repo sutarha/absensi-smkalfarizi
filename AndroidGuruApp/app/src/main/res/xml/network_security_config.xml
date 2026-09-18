@@ -5,8 +5,9 @@
     Saat production (HTTPS hosting), bagian cleartextTrafficPermitted bisa dihapus.
 -->
 <network-security-config>
-    <!-- Izinkan traffic untuk Cloudflare tunnel & development lokal -->
+    <!-- Izinkan traffic untuk domain absensismkalfarizi.my.id & development lokal -->
     <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">absensismkalfarizi.my.id</domain>
         <domain includeSubdomains="true">trycloudflare.com</domain>
         <domain includeSubdomains="false">localhost</domain>
         <domain includeSubdomains="false">127.0.0.1</domain>

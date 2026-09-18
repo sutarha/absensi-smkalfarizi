@@ -69,10 +69,14 @@ class Siswa
             $tgl2 = date('Y-m-d', $timestamp);
         }
 
-        $stmt = $db->prepare("SELECT s.*, k.nama_kelas, k.tingkat, k.jurusan 
+        $stmt = $db->prepare("SELECT s.*, k.nama_kelas, k.tingkat, k.jurusan,
+                                     COALESCE(b.tanggal_lahir, s.tanggal_lahir) as tanggal_lahir
                               FROM siswa s 
                               LEFT JOIN kelas k ON k.id = s.kelas_id 
-                              WHERE s.nisn = :nisn AND (s.tanggal_lahir = :tgl1 OR s.tanggal_lahir = :tgl2) LIMIT 1");
+                              LEFT JOIN buku_induk_siswa b ON b.siswa_id = s.id
+                              WHERE s.nisn = :nisn 
+                              AND (COALESCE(b.tanggal_lahir, s.tanggal_lahir) = :tgl1 OR COALESCE(b.tanggal_lahir, s.tanggal_lahir) = :tgl2) 
+                              LIMIT 1");
         $stmt->execute([':nisn' => $nisn, ':tgl1' => $tgl1, ':tgl2' => $tgl2]);
         $res = $stmt->fetch();
         return $res ?: null;

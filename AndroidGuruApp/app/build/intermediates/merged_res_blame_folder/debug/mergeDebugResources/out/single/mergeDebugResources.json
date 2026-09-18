@@ -24,12 +24,12 @@
         "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\drawable\\bg_badge_default.xml"
     },
     {
-        "merged": "com.smkalfarizi.guru.app-debug-35:/layout_activity_main.xml.flat",
-        "source": "com.smkalfarizi.guru.app-main-37:/layout/activity_main.xml"
-    },
-    {
         "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\layout_activity_splash.xml.flat",
         "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\layout\\activity_splash.xml"
+    },
+    {
+        "merged": "com.smkalfarizi.guru.app-debug-35:/xml_network_security_config.xml.flat",
+        "source": "com.smkalfarizi.guru.app-main-37:/xml/network_security_config.xml"
     },
     {
         "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\drawable_bg_badge_selesai.xml.flat",

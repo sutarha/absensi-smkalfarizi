@@ -21,18 +21,18 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // URL Web Server (ganti ke hosting/VPS saat production)
-        buildConfigField("String", "WEB_BASE_URL", "\"https://challenge-muslim-survival-specially.trycloudflare.com/login\"")
+        buildConfigField("String", "WEB_BASE_URL", "\"https://absensismkalfarizi.my.id\"")
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            buildConfigField("String", "WEB_BASE_URL", "\"https://challenge-muslim-survival-specially.trycloudflare.com/login\"")
+            buildConfigField("String", "WEB_BASE_URL", "\"https://absensismkalfarizi.my.id\"")
         }
         debug {
             isDebuggable = true
-            buildConfigField("String", "WEB_BASE_URL", "\"https://challenge-muslim-survival-specially.trycloudflare.com/login\"")
+            buildConfigField("String", "WEB_BASE_URL", "\"https://absensismkalfarizi.my.id\"")
         }
     }
 
