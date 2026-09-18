@@ -32,6 +32,9 @@ class GuruController
         $guruId = (int)$this->user['id'];
         $today = date('Y-m-d');
         $hariIndo = TimeHelper::getDayName($today);
+        
+        // Jalankan auto-checkout jika ada sesi terlewat 20 menit
+        SesiMengajar::runAutoCheckout();
 
         // Ambil jadwal hari ini beserta sesi aktifnya
         $jadwalList = SesiMengajar::getTodayScheduleWithSession($guruId, $today, $hariIndo);

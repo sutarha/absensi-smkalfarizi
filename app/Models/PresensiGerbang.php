@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Config\Database;
+use App\Helpers\WhatsappHelper;
 use PDO;
 
 class PresensiGerbang
@@ -14,6 +15,18 @@ class PresensiGerbang
         $db = Database::getConnection();
         $now = $waktu ?: date('Y-m-d H:i:s');
         $today = date('Y-m-d', strtotime($now));
+        
+        $config = KonfigurasiSekolah::get();
+        $jamMasukMulai = $config['jam_gerbang_masuk_mulai'] ?? '06:00:00';
+        $jamSekarang = date('H:i:s', strtotime($now));
+
+        if ($jamSekarang < $jamMasukMulai) {
+            return [
+                'success' => false,
+                'is_repeat' => false,
+                'message' => "Gerbang Masuk belum dibuka! (Buka: " . substr($jamMasukMulai, 0, 5) . ")"
+            ];
+        }
 
         // Cek apakah sudah ada baris presensi hari ini
         $stmt = $db->prepare("SELECT * FROM presensi_gerbang_siswa WHERE siswa_id = :sid AND tanggal = :tgl LIMIT 1");
@@ -53,6 +66,21 @@ class PresensiGerbang
             $inStmt->execute([':sid' => $siswaId, ':tgl' => $today, ':waktu' => $now, ':st' => $newStatus, ':ket' => $ket]);
         }
 
+        // WA Notification (Jika ada no_hp_ortu)
+        $siswaStmt = $db->prepare("SELECT nama_siswa, no_hp_ortu FROM siswa WHERE id = ?");
+        $siswaStmt->execute([$siswaId]);
+        $siswa = $siswaStmt->fetch();
+        if ($siswa && !empty($siswa['no_hp_ortu'])) {
+            $timeStr = date('H:i', strtotime($now));
+            $msg = "INFO SEKOLAH:\nBapak/Ibu, anak Anda *{$siswa['nama_siswa']}* telah tiba di sekolah pada pukul {$timeStr} WIB.";
+            if ($newStatus === 'TERLAMBAT') {
+                $msg .= "\nStatus: Terlambat.";
+            } elseif ($newStatus === 'ALPHA') {
+                $msg .= "\nStatus: Alpha (Terlambat melewati jam 08:00).";
+            }
+            WhatsappHelper::sendMessage($siswa['no_hp_ortu'], $msg);
+        }
+
         return [
             'success' => true,
             'is_repeat' => false,
@@ -74,6 +102,21 @@ class PresensiGerbang
         $stmt = $db->prepare("SELECT * FROM presensi_gerbang_siswa WHERE siswa_id = :sid AND tanggal = :tgl LIMIT 1");
         $stmt->execute([':sid' => $siswaId, ':tgl' => $today]);
         $existing = $stmt->fetch();
+
+        $config = KonfigurasiSekolah::get();
+        $isFriday = (date('N', strtotime($now)) == 5);
+        
+        $jamPulangMulai = $isFriday ? ($config['jam_gerbang_pulang_mulai_jumat'] ?? '11:30:00') : ($config['jam_gerbang_pulang_mulai'] ?? '14:00:00');
+        $jamPulangSelesai = $isFriday ? ($config['jam_gerbang_pulang_selesai_jumat'] ?? '13:30:00') : ($config['jam_gerbang_pulang_selesai'] ?? '16:00:00');
+        $jamSekarang = date('H:i:s', strtotime($now));
+
+        if ($jamSekarang < $jamPulangMulai) {
+            return [
+                'success' => false,
+                'is_repeat' => false,
+                'message' => "Gerbang Pulang belum dibuka! (Buka: " . substr($jamPulangMulai, 0, 5) . ")"
+            ];
+        }
 
         if ($existing) {
             if (!empty($existing['waktu_pulang'])) {
@@ -109,6 +152,16 @@ class PresensiGerbang
             $inStmt = $db->prepare("INSERT INTO presensi_gerbang_siswa (siswa_id, tanggal, waktu_pulang, status_kehadiran, keterangan) 
                                     VALUES (:sid, :tgl, :waktu, 'ALPHA', 'Gugur Alpha (Tidak melakukan Tap-In Pagi)')");
             $inStmt->execute([':sid' => $siswaId, ':tgl' => $today, ':waktu' => $now]);
+        }
+
+        // WA Notification (Jika ada no_hp_ortu)
+        $siswaStmt = $db->prepare("SELECT nama_siswa, no_hp_ortu FROM siswa WHERE id = ?");
+        $siswaStmt->execute([$siswaId]);
+        $siswa = $siswaStmt->fetch();
+        if ($siswa && !empty($siswa['no_hp_ortu'])) {
+            $timeStr = date('H:i', strtotime($now));
+            $msg = "INFO SEKOLAH:\nBapak/Ibu, anak Anda *{$siswa['nama_siswa']}* telah melakukan Tap-Out pulang pada pukul {$timeStr} WIB. Hati-hati di jalan.";
+            WhatsappHelper::sendMessage($siswa['no_hp_ortu'], $msg);
         }
 
         return [

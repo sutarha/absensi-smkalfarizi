@@ -215,4 +215,47 @@ class SesiMengajar
             ]);
         }
     }
+
+    /**
+     * Otomatis checkout sesi mengajar yang sudah lewat 20 menit dari jam selesainya.
+     * Tidak memotong honor.
+     * @return int Jumlah sesi yang di-checkout otomatis
+     */
+    public static function runAutoCheckout(): int
+    {
+        $db = Database::getConnection();
+        $now = date('Y-m-d H:i:s');
+        $today = date('Y-m-d');
+        
+        $sql = "SELECT sm.id, j.jam_selesai 
+                FROM sesi_mengajar_guru sm
+                JOIN jadwal_pelajaran j ON j.id = sm.jadwal_id
+                WHERE sm.tanggal = :tgl 
+                  AND sm.waktu_checkin IS NOT NULL 
+                  AND sm.waktu_checkout IS NULL";
+                  
+        $stmt = $db->prepare($sql);
+        $stmt->execute([':tgl' => $today]);
+        $openSessions = $stmt->fetchAll();
+        
+        $affected = 0;
+        foreach ($openSessions as $sesi) {
+            $jamSelesaiTimestamp = strtotime($today . ' ' . $sesi['jam_selesai']);
+            $batasCheckoutTimestamp = $jamSelesaiTimestamp + (20 * 60); // Tambah 20 menit
+            
+            if (time() > $batasCheckoutTimestamp) {
+                // Checkout otomatis dengan waktu jam_selesai + 20 menit (atau waktu saat ini, mari gunakan waktu batas)
+                $autoCheckoutTime = date('Y-m-d H:i:s', $batasCheckoutTimestamp);
+                
+                $upSql = "UPDATE sesi_mengajar_guru 
+                          SET waktu_checkout = :out, catatan_guru = 'Auto-Checkout by System' 
+                          WHERE id = :id";
+                $upStmt = $db->prepare($upSql);
+                $upStmt->execute([':out' => $autoCheckoutTime, ':id' => $sesi['id']]);
+                $affected += $upStmt->rowCount();
+            }
+        }
+        
+        return $affected;
+    }
 }

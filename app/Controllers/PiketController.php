@@ -151,4 +151,51 @@ class PiketController
             'recent_scans' => $recentScans
         ]);
     }
+
+    /**
+     * Tampilan Input Manual Izin/Sakit/Tugas Luar
+     */
+    public function inputIzinView(): void
+    {
+        $kelasList = Kelas::getAll();
+        $user = $this->user;
+        $config = $this->config;
+
+        require __DIR__ . '/../Views/piket/input_izin.php';
+    }
+
+    /**
+     * AJAX Endpoint Pemrosesan Izin Manual Siswa
+     */
+    public function ajaxInputIzin(): void
+    {
+        $siswaId = isset($_POST['siswa_id']) ? (int)$_POST['siswa_id'] : 0;
+        $status = $_POST['status_kehadiran'] ?? '';
+        $keterangan = trim($_POST['keterangan'] ?? '');
+        $tanggal = $_POST['tanggal'] ?? date('Y-m-d');
+        
+        if (empty($siswaId) || !in_array($status, ['SAKIT', 'IZIN', 'TUGAS_LUAR'])) {
+            App::json(['success' => false, 'message' => 'Data tidak valid atau status salah!'], 400);
+        }
+
+        $db = \App\Config\Database::getConnection();
+        
+        // Cek apakah sudah ada baris presensi hari ini
+        $stmt = $db->prepare("SELECT * FROM presensi_gerbang_siswa WHERE siswa_id = :sid AND tanggal = :tgl LIMIT 1");
+        $stmt->execute([':sid' => $siswaId, ':tgl' => $tanggal]);
+        $existing = $stmt->fetch();
+
+        if ($existing) {
+            $upStmt = $db->prepare("UPDATE presensi_gerbang_siswa SET status_kehadiran = :st, keterangan = :ket WHERE id = :id");
+            $upStmt->execute([':st' => $status, ':ket' => $keterangan, ':id' => $existing['id']]);
+        } else {
+            $inStmt = $db->prepare("INSERT INTO presensi_gerbang_siswa (siswa_id, tanggal, status_kehadiran, keterangan) VALUES (:sid, :tgl, :st, :ket)");
+            $inStmt->execute([':sid' => $siswaId, ':tgl' => $tanggal, ':st' => $status, ':ket' => $keterangan]);
+        }
+
+        App::json([
+            'success' => true,
+            'message' => 'Status kehadiran berhasil diperbarui.'
+        ]);
+    }
 }

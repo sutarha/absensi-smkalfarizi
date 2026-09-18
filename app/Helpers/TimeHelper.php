@@ -2,6 +2,7 @@
 namespace App\Helpers;
 
 use DateTime;
+use App\Config\Database;
 
 class TimeHelper
 {
@@ -44,6 +45,32 @@ class TimeHelper
         $m = (int)$d->format('n');
         $monthName = self::MONTHS_ID[$m] ?? '';
         return "{$day}, " . $d->format('d') . " {$monthName} " . $d->format('Y');
+    }
+
+    /**
+     * Memeriksa apakah tanggal yang diberikan adalah hari kerja reguler (Senin - Jumat) 
+     * dan tidak tercatat di tabel hari_libur.
+     */
+    public static function isWorkingDay(string $date): bool
+    {
+        $d = new DateTime($date);
+        $dayOfWeek = (int)$d->format('N'); // 1 (Senin) - 7 (Minggu)
+        
+        // 1. Cek Weekend (Sabtu & Minggu)
+        if ($dayOfWeek > 5) {
+            return false;
+        }
+
+        // 2. Cek tabel hari_libur
+        $db = Database::getConnection();
+        $stmt = $db->prepare("SELECT id FROM hari_libur WHERE tanggal = :tgl LIMIT 1");
+        $stmt->execute([':tgl' => $date]);
+        
+        if ($stmt->fetch()) {
+            return false; // Ada di tabel hari_libur
+        }
+
+        return true;
     }
 
     public static function formatRupiah(float $amount): string

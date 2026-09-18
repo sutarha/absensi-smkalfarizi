@@ -923,6 +923,11 @@ try {
             $piket->liveFeed();
             exit;
         }
+        if ($path === 'piket/input-izin') {
+            if ($method === 'POST') $piket->ajaxInputIzin();
+            else $piket->inputIzinView();
+            exit;
+        }
     }
 
     // PAYROLL ROUTES

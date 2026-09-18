@@ -149,6 +149,16 @@ use App\Helpers\BarcodeHelper;
                 <label for="mode-pulang" class="flex items-center justify-center gap-2">🌙 PULANG</label>
             </div>
 
+            <!-- Action Buttons -->
+            <div class="flex gap-2">
+                <a href="<?= App::baseUrl('piket/input-izin') ?>" class="flex-1 bg-amber-500/10 border border-amber-500/20 text-amber-400 font-semibold py-2 px-3 rounded-xl text-center text-xs hover:bg-amber-500/20 transition">
+                    📝 Input Izin / Sakit
+                </a>
+                <a href="<?= App::baseUrl('piket/riwayat') ?>" class="flex-1 bg-brand-500/10 border border-brand-500/20 text-brand-400 font-semibold py-2 px-3 rounded-xl text-center text-xs hover:bg-brand-500/20 transition">
+                    📋 Riwayat Hari Ini
+                </a>
+            </div>
+
             <!-- Active Mode Hidden Inputs for JS compatibility -->
             <button id="btnModeDatang" class="hidden"></button>
             <button id="btnModePulang" class="hidden"></button>
