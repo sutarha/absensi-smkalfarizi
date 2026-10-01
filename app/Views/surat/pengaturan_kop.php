@@ -81,7 +81,7 @@ $activeNav = 'kop_surat';
 
                     <div class="md:col-span-2">
                         <label class="block font-semibold text-slate-700 mb-1">Unggah Gambar KOP Surat (Full Header)</label>
-                        <input type="file" name="logo_kop" accept="image/png, image/jpeg, image/webp" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-1.5 text-xs text-slate-600 focus:ring-2 focus:ring-brand-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100">
+                        <input type="file" name="gambar_kop_surat" accept="image/png, image/jpeg, image/webp" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-1.5 text-xs text-slate-600 focus:ring-2 focus:ring-brand-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100">
                         <span class="text-[10px] text-slate-400">Format: PNG, JPG atau WEBP (Gambar akan direntangkan 100% mengisi lebar kertas)</span>
                     </div>
 

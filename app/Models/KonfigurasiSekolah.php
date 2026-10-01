@@ -95,8 +95,8 @@ class KonfigurasiSekolah
     {
         $db = Database::getConnection();
         $fields = ['nama_sekolah', 'alamat_sekolah', 'npsn', 'nss', 'akreditasi', 'email_sekolah', 'website_sekolah', 'kepala_sekolah'];
-        if (!empty($data['logo_kop'])) {
-            $fields[] = 'logo_kop';
+        if (!empty($data['gambar_kop_surat'])) {
+            $fields[] = 'gambar_kop_surat';
         }
 
         $sets = [];

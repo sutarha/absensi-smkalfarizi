@@ -151,20 +151,20 @@ class SuratController
             'kepala_sekolah' => trim($_POST['kepala_sekolah'] ?? '')
         ];
 
-        // Handle Logo KOP upload
-        if (!empty($_FILES['logo_kop']['tmp_name'])) {
+        // Handle Gambar KOP Surat upload
+        if (!empty($_FILES['gambar_kop_surat']['tmp_name'])) {
             $uploadDir = __DIR__ . '/../../public/uploads/';
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
 
-            $ext = strtolower(pathinfo($_FILES['logo_kop']['name'], PATHINFO_EXTENSION));
+            $ext = strtolower(pathinfo($_FILES['gambar_kop_surat']['name'], PATHINFO_EXTENSION));
             if (in_array($ext, ['png', 'jpg', 'jpeg', 'webp'])) {
-                $imgInfo = @getimagesize($_FILES['logo_kop']['tmp_name']);
+                $imgInfo = @getimagesize($_FILES['gambar_kop_surat']['tmp_name']);
                 if ($imgInfo !== false) {
-                    $newName = 'logo_kop_' . time() . '.' . $ext;
-                    if (move_uploaded_file($_FILES['logo_kop']['tmp_name'], $uploadDir . $newName)) {
-                        $data['logo_kop'] = $newName;
+                    $newName = 'gambar_kop_surat_' . time() . '.' . $ext;
+                    if (move_uploaded_file($_FILES['gambar_kop_surat']['tmp_name'], $uploadDir . $newName)) {
+                        $data['gambar_kop_surat'] = $newName;
                     }
                 }
             }
