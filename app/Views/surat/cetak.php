@@ -166,8 +166,9 @@ if (($surat['penerima_tipe'] ?? '') === 'GURU') {
         }
 
         @media print {
+            html, body { height: auto !important; margin: 0 !important; padding: 0 !important; }
+            .page-container { padding-bottom: 0 !important; margin-bottom: 0 !important; border: none !important; }
             .print-btn-bar { display: none !important; }
-            body { margin: 0; }
             .page-break { page-break-before: always; margin-top: 0; }
             .table-border th { background: #e5e5e5 !important; -webkit-print-color-adjust: exact; color-adjust: exact; }
             /* Force table borders to be solid black */
