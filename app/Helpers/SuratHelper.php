@@ -144,7 +144,7 @@ class SuratHelper
                             <div style='text-align: center;'>
                                 Pejabat Pembuat Komitmen / Kepala Sekolah,<br><br><br><br>
                                 <strong><u>{$kepsek}</u></strong><br>
-                                NIP. 197508122000031002
+                                NIP. -
                             </div>
                         </td>
                         <td style='width: 50%; padding: 10px; vertical-align: top; background: #fafafa;'>
@@ -184,7 +184,7 @@ class SuratHelper
                             <div style='text-align: center;'>
                                 Kepala Sekolah / PPK,<br><br><br><br>
                                 <strong><u>{$kepsek}</u></strong><br>
-                                NIP. 197508122000031002
+                                NIP. -
                             </div>
                         </td>
                         <td style='padding: 10px; vertical-align: top;'>
@@ -192,8 +192,8 @@ class SuratHelper
                             Perjalanan tersebut di atas benar-benar dilakukan atas perintahnya dan semata-mata untuk kepentingan jabatan dalam waktu yang sesingkat-singkatnya.<br><br>
                             <div style='text-align: center;'>
                                 Pejabat Pembuat Komitmen,<br><br><br><br>
-                                <strong><u>{$kepsek}</u></strong><br>
-                                NIP. 197508122000031002
+                                <strong><u>.......................................</u></strong><br>
+                                NIP. .......................................
                             </div>
                         </td>
                     </tr>
