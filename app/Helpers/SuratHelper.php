@@ -70,15 +70,17 @@ class SuratHelper
         $web = $config['website_sekolah'] ?? 'www.smkalfarizi.sch.id';
         $logo = !empty($config['logo_kop']) ? App::baseUrl('uploads/' . $config['logo_kop']) : '';
 
-        $logoHtml = '';
         if ($logo) {
-            $logoHtml = "<img src='{$logo}' style='width: 75px; height: 75px; object-fit: contain;'>";
-        } else {
-            $logoHtml = "
-            <div style='width: 70px; height: 70px; border-radius: 12px; background: #1e3a8a; color: white; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 24px;'>
-                AF
+            return "
+            <div style='margin-bottom: 24px;'>
+                <img src='{$logo}' style='width: 100%; max-height: 250px; object-fit: contain; display: block;'>
             </div>";
         }
+
+        $logoHtml = "
+        <div style='width: 70px; height: 70px; border-radius: 12px; background: #1e3a8a; color: white; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 24px;'>
+            AF
+        </div>";
 
         return "
         <div style='border-bottom: 3px double #0f172a; padding-bottom: 12px; margin-bottom: 24px; display: flex; align-items: center; gap: 18px;'>

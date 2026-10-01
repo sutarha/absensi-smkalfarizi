@@ -75,45 +75,23 @@ $activeNav = 'kop_surat';
                     </div>
 
                     <div>
-                        <label class="block font-semibold text-slate-700 mb-1">Status Akreditasi</label>
-                        <input type="text" name="akreditasi" value="<?= htmlspecialchars($config['akreditasi'] ?? 'A (Unggul)') ?>" placeholder="Contoh: A (Unggul)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-brand-500">
-                    </div>
-
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1">Nomor Pokok Sekolah Nasional (NPSN)</label>
-                        <input type="text" name="npsn" value="<?= htmlspecialchars($config['npsn'] ?? '69900000') ?>" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-brand-500">
-                    </div>
-
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1">Nomor Statistik Sekolah (NSS)</label>
-                        <input type="text" name="nss" value="<?= htmlspecialchars($config['nss'] ?? '402020700000') ?>" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-mono focus:ring-2 focus:ring-brand-500">
-                    </div>
-
-                    <div class="md:col-span-2">
-                        <label class="block font-semibold text-slate-700 mb-1">Alamat Lengkap Sekolah</label>
-                        <input type="text" name="alamat_sekolah" value="<?= htmlspecialchars($config['alamat_sekolah'] ?? '') ?>" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-brand-500">
-                    </div>
-
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1">Email Resmi Sekolah</label>
-                        <input type="email" name="email_sekolah" value="<?= htmlspecialchars($config['email_sekolah'] ?? 'smkalfarizi@sch.id') ?>" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-brand-500">
-                    </div>
-
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1">Website Sekolah</label>
-                        <input type="text" name="website_sekolah" value="<?= htmlspecialchars($config['website_sekolah'] ?? 'https://smkalfarizi.sch.id') ?>" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-brand-500">
-                    </div>
-
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1">Nama Kepala Sekolah</label>
+                        <label class="block font-semibold text-slate-700 mb-1">Nama Kepala Sekolah (Untuk Tanda Tangan)</label>
                         <input type="text" name="kepala_sekolah" value="<?= htmlspecialchars($config['kepala_sekolah'] ?? 'H. Ahmad Alfarizi, M.Pd') ?>" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold focus:ring-2 focus:ring-brand-500">
                     </div>
 
-                    <div>
-                        <label class="block font-semibold text-slate-700 mb-1">Unggah Logo KOP Baru (Opsional)</label>
-                        <input type="file" name="logo_kop" accept="image/png, image/jpeg, image/svg+xml" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-1.5 text-xs text-slate-600 focus:ring-2 focus:ring-brand-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100">
-                        <span class="text-[10px] text-slate-400">Format: PNG transparan atau JPG (disarankan persegi resolusi tinggi)</span>
+                    <div class="md:col-span-2">
+                        <label class="block font-semibold text-slate-700 mb-1">Unggah Gambar KOP Surat (Full Header)</label>
+                        <input type="file" name="logo_kop" accept="image/png, image/jpeg, image/webp" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-1.5 text-xs text-slate-600 focus:ring-2 focus:ring-brand-500 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100">
+                        <span class="text-[10px] text-slate-400">Format: PNG, JPG atau WEBP (Gambar akan direntangkan 100% mengisi lebar kertas)</span>
                     </div>
+
+                    <!-- Hidden fields to preserve existing configurations -->
+                    <input type="hidden" name="akreditasi" value="<?= htmlspecialchars($config['akreditasi'] ?? '') ?>">
+                    <input type="hidden" name="npsn" value="<?= htmlspecialchars($config['npsn'] ?? '') ?>">
+                    <input type="hidden" name="nss" value="<?= htmlspecialchars($config['nss'] ?? '') ?>">
+                    <input type="hidden" name="alamat_sekolah" value="<?= htmlspecialchars($config['alamat_sekolah'] ?? '') ?>">
+                    <input type="hidden" name="email_sekolah" value="<?= htmlspecialchars($config['email_sekolah'] ?? '') ?>">
+                    <input type="hidden" name="website_sekolah" value="<?= htmlspecialchars($config['website_sekolah'] ?? '') ?>">
                 </div>
 
                 <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
