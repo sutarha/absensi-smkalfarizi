@@ -19,11 +19,11 @@ $date = date('Ymd_His');
 $filename = $backupDir . '/backup_' . $date . '.sql';
 
 $env = parse_ini_file(__DIR__ . '/../.env');
-$host = $env['DB_HOST'] ?? '127.0.0.1';
-$user = $env['DB_USER'] ?? 'root';
-$pass = $env['DB_PASS'] ?? '';
-$name = $env['DB_NAME'] ?? 'absensi_db';
-$port = $env['DB_PORT'] ?? '3306';
+$host = $env['DB_HOST']     ?? '127.0.0.1';
+$user = $env['DB_USERNAME'] ?? 'root';       // Sesuai dengan .env
+$pass = $env['DB_PASSWORD'] ?? '';           // Sesuai dengan .env
+$name = $env['DB_DATABASE'] ?? 'db_presensi_smkalfarizi'; // Sesuai dengan .env
+$port = $env['DB_PORT']     ?? '3306';
 
 // Build command
 $command = "mysqldump --host={$host} --port={$port} --user={$user}";

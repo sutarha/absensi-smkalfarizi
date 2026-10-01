@@ -63,6 +63,14 @@ use App\Controllers\Api\SiswaAbsensiApiController;
 
 App::init();
 
+// ========== HTTP SECURITY HEADERS ==========
+header('X-Frame-Options: SAMEORIGIN');
+header('X-Content-Type-Options: nosniff');
+header('X-XSS-Protection: 1; mode=block');
+header('Referrer-Policy: strict-origin-when-cross-origin');
+header('Permissions-Policy: geolocation=(self), camera=(), microphone=()');
+// ===========================================
+
 // 2. URI & Route Parsing
 $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
 $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
@@ -78,6 +86,23 @@ if (!empty($baseDir) && strpos($uriPath, $baseDir) === 0) {
 
 $path = trim($uriPath, '/');
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+
+// ========== SESSION INACTIVITY TIMEOUT (8 JAM) ==========
+if (isset($_SESSION['user'])) {
+    $sessionLifetime = 8 * 60 * 60; // 8 jam
+    if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $sessionLifetime) {
+        $_SESSION = [];
+        session_destroy();
+        $isApiPath = strpos($path, 'api/v1/') === 0;
+        if ($isApiPath) {
+            \App\Config\App::json(['success' => false, 'message' => 'Sesi telah kedaluwarsa. Silakan login kembali.'], 401);
+        }
+        \App\Config\App::redirect(\App\Config\App::baseUrl('login'));
+        exit;
+    }
+    $_SESSION['last_activity'] = time();
+}
+// ========================================================
 
 // 3. Routing Engine & CSRF Protection
 if ($method === 'POST' && strpos($path, 'api/v1/') !== 0) {

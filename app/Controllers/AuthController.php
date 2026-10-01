@@ -67,6 +67,19 @@ class AuthController
             App::redirect(App::baseUrl('login'));
         }
 
+        // ===== ANTI BRUTE-FORCE: Rate Limiting Login =====
+        $attempts   = $_SESSION['login_attempts']   ?? 0;
+        $lastAttempt = $_SESSION['login_last_attempt'] ?? 0;
+        $lockoutTime = 5 * 60; // 5 menit
+
+        if ($attempts >= 5 && (time() - $lastAttempt) < $lockoutTime) {
+            $sisaDetik = $lockoutTime - (time() - $lastAttempt);
+            $_SESSION['login_error'] = 'Terlalu banyak percobaan login. Coba lagi dalam ' . ceil($sisaDetik / 60) . ' menit.';
+            App::redirect(App::baseUrl('login'));
+            return;
+        }
+        // =================================================
+
         $user = Guru::findByUsername($username);
 
         if (!$user || !password_verify($password, $user['password'])) {
@@ -76,12 +89,18 @@ class AuthController
             if ($siswa) {
                 session_regenerate_id(true);
                 $siswa['role'] = 'siswa';
-                $siswa['nama_lengkap'] = $siswa['nama_siswa']; // Alias for display
+                $siswa['nama_lengkap'] = $siswa['nama_siswa'];
                 $_SESSION['user'] = $siswa;
+                unset($_SESSION['login_attempts'], $_SESSION['login_last_attempt']);
+                \App\Helpers\AuditLog::log('LOGIN_SUCCESS', "Siswa login: {$username}", $username);
                 $this->redirectByRole('siswa');
                 return;
             }
 
+            // Tambah counter percobaan gagal
+            $_SESSION['login_attempts']    = ($attempts + 1);
+            $_SESSION['login_last_attempt'] = time();
+            \App\Helpers\AuditLog::log('LOGIN_FAILED', "Percobaan login gagal untuk username: {$username}", $username);
             $_SESSION['login_error'] = 'Username atau password salah. Silakan coba lagi.';
             App::redirect(App::baseUrl('login'));
         }
@@ -89,7 +108,10 @@ class AuthController
         // Login berhasil - Cegah Session Fixation
         session_regenerate_id(true);
         unset($user['password']);
+        unset($_SESSION['login_attempts'], $_SESSION['login_last_attempt']);
         $_SESSION['user'] = $user;
+        $_SESSION['last_activity'] = time();
+        \App\Helpers\AuditLog::log('LOGIN_SUCCESS', "Login berhasil: {$username} (role: {$user['role']})", $username);
 
         $this->redirectByRole($user['role']);
     }
