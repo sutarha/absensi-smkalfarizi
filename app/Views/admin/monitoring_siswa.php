@@ -260,6 +260,19 @@ if (!empty($siswaRincianMapel)) {
                                                 BELUM SCAN
                                             </span>
                                         <?php endif; ?>
+
+                                        <?php if (!empty($g['is_terkunci'])): ?>
+                                            <div class="mt-1 flex flex-wrap items-center gap-1">
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-white" title="Dikunci oleh: <?= htmlspecialchars($g['dikunci_oleh'] ?? 'Sistem') ?> pada <?= htmlspecialchars($g['dikunci_at'] ?? '-') ?>">
+                                                    🔒 TERKUNCI
+                                                </span>
+                                                <button type="button" onclick="editStatusSiswa(<?= $g['presensi_id'] ?: 0 ?>, <?= $g['siswa_id'] ?>, '<?= htmlspecialchars($g['nama_siswa']) ?>', '<?= htmlspecialchars($g['status_kehadiran']) ?>', '<?= htmlspecialchars($g['keterangan'] ?? '') ?>', 1)" class="text-[10px] font-bold text-brand-600 hover:text-brand-800 underline">Edit/Buka Kunci</button>
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="mt-1">
+                                                <button type="button" onclick="editStatusSiswa(<?= $g['presensi_id'] ?: 0 ?>, <?= $g['siswa_id'] ?>, '<?= htmlspecialchars($g['nama_siswa']) ?>', '<?= htmlspecialchars($g['status_kehadiran']) ?>', '<?= htmlspecialchars($g['keterangan'] ?? '') ?>', 0)" class="text-[10px] font-bold text-brand-600 hover:text-brand-800 underline">Ubah Status Manual</button>
+                                            </div>
+                                        <?php endif; ?>
                                     </td>
                                     <td class="py-3 px-4">
                                         <?php if ($mapelInfo): ?>
@@ -542,7 +555,128 @@ if (!empty($siswaRincianMapel)) {
         </div>
     </div>
 
+    <!-- Modal Ubah Status / Buka Kunci Siswa -->
+    <div id="modalEditStatusSiswa" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeModalEditStatusSiswa()"></div>
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
+            <div class="relative bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-md w-full">
+                <form action="<?= \App\Config\App::baseUrl('admin/monitoring/siswa/update') ?>" method="POST">
+                    <input type="hidden" name="csrf_token" value="<?= \App\Helpers\CsrfHelper::getToken() ?>">
+                    <input type="hidden" name="presensi_id" id="editPresensiId" value="0">
+                    <input type="hidden" name="siswa_id" id="editSiswaId" value="0">
+                    <input type="hidden" name="tanggal" value="<?= htmlspecialchars($tanggal) ?>">
+                    
+                    <div class="bg-white px-6 pt-6 pb-6">
+                        <div class="flex justify-between items-start mb-5">
+                            <div>
+                                <h3 class="text-xl font-extrabold text-slate-900 font-display">Ubah Status Presensi</h3>
+                                <p class="text-sm text-slate-500 mt-1" id="editSiswaNameTitle">Nama Siswa</p>
+                            </div>
+                            <button type="button" onclick="closeModalEditStatusSiswa()" class="text-slate-400 hover:text-slate-600 transition-colors">
+                                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div id="lockWarningBox" class="mb-5 p-3 rounded-xl bg-amber-50 border border-amber-200 hidden">
+                            <div class="flex gap-2">
+                                <span class="text-xl">🔒</span>
+                                <div>
+                                    <p class="text-sm font-bold text-amber-800">Status Saat Ini Terkunci</p>
+                                    <p class="text-xs text-amber-700 mt-0.5">Sistem evaluasi otomatis tidak akan mengubah status ini. Anda dapat membukanya agar dievaluasi ulang otomatis.</p>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="is_unlock" id="isUnlockCheckbox" value="1" class="rounded border-slate-300 text-brand-600 focus:ring-brand-500 w-4 h-4" onchange="toggleEditStatusFields(this.checked)">
+                                    <span class="ml-2 text-sm font-bold text-slate-700">Buka kunci (Biarkan sistem auto-evaluasi)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="editStatusFields" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-1.5">Status Kehadiran *</label>
+                                <select name="status_kehadiran" id="editStatusSelect" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all text-sm font-medium text-slate-700" required>
+                                    <option value="HADIR">HADIR</option>
+                                    <option value="TERLAMBAT">TERLAMBAT</option>
+                                    <option value="ALPHA">ALPHA</option>
+                                    <option value="SAKIT">SAKIT</option>
+                                    <option value="IZIN">IZIN</option>
+                                    <option value="BELUM_PRESENSI">BELUM_PRESENSI (Reset)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-1.5">Keterangan Manual (Opsional)</label>
+                                <textarea name="keterangan" id="editKeterangan" rows="2" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none transition-all text-sm" placeholder="Contoh: Izin dari orang tua via WA, atau Disetujui Kepala Sekolah..."></textarea>
+                                <p class="text-xs text-slate-500 mt-1">Mengubah status manual akan otomatis <strong>mengunci</strong> status ini agar tidak tertimpa oleh cron/evaluasi otomatis harian.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-50 px-6 py-4 flex flex-row-reverse gap-3 rounded-b-2xl border-t border-slate-100">
+                        <button type="submit" class="w-full sm:w-auto inline-flex justify-center items-center px-6 py-2.5 rounded-xl border border-transparent text-sm font-bold text-white bg-brand-600 hover:bg-brand-700 focus:ring-4 focus:ring-brand-500/30 transition-all shadow-soft-sm">
+                            Simpan Perubahan
+                        </button>
+                        <button type="button" onclick="closeModalEditStatusSiswa()" class="w-full sm:w-auto inline-flex justify-center items-center px-6 py-2.5 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 bg-white hover:bg-slate-50 focus:ring-4 focus:ring-slate-200/50 transition-all">
+                            Batal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
+        function closeModalEditStatusSiswa() {
+            document.getElementById('modalEditStatusSiswa').classList.add('hidden');
+        }
+
+        function editStatusSiswa(presensiId, siswaId, namaSiswa, status, ket, isTerkunci) {
+            document.getElementById('editPresensiId').value = presensiId;
+            document.getElementById('editSiswaId').value = siswaId;
+            document.getElementById('editSiswaNameTitle').textContent = namaSiswa;
+            
+            // Set value
+            let select = document.getElementById('editStatusSelect');
+            if (status === 'BELUM_PRESENSI' && !presensiId) {
+                // If it was just an empty state visually, set to something default like ALPHA
+                select.value = 'ALPHA';
+            } else {
+                select.value = status;
+            }
+            
+            document.getElementById('editKeterangan').value = ket === 'null' || ket === null ? '' : ket;
+            
+            // Handle lock box
+            const lockBox = document.getElementById('lockWarningBox');
+            const unlockCheck = document.getElementById('isUnlockCheckbox');
+            
+            if (isTerkunci == 1) {
+                lockBox.classList.remove('hidden');
+                unlockCheck.checked = false;
+            } else {
+                lockBox.classList.add('hidden');
+                unlockCheck.checked = false;
+            }
+            
+            toggleEditStatusFields(false);
+            
+            document.getElementById('modalEditStatusSiswa').classList.remove('hidden');
+        }
+
+        function toggleEditStatusFields(isUnlock) {
+            const fields = document.getElementById('editStatusFields');
+            if (isUnlock) {
+                fields.classList.add('hidden');
+                document.getElementById('editStatusSelect').removeAttribute('required');
+            } else {
+                fields.classList.remove('hidden');
+                document.getElementById('editStatusSelect').setAttribute('required', 'required');
+            }
+        }
+
         function switchTab(tabId) {
             const tabGerbang = document.getElementById('tabGerbang');
             const tabMapel = document.getElementById('tabMapel');
@@ -746,6 +880,23 @@ if (!empty($siswaRincianMapel)) {
 
                             let ket = g.keterangan ? escapeStr(g.keterangan) : '<span class="text-slate-300">-</span>';
 
+                            let presensiId = g.presensi_id ? g.presensi_id : 0;
+                            let actionHtml = '';
+                            if (g.is_terkunci == 1) {
+                                actionHtml = `
+                                    <div class="mt-1 flex flex-wrap items-center gap-1">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-white">🔒 TERKUNCI</span>
+                                        <button type="button" onclick="editStatusSiswa(${presensiId}, ${g.siswa_id}, '${escapeStr(g.nama_siswa)}', '${g.status_kehadiran}', '${escapeStr(g.keterangan || '')}', 1)" class="text-[10px] font-bold text-brand-600 hover:text-brand-800 underline">Edit/Buka Kunci</button>
+                                    </div>
+                                `;
+                            } else {
+                                actionHtml = `
+                                    <div class="mt-1">
+                                        <button type="button" onclick="editStatusSiswa(${presensiId}, ${g.siswa_id}, '${escapeStr(g.nama_siswa)}', '${g.status_kehadiran}', '${escapeStr(g.keterangan || '')}', 0)" class="text-[10px] font-bold text-brand-600 hover:text-brand-800 underline">Ubah Status Manual</button>
+                                    </div>
+                                `;
+                            }
+
                             html += `
                                 <tr class="hover:bg-slate-50/70 transition">
                                     <td class="py-3 px-4 text-center text-slate-400 font-medium">${idx + 1}</td>
@@ -754,7 +905,7 @@ if (!empty($siswaRincianMapel)) {
                                     <td class="py-3 px-4"><span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">${escapeStr(g.nama_kelas)}</span></td>
                                     <td class="py-3 px-4">${waktuDatang}</td>
                                     <td class="py-3 px-4">${waktuPulang}</td>
-                                    <td class="py-3 px-4">${statusBadge}</td>
+                                    <td class="py-3 px-4">${statusBadge} ${actionHtml}</td>
                                     <td class="py-3 px-4">${mapelStatusBadge}</td>
                                     <td class="py-3 px-4 text-slate-600">${ket}</td>
                                 </tr>

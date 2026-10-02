@@ -178,6 +178,29 @@ class AdminController
             }
         }
 
+        // Handle gambar_kop_surat upload
+        $kopName = null;
+        if (isset($_FILES['gambar_kop_surat']) && $_FILES['gambar_kop_surat']['error'] === UPLOAD_ERR_OK) {
+            $tmpNameKop = $_FILES['gambar_kop_surat']['tmp_name'];
+            $fileNameKop = $_FILES['gambar_kop_surat']['name'];
+            $fileExtKop = strtolower(pathinfo($fileNameKop, PATHINFO_EXTENSION));
+            $allowedExtsKop = ['jpg', 'jpeg', 'png'];
+
+            if (in_array($fileExtKop, $allowedExtsKop)) {
+                $uploadDir = __DIR__ . '/../../public/uploads/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0755, true);
+                }
+                
+                $newFileNameKop = 'kop_' . time() . '.' . $fileExtKop;
+                $targetPathKop = $uploadDir . $newFileNameKop;
+                
+                if (move_uploaded_file($tmpNameKop, $targetPathKop)) {
+                    $kopName = $newFileNameKop;
+                }
+            }
+        }
+
         $data = [
             'id' => 1,
             'nama_sekolah' => trim($_POST['nama_sekolah'] ?? 'SMK AL-FARIZI'),
@@ -193,10 +216,19 @@ class AdminController
             'toleransi_h_minus' => (int)($_POST['toleransi_h_minus'] ?? 5),
             'jam_guru_masuk_selesai' => trim($_POST['jam_guru_masuk_selesai'] ?? '06:30:00'),
             'jam_guru_pulang_mulai' => trim($_POST['jam_guru_pulang_mulai'] ?? '13:00:00'),
+            'fonnte_token' => trim($_POST['fonnte_token'] ?? ''),
+            'wa_notif_aktif' => isset($_POST['wa_notif_aktif']) ? 1 : 0,
+            'wa_notif_tap_in' => isset($_POST['wa_notif_tap_in']) ? 1 : 0,
+            'wa_notif_alpha' => isset($_POST['wa_notif_alpha']) ? 1 : 0,
+            'wa_notif_izin' => isset($_POST['wa_notif_izin']) ? 1 : 0,
+            'wa_notif_bulanan' => isset($_POST['wa_notif_bulanan']) ? 1 : 0,
         ];
 
         if ($logoName !== null) {
             $data['logo_kop'] = $logoName;
+        }
+        if ($kopName !== null) {
+            $data['gambar_kop_surat'] = $kopName;
         }
 
         KonfigurasiSekolah::updateConfig($data);
@@ -856,6 +888,48 @@ class AdminController
         require __DIR__ . '/../Views/admin/monitoring_siswa.php';
     }
 
+    public function updateSiswaStatus(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            App::redirect(App::baseUrl('admin/monitoring/siswa'));
+            return;
+        }
+
+        $presensiId = isset($_POST['presensi_id']) ? (int)$_POST['presensi_id'] : 0;
+        $status = $_POST['status_kehadiran'] ?? '';
+        $keterangan = $_POST['keterangan'] ?? '';
+        $isUnlock = isset($_POST['is_unlock']) && $_POST['is_unlock'] == '1';
+        $tanggal = $_POST['tanggal'] ?? date('Y-m-d');
+        
+        $db = Database::getConnection();
+
+        if ($presensiId > 0) {
+            if ($isUnlock) {
+                $stmt = $db->prepare("UPDATE presensi_gerbang_siswa SET is_terkunci = 0, dikunci_oleh = NULL, dikunci_at = NULL WHERE id = ?");
+                $stmt->execute([$presensiId]);
+                $_SESSION['flash_success'] = "Kunci status berhasil dibuka. Sistem akan mengevaluasi ulang secara otomatis pada jadwal berikutnya.";
+            } else {
+                $oleh = $this->user['nama'];
+                $at = date('Y-m-d H:i:s');
+                $stmt = $db->prepare("UPDATE presensi_gerbang_siswa SET status_kehadiran = ?, keterangan = ?, is_terkunci = 1, dikunci_oleh = ?, dikunci_at = ? WHERE id = ?");
+                $stmt->execute([$status, $keterangan, $oleh, $at, $presensiId]);
+                $_SESSION['flash_success'] = "Status berhasil diperbarui dan dikunci secara manual.";
+            }
+        } else {
+            // Insert baru
+            $siswaId = isset($_POST['siswa_id']) ? (int)$_POST['siswa_id'] : 0;
+            if ($siswaId > 0 && !$isUnlock) {
+                $oleh = $this->user['nama'];
+                $at = date('Y-m-d H:i:s');
+                $stmt = $db->prepare("INSERT INTO presensi_gerbang_siswa (siswa_id, tanggal, status_kehadiran, keterangan, is_terkunci, dikunci_oleh, dikunci_at) VALUES (?, ?, ?, ?, 1, ?, ?)");
+                $stmt->execute([$siswaId, $tanggal, $status, $keterangan, $oleh, $at]);
+                $_SESSION['flash_success'] = "Status berhasil ditambahkan dan dikunci secara manual.";
+            }
+        }
+
+        App::redirect(App::baseUrl('admin/monitoring/siswa?tanggal=' . $tanggal));
+    }
+
     /**
      * Endpoint Real-Time Live Sync Monitoring Guru
      */
@@ -1212,8 +1286,111 @@ class AdminController
         } else {
             $_SESSION['flash_error'] = 'Gagal menghapus notifikasi.';
         }
+    }
 
-        App::redirect(App::baseUrl('admin/notifikasi'));
+    /**
+     * Halaman Manajemen Pengajuan Izin Siswa
+     */
+    public function izinSiswa(): void
+    {
+        $status = $_GET['status'] ?? '';
+        $pengajuanList = \App\Models\PengajuanIzinSiswa::getAll($status);
+
+        $user   = $this->user;
+        $config = $this->config;
+
+        require __DIR__ . '/../Views/admin/izin_siswa.php';
+    }
+
+    /**
+     * Proses Persetujuan Izin Siswa
+     */
+    public function prosesIzinSiswa(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            App::redirect(App::baseUrl('admin/izin-siswa'));
+            return;
+        }
+
+        $id = (int)($_POST['id'] ?? 0);
+        $status = trim($_POST['status'] ?? '');
+        $catatan = trim($_POST['catatan_guru'] ?? '');
+
+        if ($id <= 0 || !in_array($status, ['DISETUJUI', 'DITOLAK'])) {
+            $_SESSION['flash_error'] = 'Data tidak valid.';
+            App::redirect(App::baseUrl('admin/izin-siswa'));
+            return;
+        }
+
+        $pengajuan = \App\Models\PengajuanIzinSiswa::findById($id);
+        if (!$pengajuan) {
+            $_SESSION['flash_error'] = 'Pengajuan izin tidak ditemukan.';
+            App::redirect(App::baseUrl('admin/izin-siswa'));
+            return;
+        }
+
+        $success = \App\Models\PengajuanIzinSiswa::process($id, $status, $this->user['id'], $catatan);
+        
+        if ($success) {
+            if ($status === 'DISETUJUI') {
+                // Update or create PresensiGerbangSiswa and set is_terkunci = 1
+                $db = \App\Config\Database::getConnection();
+                $tglMulai = $pengajuan['tanggal_mulai'];
+                $tglSelesai = $pengajuan['tanggal_selesai'];
+                
+                $currentDate = new \DateTime($tglMulai);
+                $endDate = new \DateTime($tglSelesai);
+                
+                while ($currentDate <= $endDate) {
+                    // Only process weekdays (Senin - Jumat)
+                    if ($currentDate->format('N') <= 5) {
+                        $tgl = $currentDate->format('Y-m-d');
+                        
+                        // Cek existing record
+                        $stmtCheck = $db->prepare("SELECT id FROM presensi_gerbang_siswa WHERE siswa_id = :sid AND tanggal = :tgl");
+                        $stmtCheck->execute([':sid' => $pengajuan['siswa_id'], ':tgl' => $tgl]);
+                        $existing = $stmtCheck->fetchColumn();
+                        
+                        if ($existing) {
+                            $stmtUpd = $db->prepare("UPDATE presensi_gerbang_siswa SET status_kehadiran = :status, is_terkunci = 1, dikunci_oleh = :admin, dikunci_at = NOW(), keterangan = :ket WHERE id = :id");
+                            $stmtUpd->execute([
+                                ':status' => $pengajuan['jenis_izin'],
+                                ':admin' => $this->user['id'],
+                                ':ket' => 'Izin disetujui: ' . $pengajuan['alasan'],
+                                ':id' => $existing
+                            ]);
+                        } else {
+                            $stmtIns = $db->prepare("INSERT INTO presensi_gerbang_siswa (siswa_id, tanggal, status_kehadiran, is_terkunci, dikunci_oleh, dikunci_at, keterangan) VALUES (:sid, :tgl, :status, 1, :admin, NOW(), :ket)");
+                            $stmtIns->execute([
+                                ':sid' => $pengajuan['siswa_id'],
+                                ':tgl' => $tgl,
+                                ':status' => $pengajuan['jenis_izin'],
+                                ':admin' => $this->user['id'],
+                                ':ket' => 'Izin disetujui: ' . $pengajuan['alasan']
+                            ]);
+                        }
+                    }
+                    $currentDate->modify('+1 day');
+                }
+            }
+            if ($status === 'DISETUJUI' || $status === 'DITOLAK') {
+                $db = \App\Config\Database::getConnection();
+                $stmtSiswa = $db->prepare("SELECT nama_siswa, no_hp_ortu FROM siswa WHERE id = :sid");
+                $stmtSiswa->execute([':sid' => $pengajuan['siswa_id']]);
+                $siswa = $stmtSiswa->fetch();
+                
+                if ($siswa && !empty($siswa['no_hp_ortu'])) {
+                    $msg = "INFO SEKOLAH:\nBapak/Ibu, pengajuan izin untuk anak Anda *{$siswa['nama_siswa']}* (Mulai: {$pengajuan['tanggal_mulai']}) telah *{$status}*.\nCatatan: " . ($catatan ?: '-');
+                    \App\Helpers\WhatsappHelper::sendMessage($siswa['no_hp_ortu'], $msg);
+                }
+            }
+
+            $_SESSION['flash_success'] = 'Pengajuan izin berhasil diproses.';
+        } else {
+            $_SESSION['flash_error'] = 'Gagal memproses pengajuan izin.';
+        }
+
+        App::redirect(App::baseUrl('admin/izin-siswa'));
     }
 }
 

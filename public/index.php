@@ -278,6 +278,16 @@ try {
             (new SiswaApiController())->tabungan();
             exit;
         }
+        // POST api/v1/siswa/izin/ajukan
+        if ($apiPath === 'siswa/izin/ajukan' && $method === 'POST') {
+            (new SiswaApiController())->ajukanIzin();
+            exit;
+        }
+        // GET api/v1/siswa/izin
+        if ($apiPath === 'siswa/izin' && $method === 'GET') {
+            (new SiswaApiController())->riwayatIzin();
+            exit;
+        }
         // GET api/v1/siswa/lms/materi
         if ($apiPath === 'siswa/lms/materi' && $method === 'GET') {
             (new \App\Controllers\Api\SiswaLmsApiController())->getMateri();
@@ -557,6 +567,10 @@ try {
             $admin->monitoringSiswa();
             exit;
         }
+        if ($path === 'admin/monitoring/siswa/update' && $method === 'POST') {
+            $admin->updateSiswaStatus();
+            exit;
+        }
         if ($path === 'admin/monitoring/siswa-live') {
             $admin->monitoringSiswaLive();
             exit;
@@ -571,6 +585,16 @@ try {
         }
         if ($path === 'admin/monitoring/evaluasi-gerbang' && $method === 'POST') {
             $admin->triggerEvaluasiGerbang();
+            exit;
+        }
+
+        // PENGAJUAN IZIN SISWA
+        if ($path === 'admin/izin-siswa') {
+            $admin->izinSiswa();
+            exit;
+        }
+        if ($path === 'admin/izin-siswa/proses' && $method === 'POST') {
+            $admin->prosesIzinSiswa();
             exit;
         }
 
@@ -785,6 +809,14 @@ try {
         }
         if ($path === 'guru/notifikasi/list') {
             $guru->notifikasiList();
+            exit;
+        }
+        if ($path === 'guru/izin-siswa') {
+            $guru->izinSiswa();
+            exit;
+        }
+        if ($path === 'guru/izin-siswa/proses' && $method === 'POST') {
+            $guru->prosesIzinSiswa();
             exit;
         }
         

@@ -183,6 +183,43 @@ $activeNav = 'geofence';
                             </div>
                         </div>
 
+                        <!-- Fonnte WhatsApp Card -->
+                        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-soft-sm space-y-4">
+                            <h2 class="font-display font-bold text-base text-slate-900 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                                <span>Notifikasi WhatsApp (Fonnte API)</span>
+                            </h2>
+
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-700 mb-1">Fonnte API Token</label>
+                                <input type="text" name="fonnte_token" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition shadow-sm" value="<?= htmlspecialchars($config['fonnte_token'] ?? '') ?>">
+                                <span class="text-[10px] text-slate-400 mt-1 block">Dapatkan token di <a href="https://md.fonnte.com/new/device.php" target="_blank" class="text-brand-600 underline">Fonnte</a>. Kosongkan untuk mematikan fitur API.</span>
+                            </div>
+
+                            <div class="space-y-2 mt-3 border-t border-slate-100 pt-3">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" name="wa_notif_aktif" value="1" class="w-4 h-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500" <?= !empty($config['wa_notif_aktif']) ? 'checked' : '' ?>>
+                                    <span class="text-xs font-semibold text-slate-800">Aktifkan Notifikasi WhatsApp (Master Switch)</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer ml-6">
+                                    <input type="checkbox" name="wa_notif_tap_in" value="1" class="w-4 h-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500" <?= !empty($config['wa_notif_tap_in']) ? 'checked' : '' ?>>
+                                    <span class="text-xs text-slate-600">Notifikasi saat siswa tap-in/out gerbang</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer ml-6">
+                                    <input type="checkbox" name="wa_notif_alpha" value="1" class="w-4 h-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500" <?= !empty($config['wa_notif_alpha']) ? 'checked' : '' ?>>
+                                    <span class="text-xs text-slate-600">Notifikasi saat siswa dikunci Alpha</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer ml-6">
+                                    <input type="checkbox" name="wa_notif_izin" value="1" class="w-4 h-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500" <?= !empty($config['wa_notif_izin']) ? 'checked' : '' ?>>
+                                    <span class="text-xs text-slate-600">Notifikasi saat izin disetujui/ditolak</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer ml-6">
+                                    <input type="checkbox" name="wa_notif_bulanan" value="1" class="w-4 h-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500" <?= !empty($config['wa_notif_bulanan']) ? 'checked' : '' ?>>
+                                    <span class="text-xs text-slate-600">Notifikasi rekap bulanan ke orang tua</span>
+                                </label>
+                            </div>
+                        </div>
+
                         <!-- Identitas Sekolah Card -->
                         <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-soft-sm space-y-4">
                             <h2 class="font-display font-bold text-base text-slate-900 flex items-center gap-2">
@@ -220,6 +257,17 @@ $activeNav = 'geofence';
                                     <input type="file" name="logo_kop" accept="image/png, image/jpeg, image/jpg" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100 transition cursor-pointer">
                                 </div>
                                 <span class="text-[10px] text-slate-400 mt-1 block">Biarkan kosong jika tidak ingin mengubah logo saat ini.</span>
+                            </div>
+
+                            <div class="pt-2 border-t border-slate-100">
+                                <label class="block text-[11px] font-bold text-slate-700 mb-1">Gambar Kop Surat (Utuh, max 2MB)</label>
+                                <div class="flex items-center gap-4">
+                                    <?php if (!empty($config['gambar_kop_surat'])): ?>
+                                        <img src="<?= App::baseUrl('uploads/' . htmlspecialchars($config['gambar_kop_surat'])) ?>" alt="Kop Surat Lama" class="h-16 object-contain bg-slate-50 rounded-lg border border-slate-200 p-1">
+                                    <?php endif; ?>
+                                    <input type="file" name="gambar_kop_surat" accept="image/png, image/jpeg, image/jpg" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition cursor-pointer">
+                                </div>
+                                <span class="text-[10px] text-slate-400 mt-1 block">Upload gambar header / kop surat utuh (berisi logo dan tulisan). Digunakan untuk cetak surat dan SPPD.</span>
                             </div>
 
                             <button type="submit" class="w-full mt-2 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-bold text-xs py-3 rounded-xl shadow-soft-md hover:shadow-glow-brand transition flex items-center justify-center gap-2 cursor-pointer">

@@ -227,7 +227,18 @@ use App\Helpers\TimeHelper;
                         <span class="text-[11px] font-bold text-slate-700 leading-tight">Riwayat KBM</span>
                     </a>
 
-                    <!-- 8. Keluar -->
+                    <!-- 8. Izin Siswa (Wali Kelas) -->
+                    <?php if ($isWaliKelas): ?>
+                    <a href="<?= App::baseUrl('guru/izin-siswa') ?>" class="flex flex-col items-center gap-1 p-2 rounded-2xl hover:bg-slate-50 transition active:scale-95 group">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-400 text-white flex items-center justify-center text-xl shadow-sm shadow-orange-500/20 group-hover:scale-105 transition-transform relative">
+                            📋
+                            <!-- Optional badge for pending could be added here if needed -->
+                        </div>
+                        <span class="text-[11px] font-bold text-slate-700 leading-tight">Izin Siswa</span>
+                    </a>
+                    <?php endif; ?>
+
+                    <!-- 9. Keluar -->
                     <a href="<?= App::baseUrl('logout') ?>" onclick="return confirm('Keluar dari akun guru?')" class="flex flex-col items-center gap-1 p-2 rounded-2xl hover:bg-slate-50 transition active:scale-95 group">
                         <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-slate-400 to-slate-500 text-white flex items-center justify-center text-xl shadow-sm group-hover:scale-105 transition-transform">
                             🚪

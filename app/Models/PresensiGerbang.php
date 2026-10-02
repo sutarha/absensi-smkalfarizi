@@ -182,19 +182,129 @@ class PresensiGerbang
         $db = Database::getConnection();
         $tgl = $tanggal ?: date('Y-m-d');
 
-        // Update semua record di tanggal tersebut yang belum komplit dua arah menjadi ALPHA
-        $sql = "UPDATE presensi_gerbang_siswa 
-                SET status_kehadiran = 'ALPHA', 
-                    keterangan = CASE 
-                        WHEN waktu_datang IS NOT NULL AND waktu_pulang IS NULL THEN 'Gugur Alpha: Tidak melakukan Tap-Out Pulang'
-                        WHEN waktu_datang IS NULL AND waktu_pulang IS NOT NULL THEN 'Gugur Alpha: Tidak melakukan Tap-In Masuk'
-                        ELSE keterangan 
-                    END
-                WHERE tanggal = :tgl AND (waktu_datang IS NULL OR waktu_pulang IS NULL)";
+        $sql = "SELECT s.id as siswa_id, pg.id as presensi_id, pg.waktu_datang, pg.waktu_pulang, pg.status_kehadiran, pg.is_terkunci 
+                FROM siswa s 
+                LEFT JOIN presensi_gerbang_siswa pg ON pg.siswa_id = s.id AND pg.tanggal = :tgl 
+                WHERE s.status = 'AKTIF'";
         
         $stmt = $db->prepare($sql);
         $stmt->execute([':tgl' => $tgl]);
-        return $stmt->rowCount();
+        $siswaList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $ketuntasan = \App\Models\PresensiMapel::getKetuntasanHarian($tgl);
+        $mapelSummary = [];
+        foreach ($ketuntasan as $k) {
+            $mapelSummary[$k['siswa_id']] = $k;
+        }
+
+        $affected = 0;
+        $db->beginTransaction();
+        try {
+            $insStmt = $db->prepare("INSERT INTO presensi_gerbang_siswa (siswa_id, tanggal, status_kehadiran, keterangan, is_terkunci, dikunci_oleh, dikunci_at) VALUES (:sid, :tgl, :st, :ket, :lock, :oleh, :at)");
+            $updStmt = $db->prepare("UPDATE presensi_gerbang_siswa SET status_kehadiran = :st, keterangan = :ket, is_terkunci = :lock, waktu_pulang = :wp, dikunci_oleh = :oleh, dikunci_at = :at WHERE id = :id");
+
+            foreach ($siswaList as $s) {
+                $sid = $s['siswa_id'];
+                $sum = $mapelSummary[$sid] ?? ['total_sesi_tercatat' => 0, 'count_hadir' => 0, 'count_sakit' => 0, 'count_izin' => 0, 'count_alpha' => 0];
+
+                // Lewati jika sudah dikunci (manual oleh admin atau dari eval sebelumnya)
+                if (!empty($s['is_terkunci'])) {
+                    continue;
+                }
+
+                $presensiId = $s['presensi_id'];
+                $waktuDatang = $s['waktu_datang'];
+                $waktuPulang = $s['waktu_pulang'];
+                $statusSekarang = $s['status_kehadiran'];
+
+                $newStatus = null;
+                $newKet = null;
+                $newLock = 0;
+                $newWp = $waktuPulang;
+                $dikunciOleh = null;
+                $dikunciAt = null;
+
+                if (!$presensiId || !$waktuDatang) {
+                    // TIDAK TAP-IN
+                    if ($sum['count_sakit'] > 0) {
+                        $newStatus = 'SAKIT';
+                        $newKet = 'Sakit (Berdasarkan Laporan KBM)';
+                    } elseif ($sum['count_izin'] > 0) {
+                        $newStatus = 'IZIN';
+                        $newKet = 'Izin (Berdasarkan Laporan KBM)';
+                    } else {
+                        $newStatus = 'ALPHA';
+                        $newKet = 'Gugur Alpha (Tidak Absen Gerbang)';
+                        $newLock = 1;
+                        $dikunciOleh = 'Sistem Auto-Eval';
+                        $dikunciAt = date('Y-m-d H:i:s');
+                    }
+                } else {
+                    // ADA TAP-IN
+                    if (!$waktuPulang) {
+                        // TIDAK TAP-OUT
+                        if ($sum['count_alpha'] > 0) {
+                            $newStatus = 'ALPHA';
+                            $newKet = 'Gugur Alpha (Tidak Tap-Out & Ada Sesi KBM Alpha)';
+                            $newLock = 1;
+                            $dikunciOleh = 'Sistem Auto-Eval';
+                            $dikunciAt = date('Y-m-d H:i:s');
+                        } elseif ($sum['total_sesi_tercatat'] > 0 && $sum['count_hadir'] == $sum['total_sesi_tercatat']) {
+                            // Semua KBM hadir -> Auto-checkout
+                            $newStatus = $statusSekarang; // Pertahankan HADIR/TERLAMBAT
+                            $newKet = 'Hadir (Auto-Checkout KBM Lengkap)';
+                            $newWp = date('Y-m-d 17:00:00'); // Set default tap-out sore
+                        } else {
+                            $newStatus = 'ALPHA';
+                            $newKet = 'Gugur Alpha (Tidak Tap-Out & Sesi KBM Tidak Lengkap)';
+                            $newLock = 1;
+                            $dikunciOleh = 'Sistem Auto-Eval';
+                            $dikunciAt = date('Y-m-d H:i:s');
+                        }
+                    }
+                }
+
+                if ($newStatus) {
+                    if (!$presensiId) {
+                        $insStmt->execute([
+                            ':sid' => $sid,
+                            ':tgl' => $tgl,
+                            ':st' => $newStatus,
+                            ':ket' => $newKet,
+                            ':lock' => $newLock,
+                            ':oleh' => $dikunciOleh,
+                            ':at' => $dikunciAt
+                        ]);
+                    } else {
+                        $updStmt->execute([
+                            ':st' => $newStatus,
+                            ':ket' => $newKet,
+                            ':lock' => $newLock,
+                            ':wp' => $newWp,
+                            ':oleh' => $dikunciOleh,
+                            ':at' => $dikunciAt,
+                            ':id' => $presensiId
+                        ]);
+                    }
+                    $affected++;
+
+                    if ($newStatus === 'ALPHA') {
+                        $stmtSiswa = $db->prepare("SELECT nama_siswa, no_hp_ortu FROM siswa WHERE id = :sid");
+                        $stmtSiswa->execute([':sid' => $sid]);
+                        $siswaRow = $stmtSiswa->fetch();
+                        if ($siswaRow && !empty($siswaRow['no_hp_ortu'])) {
+                            $msg = "INFO SEKOLAH:\nBapak/Ibu, anak Anda *{$siswaRow['nama_siswa']}* tidak tercatat hadir di sekolah pada {$tgl} (Status: ALPHA).\nKeterangan: {$newKet}";
+                            WhatsappHelper::sendMessage($siswaRow['no_hp_ortu'], $msg);
+                        }
+                    }
+                }
+            }
+            $db->commit();
+            return $affected;
+        } catch (\Exception $e) {
+            $db->rollBack();
+            return 0;
+        }
     }
 
     /**
@@ -221,7 +331,7 @@ class PresensiGerbang
                        k.nama_kelas, k.tingkat, k.jurusan,
                        pg.id as presensi_id, pg.tanggal, pg.waktu_datang, pg.waktu_pulang, 
                        COALESCE(pg.status_kehadiran, 'BELUM_PRESENSI') as status_kehadiran,
-                       pg.keterangan
+                       pg.keterangan, pg.is_terkunci, pg.dikunci_oleh, pg.dikunci_at
                 FROM siswa s
                 JOIN kelas k ON k.id = s.kelas_id
                 LEFT JOIN presensi_gerbang_siswa pg ON pg.siswa_id = s.id AND pg.tanggal = :tgl
@@ -241,27 +351,42 @@ class PresensiGerbang
         }
 
         foreach ($gerbangData as &$g) {
+            $sid = $g['siswa_id'];
+            $sum = $mapelSummary[$sid] ?? ['total_sesi_tercatat' => 0, 'count_hadir' => 0, 'count_sakit' => 0, 'count_izin' => 0, 'count_alpha' => 0];
+
             if ($g['status_kehadiran'] === 'BELUM_PRESENSI') {
-                $sid = $g['siswa_id'];
                 $newStatus = 'ALPHA';
                 $ket = 'Gugur Alpha (Tidak Absen Gerbang)';
+                $isTerkunci = 0; // Virtual status should not be locked, otherwise unlock action fails
 
-                if (isset($mapelSummary[$sid])) {
-                    $sum = $mapelSummary[$sid];
-                    if ($sum['total_sesi_tercatat'] > 0) {
-                        if ($sum['count_sakit'] == $sum['total_sesi_tercatat']) {
-                            $newStatus = 'SAKIT';
-                            $ket = 'Sakit (Berdasarkan Laporan KBM)';
-                        } elseif ($sum['count_izin'] == $sum['total_sesi_tercatat']) {
-                            $newStatus = 'IZIN';
-                            $ket = 'Izin (Berdasarkan Laporan KBM)';
-                        }
+                if ($sum['total_sesi_tercatat'] > 0) {
+                    if ($sum['count_sakit'] == $sum['total_sesi_tercatat']) {
+                        $newStatus = 'SAKIT';
+                        $ket = 'Sakit (Berdasarkan Laporan KBM)';
+                        $isTerkunci = 0;
+                    } elseif ($sum['count_izin'] == $sum['total_sesi_tercatat']) {
+                        $newStatus = 'IZIN';
+                        $ket = 'Izin (Berdasarkan Laporan KBM)';
+                        $isTerkunci = 0;
+                    } elseif ($sum['count_alpha'] > 0) {
+                        $ket = 'Gugur Alpha (Tidak Absen Gerbang & Ada KBM Alpha)';
                     }
                 }
                 
                 $g['status_kehadiran'] = $newStatus;
+                $g['is_terkunci'] = $isTerkunci;
                 if (empty($g['keterangan'])) {
                     $g['keterangan'] = $ket;
+                }
+            } elseif ($g['waktu_datang'] && !$g['waktu_pulang'] && $g['is_terkunci'] != 1) {
+                // Ada tap-in, tidak ada tap-out (visual only logic, runDailyEvaluation persists it)
+                if ($sum['total_sesi_tercatat'] > 0 && $sum['count_hadir'] == $sum['total_sesi_tercatat']) {
+                    $g['waktu_pulang'] = 'AUTO'; // Just a marker
+                    $g['keterangan'] = 'Hadir (Auto-Checkout KBM Lengkap)';
+                } else {
+                    $g['status_kehadiran'] = 'ALPHA';
+                    $g['is_terkunci'] = 0; // Virtual status should not be locked
+                    $g['keterangan'] = 'Gugur Alpha (Tidak Tap-Out & Sesi KBM Tidak Lengkap)';
                 }
             }
         }

@@ -251,7 +251,7 @@ $activeNav = 'kelas';
                          </div>
                          <div class="sm:col-span-2">
                              <label class="block text-[11px] font-bold text-slate-600 mb-1">Beban JP</label>
-                             <input type="number" name="alokasi_jp" id="plot_alokasi_jp" value="2" min="1" max="24" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none transition text-center" required>
+                             <input type="number" name="alokasi_jp" id="plot_alokasi_jp" value="2" min="1" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none transition text-center" required>
                          </div>
                      </div>
                      <div class="flex justify-end pt-1">

@@ -143,8 +143,7 @@ class SuratHelper
                             <strong>Ke</strong> : {$tempatTujuan}<br><br>
                             <div style='text-align: center;'>
                                 Pejabat Pembuat Komitmen / Kepala Sekolah,<br><br><br><br>
-                                <strong><u>{$kepsek}</u></strong><br>
-                                NIP. -
+                                <strong><u>{$kepsek}</u></strong>
                             </div>
                         </td>
                         <td style='width: 50%; padding: 10px; vertical-align: top; background: #fafafa;'>
@@ -183,17 +182,15 @@ class SuratHelper
                             <strong>Pada Tanggal</strong> : {$tglKembali}<br><br>
                             <div style='text-align: center;'>
                                 Kepala Sekolah / PPK,<br><br><br><br>
-                                <strong><u>{$kepsek}</u></strong><br>
-                                NIP. -
+                                <strong><u>{$kepsek}</u></strong>
                             </div>
                         </td>
                         <td style='padding: 10px; vertical-align: top;'>
                             <strong>Telah diperiksa dengan keterangan bahwa:</strong><br>
                             Perjalanan tersebut di atas benar-benar dilakukan atas perintahnya dan semata-mata untuk kepentingan jabatan dalam waktu yang sesingkat-singkatnya.<br><br>
                             <div style='text-align: center;'>
-                                Pejabat Pembuat Komitmen,<br><br><br><br>
-                                <strong><u>.......................................</u></strong><br>
-                                NIP. .......................................
+                                Kepala Sekolah,<br><br><br><br>
+                                <strong><u>{$kepsek}</u></strong>
                             </div>
                         </td>
                     </tr>

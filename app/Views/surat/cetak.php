@@ -103,15 +103,15 @@ if (($surat['penerima_tipe'] ?? '') === 'GURU') {
         .table-border {
             width: 100%;
             border-collapse: collapse;
-            font-size: 11pt; /* Slightly smaller for dense tables to fit well */
-            margin-top: 15px;
-            margin-bottom: 15px;
+            font-size: 10pt; /* Smaller font to fit SPPD in one page */
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
         .table-border th, .table-border td {
             border: 1px solid #000;
-            padding: 6px 10px;
+            padding: 4px 6px; /* Reduced padding */
             vertical-align: top;
-            line-height: 1.4;
+            line-height: 1.3; /* Slightly tighter line height */
         }
         .table-border th {
             background: #f1f5f9;
@@ -141,7 +141,7 @@ if (($surat['penerima_tipe'] ?? '') === 'GURU') {
 
         /* Signature Block */
         .ttd-box {
-            margin-top: 40px;
+            margin-top: 20px;
             width: 100%;
             display: flex;
             justify-content: flex-end;
@@ -152,7 +152,7 @@ if (($surat['penerima_tipe'] ?? '') === 'GURU') {
             width: 300px;
         }
         .ttd-signature-space {
-            height: 70px; /* Ample space for stamp and signature */
+            height: 60px; /* Ample space for stamp and signature */
         }
         .ttd-name {
             font-weight: bold;
@@ -367,7 +367,6 @@ if (($surat['penerima_tipe'] ?? '') === 'GURU') {
             </div>
 
             <!-- LEMBAR 3: LEMBAR VISUM TANDA TANGAN & CAP PEJABAT YANG DITUJU SESUAI PERMENDIKNAS -->
-            <div class="page-break"></div>
             <?= SuratHelper::renderLembarVisumSppd($surat, $config) ?>
 
         <!-- ============================================== -->

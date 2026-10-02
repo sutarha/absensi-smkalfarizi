@@ -58,10 +58,19 @@ class KonfigurasiSekolah
             denda_per_menit = :denda_per_menit,
             toleransi_h_minus = :toleransi_h_minus,
             jam_guru_masuk_selesai = :jam_guru_masuk_selesai,
-            jam_guru_pulang_mulai = :jam_guru_pulang_mulai";
+            jam_guru_pulang_mulai = :jam_guru_pulang_mulai,
+            fonnte_token = :fonnte_token,
+            wa_notif_aktif = :wa_notif_aktif,
+            wa_notif_tap_in = :wa_notif_tap_in,
+            wa_notif_alpha = :wa_notif_alpha,
+            wa_notif_izin = :wa_notif_izin,
+            wa_notif_bulanan = :wa_notif_bulanan";
 
         if (isset($data['logo_kop'])) {
             $setClause .= ", logo_kop = :logo_kop";
+        }
+        if (isset($data['gambar_kop_surat'])) {
+            $setClause .= ", gambar_kop_surat = :gambar_kop_surat";
         }
 
         $sql = "UPDATE konfigurasi_sekolah SET {$setClause} WHERE id = :id";
@@ -81,11 +90,20 @@ class KonfigurasiSekolah
             ':toleransi_h_minus' => (int)($data['toleransi_h_minus'] ?? 5),
             ':jam_guru_masuk_selesai' => $data['jam_guru_masuk_selesai'] ?? '06:30:00',
             ':jam_guru_pulang_mulai' => $data['jam_guru_pulang_mulai'] ?? '13:00:00',
+            ':fonnte_token' => $data['fonnte_token'] ?? null,
+            ':wa_notif_aktif' => (int)($data['wa_notif_aktif'] ?? 0),
+            ':wa_notif_tap_in' => (int)($data['wa_notif_tap_in'] ?? 1),
+            ':wa_notif_alpha' => (int)($data['wa_notif_alpha'] ?? 1),
+            ':wa_notif_izin' => (int)($data['wa_notif_izin'] ?? 1),
+            ':wa_notif_bulanan' => (int)($data['wa_notif_bulanan'] ?? 1),
             ':id' => $targetId,
         ];
         
         if (isset($data['logo_kop'])) {
             $params[':logo_kop'] = $data['logo_kop'];
+        }
+        if (isset($data['gambar_kop_surat'])) {
+            $params[':gambar_kop_surat'] = $data['gambar_kop_surat'];
         }
 
         return $stmt->execute($params);

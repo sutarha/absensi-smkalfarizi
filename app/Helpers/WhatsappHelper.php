@@ -14,13 +14,25 @@ class WhatsappHelper
      */
     public static function sendMessage(string $target, string $message): array
     {
-        $env = parse_ini_file(__DIR__ . '/../../.env');
-        $token = $env['FONNTE_TOKEN'] ?? '';
-        
+        $config = \App\Models\KonfigurasiSekolah::get();
+        if (empty($config['wa_notif_aktif'])) {
+            return [
+                'success' => false,
+                'message' => 'Notifikasi WhatsApp dinonaktifkan di pengaturan.',
+                'response' => null
+            ];
+        }
+
+        $token = $config['fonnte_token'] ?? '';
+        if (empty($token)) {
+            $env = parse_ini_file(__DIR__ . '/../../.env');
+            $token = $env['FONNTE_TOKEN'] ?? '';
+        }
+
         if (empty($token)) {
             return [
                 'success' => false,
-                'message' => 'Token Fonnte belum dikonfigurasi di .env',
+                'message' => 'Token Fonnte belum dikonfigurasi di Pengaturan atau .env',
                 'response' => null
             ];
         }

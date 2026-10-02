@@ -447,6 +447,7 @@ class SiswaApiController extends ApiController
             'nama_siswa'  => $s['nama_siswa'],
             'jenis_kelamin' => $s['jenis_kelamin'],
             'foto'        => $s['foto'],
+            'barcode_code'=> $s['barcode_code'] ?? null,
             'kelas_id'    => (int)$s['kelas_id'],
             'nama_kelas'  => $s['nama_kelas'],
             'tingkat'     => $s['tingkat'],
@@ -534,5 +535,166 @@ class SiswaApiController extends ApiController
             'latest'       => $latest,
         ]);
     }
-}
+    // ===========================================================
+    // GET /api/v1/siswa/izin
+    // ===========================================================
+    public function riwayatIzin(): void
+    {
+        self::requireMethod('GET');
+        $payload = $this->requireSiswaAuth();
+        $siswaId = (int)$payload->siswa_id;
 
+        $riwayat = \App\Models\PengajuanIzinSiswa::getBySiswaId($siswaId);
+
+        $formatted = [];
+        foreach ($riwayat as $r) {
+            $status_izin = strtolower($r['status']);
+            $tanggal_izin = $r['tanggal_mulai'] === $r['tanggal_selesai'] 
+                ? $r['tanggal_mulai'] 
+                : $r['tanggal_mulai'] . ' s/d ' . $r['tanggal_selesai'];
+
+            $formatted[] = [
+                'id' => $r['id'],
+                'tanggal_izin' => $tanggal_izin,
+                'jenis_izin' => $r['jenis_izin'],
+                'status_izin' => $status_izin,
+                'file_bukti' => $r['file_lampiran'] ? basename($r['file_lampiran']) : null,
+                'alasan' => $r['alasan'],
+            ];
+        }
+
+        self::json([
+            'success' => true,
+            'data'    => $formatted
+        ]);
+    }
+
+    // ===========================================================
+    // POST /api/v1/siswa/izin/ajukan
+    // ===========================================================
+    public function ajukanIzin(): void
+    {
+        self::requireMethod('POST');
+        $payload = $this->requireSiswaAuth();
+        $siswaId = (int)$payload->siswa_id;
+
+        // Mendukung form-data (untuk file upload)
+        $tglMulai = trim($_POST['tanggal_mulai'] ?? $_POST['tanggal_izin'] ?? '');
+        $tglSelesai = trim($_POST['tanggal_selesai'] ?? $_POST['tanggal_izin'] ?? '');
+        $jenis = strtoupper(trim($_POST['jenis_izin'] ?? ''));
+        $alasan = trim($_POST['alasan'] ?? '');
+
+        if (!$tglMulai || !$tglSelesai || !$jenis || !$alasan) {
+            self::json(['success' => false, 'message' => 'Lengkapi semua field yang diperlukan.'], 422);
+        }
+
+        if (!in_array($jenis, ['SAKIT', 'IZIN'])) {
+            self::json(['success' => false, 'message' => 'Jenis izin tidak valid.'], 422);
+        }
+
+        $lampiran = null;
+        if (isset($_FILES['file_lampiran']) && $_FILES['file_lampiran']['error'] === UPLOAD_ERR_OK) {
+            $allowedExts = ['jpg', 'jpeg', 'png', 'pdf'];
+            $file = $_FILES['file_lampiran'];
+            $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+            if (!in_array($ext, $allowedExts)) {
+                self::json(['success' => false, 'message' => 'Format file lampiran tidak valid (hanya JPG, PNG, PDF).'], 422);
+            }
+
+            if ($file['size'] > 2 * 1024 * 1024) {
+                self::json(['success' => false, 'message' => 'Ukuran file lampiran maksimal 2MB.'], 422);
+            }
+
+            $uploadDir = __DIR__ . '/../../../public/uploads/izin/';
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            $filename = time() . '_' . $siswaId . '_' . uniqid() . '.' . $ext;
+            if (move_uploaded_file($file['tmp_name'], $uploadDir . $filename)) {
+                $lampiran = 'uploads/izin/' . $filename;
+            } else {
+                self::json(['success' => false, 'message' => 'Gagal mengupload lampiran.'], 500);
+            }
+        }
+
+        try {
+            $id = \App\Models\PengajuanIzinSiswa::create($siswaId, $tglMulai, $tglSelesai, $jenis, $alasan, $lampiran);
+            
+            // Kirim notifikasi WA ke Wali Kelas
+            $db = Database::getConnection();
+            $stmtInfo = $db->prepare("
+                SELECT s.nama_siswa, k.nama_kelas, g.nama_lengkap as nama_guru, g.no_hp
+                FROM siswa s
+                JOIN kelas k ON s.kelas_id = k.id
+                JOIN guru g ON k.wali_kelas_guru_id = g.id
+                WHERE s.id = :sid
+            ");
+            $stmtInfo->execute([':sid' => $siswaId]);
+            $info = $stmtInfo->fetch();
+            
+            if ($info && !empty($info['no_hp'])) {
+                $msg = "INFO SEKOLAH:\nBapak/Ibu Wali Kelas *{$info['nama_guru']}*,\nSiswa Anda *{$info['nama_siswa']}* kelas *{$info['nama_kelas']}* mengajukan *{$jenis}* dari tanggal {$tglMulai} s.d. {$tglSelesai}.\nAlasan: {$alasan}\n\nMohon buka Aplikasi Guru untuk menyetujui pengajuan ini.";
+                \App\Helpers\WhatsappHelper::sendMessage($info['no_hp'], $msg);
+            }
+            
+            self::json([
+                'success' => true,
+                'message' => 'Pengajuan izin berhasil dikirim dan menunggu persetujuan.'
+            ]);
+        } catch (\Exception $e) {
+            self::json([
+                'success' => false,
+                'message' => 'Gagal menyimpan pengajuan izin: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    // ===========================================================
+    // POST /api/v1/siswa/foto
+    // ===========================================================
+    public function uploadFoto(): void
+    {
+        self::requireMethod('POST');
+        $payload = $this->requireSiswaAuth();
+        $siswaId = (int)$payload->siswa_id;
+
+        if (!isset($_FILES['foto']) || $_FILES['foto']['error'] !== UPLOAD_ERR_OK) {
+            self::json(['success' => false, 'message' => 'File foto tidak ditemukan atau terjadi error saat upload.'], 400);
+        }
+
+        $file = $_FILES['foto'];
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $allowedExts = ['jpg', 'jpeg', 'png'];
+
+        if (!in_array($ext, $allowedExts)) {
+            self::json(['success' => false, 'message' => 'Format file tidak valid. Gunakan JPG atau PNG.'], 400);
+        }
+
+        if ($file['size'] > 2 * 1024 * 1024) {
+            self::json(['success' => false, 'message' => 'Ukuran file maksimal 2MB.'], 400);
+        }
+
+        $uploadDir = __DIR__ . '/../../../public/uploads/siswa/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $filename = 'foto_' . $siswaId . '_' . time() . '.' . $ext;
+        if (move_uploaded_file($file['tmp_name'], $uploadDir . $filename)) {
+            $fotoPath = 'uploads/siswa/' . $filename;
+            $db = Database::getConnection();
+            $stmt = $db->prepare("UPDATE siswa SET foto = :foto WHERE id = :id");
+            $stmt->execute([':foto' => $fotoPath, ':id' => $siswaId]);
+
+            self::json([
+                'success' => true,
+                'message' => 'Foto profil berhasil diperbarui.',
+                'foto'    => $fotoPath
+            ]);
+        } else {
+            self::json(['success' => false, 'message' => 'Gagal menyimpan file foto.'], 500);
+        }
+    }
+}

@@ -37,6 +37,8 @@ if ($sessionSiswa && ($sessionSiswa['role'] ?? '') === 'siswa') {
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-messaging-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     <?php require __DIR__ . '/../partials/tailwind_head.php'; ?>
     <style>
         * { -webkit-tap-highlight-color: transparent; }
@@ -227,6 +229,149 @@ if ($sessionSiswa && ($sessionSiswa['role'] ?? '') === 'siswa') {
             font-size: 11px; font-weight: 600; color: #334155;
             text-align: center; line-height: 1.2;
         }
+        /* === KARTU PELAJAR DIGITAL === */
+        .kartu-pelajar-digital {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #1d4ed8 100%);
+            box-shadow: 0 20px 40px -8px rgba(37,99,235,0.45), 0 4px 16px rgba(0,0,0,0.25);
+            color: white;
+        }
+        .kartu-pelajar-digital::before {
+            content: '';
+            position: absolute;
+            top: -40px; right: -40px;
+            width: 180px; height: 180px;
+            background: radial-gradient(circle, rgba(99,179,237,0.20) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .kartu-pelajar-digital::after {
+            content: '';
+            position: absolute;
+            bottom: -30px; left: -30px;
+            width: 140px; height: 140px;
+            background: radial-gradient(circle, rgba(139,92,246,0.18) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .kp-header {
+            background: linear-gradient(90deg, rgba(37,99,235,0.6), rgba(99,102,241,0.4));
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+        .kp-body { padding: 14px 16px; display: flex; gap: 14px; position: relative; z-index: 2; }
+        .kp-foto-wrap {
+            width: 76px; height: 90px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.25);
+            flex-shrink: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 900;
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .kp-info { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+        .kp-label { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(148,214,255,0.8); margin-bottom: 2px; }
+        .kp-value { font-size: 13px; font-weight: 800; color: #fff; line-height: 1.3; }
+        .kp-value-sm { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.85); font-family: monospace; }
+        .kp-barcode-section {
+            background: white;
+            margin: 0 14px 14px;
+            border-radius: 16px;
+            padding: 12px 16px 8px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        .kp-barcode-label {
+            font-size: 9px;
+            font-weight: 800;
+            color: #64748b;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+        .kp-nisn-text {
+            font-family: monospace;
+            font-size: 13px;
+            font-weight: 900;
+            color: #0f172a;
+            letter-spacing: 0.12em;
+            margin-top: 3px;
+        }
+        .kp-badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 100px;
+            padding: 3px 10px;
+            font-size: 10px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.9);
+        }
+        .kp-shine {
+            position: absolute;
+            top: 0; left: -100%;
+            width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+            animation: kp-shine 4s ease infinite;
+            pointer-events: none;
+            z-index: 10;
+        }
+        @keyframes kp-shine {
+            0% { left: -100%; }
+            50%, 100% { left: 150%; }
+        }
+        .kp-expand-btn {
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 100px;
+            padding: 4px 12px;
+            font-size: 10px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.85);
+            transition: all 0.2s;
+        }
+        .kp-expand-btn:hover { background: rgba(255,255,255,0.2); }
+        /* Modal Kartu Full */
+        #modal-kartu-full {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            backdrop-filter: blur(8px);
+        }
+        #modal-kartu-full.open { display: flex; animation: fadeIn 0.2s ease; }
+        .modal-kartu-inner {
+            width: 100%;
+            max-width: 380px;
+            border-radius: 28px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 45%, #1d4ed8 100%);
+            box-shadow: 0 30px 60px -10px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.1);
+            animation: slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        @keyframes slideUp { from { transform:translateY(40px); opacity:0; } to { transform:translateY(0); opacity:1; } }
     </style>
 </head>
 <body>
@@ -318,6 +463,7 @@ if ($sessionSiswa && ($sessionSiswa['role'] ?? '') === 'siswa') {
             <!-- ============================================== -->
             <!-- MENU HANDPHONE (APP LAUNCHER GRID) -->
             <!-- ============================================== -->
+
             <div class="mb-5">
                 <div class="flex items-center justify-between mb-3 px-1">
                     <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
@@ -397,7 +543,17 @@ if ($sessionSiswa && ($sessionSiswa['role'] ?? '') === 'siswa') {
                         <span class="menu-label group-hover:text-rose-600 transition">Notifikasi</span>
                     </button>
 
-                    <!-- 8. Profil Siswa -->
+                    <!-- 8. Izin Siswa -->
+                    <button type="button" onclick="App.switchPage('izin')" class="menu-btn group">
+                        <div class="menu-icon-box bg-gradient-to-tr from-fuchsia-600 to-pink-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <span class="menu-label group-hover:text-fuchsia-600 transition">Pengajuan Izin</span>
+                    </button>
+
+                    <!-- 9. Profil Siswa -->
                     <button type="button" onclick="App.switchPage('profil')" class="menu-btn group">
                         <div class="menu-icon-box bg-gradient-to-tr from-slate-700 to-slate-500">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -626,47 +782,143 @@ if ($sessionSiswa && ($sessionSiswa['role'] ?? '') === 'siswa') {
             </div>
         </div>
 
+        <!-- ====== PAGE: IZIN SISWA ====== -->
+        <div class="page" id="page-izin">
+            <h2 class="text-xl font-black text-slate-800 mb-1">Pengajuan Izin</h2>
+            <p class="text-xs text-slate-500 mb-4">Ajukan izin tidak hadir karena sakit atau keperluan lain 📝</p>
+
+            <form id="formIzinSiswa" class="card p-4 mb-4" onsubmit="App.submitIzin(event)">
+                <div class="mb-3">
+                    <label class="block text-xs font-bold text-slate-600 mb-1">Tanggal Izin <span class="text-red-500">*</span></label>
+                    <input type="date" id="izinTanggal" required class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm font-semibold rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500">
+                </div>
+                <div class="mb-3">
+                    <label class="block text-xs font-bold text-slate-600 mb-1">Jenis Izin <span class="text-red-500">*</span></label>
+                    <select id="izinJenis" required class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm font-semibold rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500">
+                        <option value="">Pilih Jenis Izin</option>
+                        <option value="Sakit">Sakit</option>
+                        <option value="Izin">Izin (Keperluan Lain)</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="block text-xs font-bold text-slate-600 mb-1">Alasan / Keterangan <span class="text-red-500">*</span></label>
+                    <textarea id="izinAlasan" required rows="3" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm font-semibold rounded-xl px-3 py-2.5 focus:outline-none focus:border-blue-500"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-xs font-bold text-slate-600 mb-1">Lampiran (Foto Bukti) <span class="text-xs text-slate-400 font-normal">(opsional)</span></label>
+                    <input type="file" id="izinFile" accept="image/*" class="w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer">
+                </div>
+                <button type="submit" id="btnSubmitIzin" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition shadow-md shadow-blue-500/30 flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                    Ajukan Izin
+                </button>
+            </form>
+
+            <h3 class="text-sm font-bold text-slate-800 mb-3">Riwayat Pengajuan</h3>
+            <div id="izin-riwayat-content" class="space-y-3">
+                <div class="text-center text-slate-500 text-sm py-4">Memuat data...</div>
+            </div>
+        </div><!-- /page-izin -->
+
         <!-- ====== PAGE: PROFIL ====== -->
         <div class="page" id="page-profil">
-            <h2 class="text-xl font-black text-slate-800 mb-3">Profil Saya</h2>
-            
-            <div class="profile-bg p-5 mb-4 text-white">
-                <div class="flex items-center gap-4">
-                    <div id="pp-foto" class="w-18 h-18 rounded-2xl bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white font-black text-3xl font-outfit overflow-hidden flex-shrink-0"></div>
-                    <div>
-                        <div id="pp-nama" class="font-black text-lg leading-tight"></div>
-                        <div id="pp-kelas" class="text-blue-100 text-sm mt-0.5"></div>
-                        <div id="pp-jurusan" class="text-blue-200 text-xs mt-0.5"></div>
+
+            <!-- INPUT UPLOAD FOTO TERSEMBUNYI -->
+            <input type="file" id="foto-upload" class="hidden" accept="image/jpeg, image/png" onchange="App.uploadFoto(this)">
+
+            <!-- ====== KARTU PELAJAR DIGITAL ====== -->
+            <div id="kartu-pelajar-container" class="kartu-pelajar-digital mb-4">
+                <div class="kp-shine"></div>
+
+                <!-- Header Kartu -->
+                <div class="kp-header">
+                    <div class="flex items-center gap-3">
+                        <?php if (!empty($config['logo_kop'])): ?>
+                            <img src="<?= App::baseUrl('uploads/' . htmlspecialchars($config['logo_kop'])) ?>" alt="Logo" class="w-10 h-10 rounded-xl object-contain bg-white p-0.5 shadow-sm">
+                        <?php else: ?>
+                            <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center font-black text-white text-base">AF</div>
+                        <?php endif; ?>
+                        <div>
+                            <div style="font-size:13px;font-weight:900;color:white;letter-spacing:.04em;"><?= htmlspecialchars($config['nama_sekolah'] ?? 'SMK AL-FARIZI') ?></div>
+                            <div style="font-size:9px;color:rgba(147,210,255,.85);font-weight:600;letter-spacing:.1em;text-transform:uppercase;">Kartu Tanda Pelajar</div>
+                        </div>
                     </div>
+                    <div class="kp-badge">
+                        <svg class="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        Resmi
+                    </div>
+                </div>
+
+                <!-- Foto + Info Siswa -->
+                <div class="kp-body">
+                    <!-- Foto (klik untuk ganti) -->
+                    <div style="position:relative;flex-shrink:0;">
+                        <div id="pp-foto" class="kp-foto-wrap" onclick="document.getElementById('foto-upload').click()" style="cursor:pointer;">?</div>
+                        <div onclick="document.getElementById('foto-upload').click()" style="position:absolute;bottom:-6px;right:-6px;background:white;border-radius:50%;padding:5px;cursor:pointer;border:2px solid rgba(255,255,255,0.6);box-shadow:0 2px 6px rgba(0,0,0,0.2);">
+                            <svg style="width:12px;height:12px;color:#2563eb;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="kp-info">
+                        <div style="margin-bottom:8px;">
+                            <div class="kp-label">Nama Lengkap</div>
+                            <div class="kp-value" id="pp-nama" style="font-size:13px;">–</div>
+                        </div>
+                        <div style="margin-bottom:8px;">
+                            <div class="kp-label">NISN</div>
+                            <div class="kp-value" id="pp-nisn" style="font-size:12px;font-family:monospace;">–</div>
+                        </div>
+                        <div style="margin-bottom:8px;">
+                            <div class="kp-label">Kelas</div>
+                            <div class="kp-value" id="pp-kelas" style="font-size:12px;">–</div>
+                        </div>
+                        <div>
+                            <div class="kp-label">Jurusan</div>
+                            <div class="kp-value" id="pp-jurusan" style="font-size:11px;opacity:.85;">–</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Barcode Presensi Gerbang -->
+                <div class="kp-barcode-section">
+                    <div class="kp-barcode-label">
+                        <svg style="width:11px;height:11px;" fill="none" stroke="#2563eb" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+                        Scan Barcode — Presensi Gerbang
+                    </div>
+                    <svg id="kp-barcode" class="w-full" style="max-height:60px;"></svg>
+                    <div class="kp-nisn-text" id="kp-barcode-code-text">–</div>
                 </div>
             </div>
 
+            <!-- Info Tambahan -->
             <div class="card divide-y divide-slate-100 mb-4">
-                <div class="px-4 py-3.5 flex justify-between items-center">
-                    <span class="text-slate-500 text-xs font-semibold">NISN</span>
-                    <span id="pp-nisn" class="text-slate-800 font-mono text-xs font-bold"></span>
-                </div>
-                <div class="px-4 py-3.5 flex justify-between items-center">
+                <div class="px-4 py-3 flex justify-between items-center">
                     <span class="text-slate-500 text-xs font-semibold">Tanggal Lahir</span>
-                    <span id="pp-tgl-lahir" class="text-slate-800 text-xs font-medium"></span>
+                    <span id="pp-tgl-lahir" class="text-slate-800 text-xs font-medium">–</span>
                 </div>
-                <div class="px-4 py-3.5 flex justify-between items-center">
+                <div class="px-4 py-3 flex justify-between items-center">
                     <span class="text-slate-500 text-xs font-semibold">Jenis Kelamin</span>
-                    <span id="pp-jk" class="text-slate-800 text-xs font-medium"></span>
+                    <span id="pp-jk" class="text-slate-800 text-xs font-medium">–</span>
                 </div>
-                <div class="px-4 py-3.5 flex justify-between items-center">
+                <div class="px-4 py-3 flex justify-between items-center">
                     <span class="text-slate-500 text-xs font-semibold">No. HP Orang Tua</span>
                     <span id="pp-hp-ortu" class="text-slate-800 text-xs font-medium">–</span>
                 </div>
             </div>
 
-            <button type="button" onclick="App.logout()" class="w-full py-3.5 rounded-2xl text-rose-600 border border-rose-200 bg-rose-50 text-sm font-bold hover:bg-rose-100 active:scale-98 transition flex items-center justify-center gap-2 cursor-pointer shadow-sm">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                </svg>
-                <span>Keluar dari Akun</span>
-            </button>
-        </div>
+            <!-- Tombol Download Kartu & Logout -->
+            <div class="flex gap-3 mb-3">
+                <button onclick="App.downloadKartuPelajar()" class="flex-1 py-3 rounded-2xl text-blue-600 border border-blue-200 bg-blue-50 text-sm font-bold hover:bg-blue-100 active:scale-98 transition flex items-center justify-center gap-2 cursor-pointer shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Simpan Kartu
+                </button>
+                <button type="button" onclick="App.logout()" class="flex-1 py-3 rounded-2xl text-rose-600 border border-rose-200 bg-rose-50 text-sm font-bold hover:bg-rose-100 active:scale-98 transition flex items-center justify-center gap-2 cursor-pointer shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                    Keluar
+                </button>
+            </div>
+        </div><!-- /page-profil -->
 
     </main><!-- /content-area -->
 
@@ -723,6 +975,16 @@ if ($sessionSiswa && ($sessionSiswa['role'] ?? '') === 'siswa') {
                 <span>LMS</span>
             </div>
 
+            <div class="nav-item" id="nav-izin" onclick="App.switchPage('izin')">
+                <div class="relative">
+                    <div class="nav-indicator"></div>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                </div>
+                <span>Izin</span>
+            </div>
+
             <div class="nav-item" id="nav-profil" onclick="App.switchPage('profil')">
                 <div class="relative">
                     <div class="nav-indicator"></div>
@@ -734,6 +996,76 @@ if ($sessionSiswa && ($sessionSiswa['role'] ?? '') === 'siswa') {
             </div>
         </div>
     </nav>
+</div>
+
+<!-- ============================================================ -->
+<!-- MODAL KARTU PELAJAR FULL SCREEN                              -->
+<!-- ============================================================ -->
+<div id="modal-kartu-full" onclick="if(event.target===this) App.tutupKartuFull()">
+    <div class="modal-kartu-inner" style="position:relative;overflow:hidden;">
+        <!-- Shine Effect -->
+        <div style="position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.07),transparent);animation:kp-shine 4s ease infinite;pointer-events:none;z-index:10;"></div>
+
+        <!-- Header -->
+        <div class="kp-header">
+            <div class="flex items-center gap-3">
+                <?php if (!empty($config['logo_kop'])): ?>
+                    <img src="<?= App::baseUrl('uploads/' . htmlspecialchars($config['logo_kop'])) ?>" alt="Logo" class="w-10 h-10 rounded-xl object-contain bg-white p-0.5 shadow-sm">
+                <?php else: ?>
+                    <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center font-black text-white text-base">AF</div>
+                <?php endif; ?>
+                <div>
+                    <div class="text-white font-black text-sm tracking-wide"><?= htmlspecialchars($config['nama_sekolah'] ?? 'SMK AL-FARIZI') ?></div>
+                    <div class="text-blue-200 text-[10px] font-semibold uppercase tracking-widest"><?= htmlspecialchars($config['alamat_sekolah'] ?? 'Kartu Tanda Pelajar') ?></div>
+                </div>
+            </div>
+            <button onclick="App.tutupKartuFull()" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;cursor:pointer;">✕</button>
+        </div>
+
+        <!-- Body Foto + Info -->
+        <div style="padding:20px 20px 14px;display:flex;gap:18px;position:relative;z-index:2;">
+            <div id="kp-modal-foto" style="width:90px;height:108px;border-radius:16px;background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);border:2px solid rgba(255,255,255,0.3);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;color:white;font-family:'Plus Jakarta Sans',sans-serif;"></div>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:10px;">
+                <div>
+                    <div class="kp-label" style="font-size:8px">Nama Lengkap</div>
+                    <div class="kp-value" id="kp-modal-nama" style="font-size:15px;line-height:1.2">–</div>
+                </div>
+                <div>
+                    <div class="kp-label" style="font-size:8px">Kelas</div>
+                    <div class="kp-value" id="kp-modal-kelas" style="font-size:13px">–</div>
+                </div>
+                <div>
+                    <div class="kp-label" style="font-size:8px">Jurusan</div>
+                    <div class="kp-value" id="kp-modal-jurusan" style="font-size:12px;opacity:.85">–</div>
+                </div>
+                <div>
+                    <div class="kp-label" style="font-size:8px">Tahun Masuk</div>
+                    <div class="kp-value" id="kp-modal-tahun" style="font-size:12px;opacity:.85">–</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barcode Besar -->
+        <div style="background:white;margin:0 16px 8px;border-radius:20px;padding:18px 20px 12px;position:relative;z-index:2;text-align:center;">
+            <div style="font-size:9px;font-weight:800;color:#475569;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:5px;">
+                <svg style="width:12px;height:12px;color:#2563eb" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+                Barcode Presensi Gerbang
+            </div>
+            <svg id="kp-modal-barcode" style="width:100%;max-height:80px;"></svg>
+            <div id="kp-modal-nisn-text" style="font-family:monospace;font-size:15px;font-weight:900;color:#0f172a;letter-spacing:0.15em;margin-top:6px;">–</div>
+        </div>
+
+        <!-- Instruksi -->
+        <div style="padding:0 16px 20px;position:relative;z-index:2;">
+            <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:10px;">
+                <span style="font-size:20px;">📡</span>
+                <div>
+                    <div style="color:white;font-size:11px;font-weight:800;margin-bottom:2px;">Cara Penggunaan</div>
+                    <div style="color:rgba(255,255,255,0.7);font-size:10px;line-height:1.5;">Tunjukkan barcode ini ke petugas gerbang atau scanner presensi. Bisa digunakan saat lupa membawa kartu fisik.</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Toast -->
@@ -801,6 +1133,7 @@ const App = {
         if (page === 'lms') this.loadLms();
         if (page === 'notif') this.loadNotifikasi();
         if (page === 'profil') this.renderProfil();
+        if (page === 'izin') this.loadRiwayatIzin();
     },
 
     async api(endpoint, opts = {}) {
@@ -824,7 +1157,10 @@ const App = {
         const s = this.siswa;
         const inisial = (s.nama_siswa || 'S').split(' ').slice(0,2).map(n => n[0]).join('').toUpperCase();
 
+        // Top bar
         document.getElementById('topbar-nama').textContent = (s.nama_siswa || 'Siswa').split(' ')[0];
+
+        // Beranda profile banner
         document.getElementById('profil-nama').textContent = s.nama_siswa;
         document.getElementById('profil-nama').classList.remove('skeleton', 'h-5', 'w-40', 'rounded', 'mb-1');
         document.getElementById('profil-kelas').textContent = s.nama_kelas ? `Kelas ${s.nama_kelas}${s.jurusan ? ' · ' + s.jurusan : ''}` : 'SMK Al-Farizi';
@@ -833,21 +1169,143 @@ const App = {
         document.getElementById('profil-nisn').classList.remove('skeleton', 'h-4', 'w-24');
         document.getElementById('profil-foto').textContent = inisial;
 
-        // Profil page
-        document.getElementById('pp-nama').textContent = s.nama_siswa;
-        document.getElementById('pp-kelas').textContent = s.nama_kelas ? `Kelas ${s.nama_kelas}` : '–';
-        document.getElementById('pp-jurusan').textContent = s.jurusan || '–';
-        document.getElementById('pp-nisn').textContent = s.nisn;
-        document.getElementById('pp-tgl-lahir').textContent = s.tanggal_lahir
+        // === Kartu Pelajar (Tab Profil) ===
+        // Foto / inisial
+        const ppFoto = document.getElementById('pp-foto');
+        if (ppFoto) {
+            if (s.foto) {
+                ppFoto.innerHTML = `<img src="${BASE_URL}uploads/${s.foto}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" onerror="this.parentElement.textContent='${inisial}'">`;
+            } else {
+                ppFoto.textContent = inisial;
+            }
+        }
+
+        // Info teks
+        const setEl = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val || '–'; };
+        setEl('pp-nama', s.nama_siswa);
+        setEl('pp-nisn', s.nisn);
+        setEl('pp-kelas', s.nama_kelas ? `Kelas ${s.nama_kelas}` : '–');
+        setEl('pp-jurusan', s.jurusan || '–');
+        setEl('pp-tgl-lahir', s.tanggal_lahir
             ? new Date(s.tanggal_lahir).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'})
-            : '–';
-        document.getElementById('pp-jk').textContent = s.jenis_kelamin === 'L' ? '👦 Laki-laki' : '👧 Perempuan';
-        document.getElementById('pp-hp-ortu').textContent = s.no_hp_ortu || '–';
-        document.getElementById('pp-foto').textContent = inisial;
+            : '–');
+        setEl('pp-jk', s.jenis_kelamin === 'L' ? '👦 Laki-laki' : '👧 Perempuan');
+        setEl('pp-hp-ortu', s.no_hp_ortu || '–');
+
+        // Barcode — gunakan barcode_code SAMA SEPERTI ADMIN (format ALF-NISN)
+        // barcode_code sudah ada di data siswa dari API /siswa/me
+        const barcodeValue = s.barcode_code || ('ALF-' + s.nisn);
+        setEl('kp-barcode-code-text', barcodeValue);
+
+        if (typeof JsBarcode !== 'undefined') {
+            try {
+                JsBarcode('#kp-barcode', barcodeValue, {
+                    format: 'CODE128',
+                    width: 2,
+                    height: 52,
+                    displayValue: false,
+                    margin: 0,
+                    background: '#ffffff',
+                    lineColor: '#0f172a',
+                });
+            } catch(e) { console.warn('Barcode profil error:', e); }
+        }
     },
 
     renderProfil() {
         this.renderProfile();
+    },
+
+    async downloadKartuPelajar() {
+        if (typeof html2canvas === 'undefined') {
+            this.showToast('Gagal: Modul html2canvas belum termuat.');
+            return;
+        }
+        
+        try {
+            this.showToast('Mempersiapkan gambar kartu...');
+            const kartu = document.getElementById('kartu-pelajar-container');
+            if (!kartu) return;
+            
+            // Render canvas
+            const canvas = await html2canvas(kartu, {
+                scale: 3, 
+                useCORS: true,
+                backgroundColor: null 
+            });
+            
+            // Download file
+            const link = document.createElement('a');
+            link.download = `Kartu_Pelajar_${this.siswa?.nisn || 'Siswa'}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            
+            this.showToast('Berhasil menyimpan Kartu Pelajar!');
+        } catch (err) {
+            console.error(err);
+            this.showToast('Gagal menyimpan Kartu Pelajar.');
+        }
+    },
+
+
+    bukaKartuFull() {
+        if (!this.siswa) return;
+        const s = this.siswa;
+        const inisial = (s.nama_siswa || 'S').split(' ').slice(0,2).map(n => n[0]).join('').toUpperCase();
+
+        // Isi data modal
+        const setEl = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val || '–'; };
+        setEl('kp-modal-nama', s.nama_siswa);
+        setEl('kp-modal-kelas', s.nama_kelas ? `Kelas ${s.nama_kelas}` : '–');
+        setEl('kp-modal-jurusan', s.jurusan || '–');
+        setEl('kp-modal-nisn-text', s.nisn);
+
+        // Hitung tahun masuk dari kelas (tingkat)
+        const tahunSekarang = new Date().getFullYear();
+        const tingkat = parseInt(s.tingkat) || 10;
+        const tahunMasuk = tahunSekarang - (tingkat - 10);
+        setEl('kp-modal-tahun', `${tahunMasuk} / ${tahunMasuk + 1}`);
+
+        // Foto modal
+        const fotoModalEl = document.getElementById('kp-modal-foto');
+        if (fotoModalEl) {
+            if (s.foto) {
+                fotoModalEl.innerHTML = `<img src="${BASE_URL}uploads/${s.foto}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.textContent='${inisial}'">`;
+            } else {
+                fotoModalEl.textContent = inisial;
+            }
+        }
+
+        // Generate barcode besar di modal
+        if (s.nisn && typeof JsBarcode !== 'undefined') {
+            try {
+                JsBarcode('#kp-modal-barcode', s.nisn, {
+                    format: 'CODE128',
+                    width: 2.2,
+                    height: 70,
+                    displayValue: false,
+                    margin: 0,
+                    background: '#ffffff',
+                    lineColor: '#0f172a',
+                });
+            } catch(e) { console.warn('Barcode modal error:', e); }
+        }
+
+        // Tampilkan modal
+        const modal = document.getElementById('modal-kartu-full');
+        if (modal) {
+            modal.classList.add('open');
+            // Prevent scroll background
+            document.body.style.overflow = 'hidden';
+        }
+    },
+
+    tutupKartuFull() {
+        const modal = document.getElementById('modal-kartu-full');
+        if (modal) {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
     },
 
     async loadDashboard() {
@@ -1343,6 +1801,93 @@ const App = {
         printWin.document.open();
         printWin.document.write(html);
         printWin.document.close();
+    },
+
+    async submitIzin(e) {
+        e.preventDefault();
+        const btn = document.getElementById('btnSubmitIzin');
+        const form = document.getElementById('formIzinSiswa');
+        const fileInput = document.getElementById('izinFile');
+        const originText = btn.innerHTML;
+        
+        btn.innerHTML = 'Memproses...';
+        btn.disabled = true;
+
+        try {
+            const formData = new FormData();
+            formData.append('tanggal_izin', document.getElementById('izinTanggal').value);
+            formData.append('jenis_izin', document.getElementById('izinJenis').value);
+            formData.append('alasan', document.getElementById('izinAlasan').value);
+            if (fileInput.files.length > 0) {
+                formData.append('file_bukti', fileInput.files[0]);
+            }
+
+            const res = await fetch(`${API_BASE}/siswa/izin/ajukan`, {
+                method: 'POST',
+                headers: { 'Authorization': 'Bearer ' + this.token },
+                body: formData
+            });
+
+            const data = await res.json();
+            if (data.status === 'success') {
+                this.showToast('✅ ' + data.message);
+                form.reset();
+                this.loadRiwayatIzin();
+            } else {
+                this.showToast('❌ ' + (data.message || 'Gagal mengajukan izin'));
+            }
+        } catch (error) {
+            this.showToast('❌ Terjadi kesalahan jaringan');
+        } finally {
+            btn.innerHTML = originText;
+            btn.disabled = false;
+        }
+    },
+
+    async loadRiwayatIzin() {
+        const container = document.getElementById('izin-riwayat-content');
+        if (!container) return;
+        
+        container.innerHTML = '<div class="text-center text-slate-400 text-sm py-4">Memuat riwayat izin...</div>';
+
+        try {
+            const res = await this.api('siswa/izin');
+            if (res.success && res.data && res.data.length > 0) {
+                container.innerHTML = res.data.map(i => {
+                    let statusColor = 'bg-amber-100 text-amber-800 border-amber-200';
+                    let statusText = 'Belum Disetujui';
+                    if (i.status_izin === 'disetujui') {
+                        statusColor = 'bg-emerald-100 text-emerald-800 border-emerald-200';
+                        statusText = 'Disetujui';
+                    } else if (i.status_izin === 'ditolak') {
+                        statusColor = 'bg-rose-100 text-rose-800 border-rose-200';
+                        statusText = 'Ditolak';
+                    }
+                    
+                    let lampiranHtml = i.file_bukti 
+                        ? `<a href="/uploads/izin/${i.file_bukti}" target="_blank" class="text-[10px] font-bold text-blue-600 underline inline-block mt-2 bg-blue-50 px-2 py-1 rounded">📎 Lihat Bukti</a>`
+                        : '';
+
+                    return `
+                        <div class="card p-3 bg-white border border-slate-200 relative overflow-hidden">
+                            <div class="flex justify-between items-start mb-1.5">
+                                <div>
+                                    <div class="font-bold text-slate-800 text-sm leading-tight">${i.tanggal_izin}</div>
+                                    <div class="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">${i.jenis_izin}</div>
+                                </div>
+                                <span class="px-2 py-0.5 rounded text-[9px] font-bold border ${statusColor}">${statusText}</span>
+                            </div>
+                            <p class="text-[11px] text-slate-600 mt-1 leading-snug">${i.alasan}</p>
+                            ${lampiranHtml}
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                container.innerHTML = '<div class="text-center text-slate-400 text-xs py-6 bg-slate-50 rounded-xl border border-slate-200/60">Belum ada riwayat pengajuan izin</div>';
+            }
+        } catch (error) {
+            container.innerHTML = '<div class="text-center text-rose-500 text-xs py-4">Gagal memuat data</div>';
+        }
     },
 
     async loadNotifikasi() {

@@ -36,6 +36,12 @@ class GuruController
         // Jalankan auto-checkout jika ada sesi terlewat 20 menit
         SesiMengajar::runAutoCheckout();
 
+        // Cek apakah guru adalah Wali Kelas
+        $db = \App\Config\Database::getConnection();
+        $stmtWk = $db->prepare("SELECT id FROM kelas WHERE wali_kelas_guru_id = ?");
+        $stmtWk->execute([$guruId]);
+        $isWaliKelas = (bool)$stmtWk->fetch();
+
         // Ambil jadwal hari ini beserta sesi aktifnya
         $jadwalList = SesiMengajar::getTodayScheduleWithSession($guruId, $today, $hariIndo);
 
@@ -664,6 +670,109 @@ class GuruController
         $guruId = (int)$this->user['id'];
         $res = Notifikasi::markAllAsReadForGuru($guruId);
         App::json(['success' => $res, 'unread_count' => 0]);
+    }
+
+    /**
+     * Halaman Persetujuan Izin Siswa (Khusus Wali Kelas)
+     */
+    public function izinSiswa(): void
+    {
+        $guruId = (int)$this->user['id'];
+        $status = $_GET['status'] ?? '';
+        $pengajuanList = \App\Models\PengajuanIzinSiswa::getAllForWaliKelas($guruId, $status);
+
+        $user   = $this->user;
+        $config = $this->config;
+
+        require __DIR__ . '/../Views/guru/izin_siswa.php';
+    }
+
+    /**
+     * Proses Persetujuan Izin Siswa
+     */
+    public function prosesIzinSiswa(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            App::redirect(App::baseUrl('guru/izin-siswa'));
+            return;
+        }
+
+        $id = (int)($_POST['id'] ?? 0);
+        $status = trim($_POST['status'] ?? '');
+        $catatan = trim($_POST['catatan_guru'] ?? '');
+
+        if ($id <= 0 || !in_array($status, ['DISETUJUI', 'DITOLAK'])) {
+            $_SESSION['flash_error'] = 'Data tidak valid.';
+            App::redirect(App::baseUrl('guru/izin-siswa'));
+            return;
+        }
+
+        $pengajuan = \App\Models\PengajuanIzinSiswa::findById($id);
+        if (!$pengajuan) {
+            $_SESSION['flash_error'] = 'Pengajuan izin tidak ditemukan.';
+            App::redirect(App::baseUrl('guru/izin-siswa'));
+            return;
+        }
+
+        $success = \App\Models\PengajuanIzinSiswa::process($id, $status, $this->user['id'], $catatan);
+        
+        if ($success) {
+            if ($status === 'DISETUJUI') {
+                $db = \App\Config\Database::getConnection();
+                $tglMulai = $pengajuan['tanggal_mulai'];
+                $tglSelesai = $pengajuan['tanggal_selesai'];
+                
+                $currentDate = new \DateTime($tglMulai);
+                $endDate = new \DateTime($tglSelesai);
+                
+                while ($currentDate <= $endDate) {
+                    if ($currentDate->format('N') <= 5) {
+                        $tgl = $currentDate->format('Y-m-d');
+                        $stmtCheck = $db->prepare("SELECT id FROM presensi_gerbang_siswa WHERE siswa_id = :sid AND tanggal = :tgl");
+                        $stmtCheck->execute([':sid' => $pengajuan['siswa_id'], ':tgl' => $tgl]);
+                        $existing = $stmtCheck->fetchColumn();
+                        
+                            $jenisIzin = strtoupper($pengajuan['jenis_izin']);
+                            if ($existing) {
+                                $stmtUpd = $db->prepare("UPDATE presensi_gerbang_siswa SET status_kehadiran = :status, is_terkunci = 1, dikunci_oleh = :admin, dikunci_at = NOW(), keterangan = :ket WHERE id = :id");
+                                $stmtUpd->execute([
+                                    ':status' => $jenisIzin,
+                                    ':admin' => $this->user['id'],
+                                    ':ket' => 'Izin disetujui: ' . $pengajuan['alasan'],
+                                    ':id' => $existing
+                                ]);
+                            } else {
+                                $stmtIns = $db->prepare("INSERT INTO presensi_gerbang_siswa (siswa_id, tanggal, status_kehadiran, is_terkunci, dikunci_oleh, dikunci_at, keterangan) VALUES (:sid, :tgl, :status, 1, :admin, NOW(), :ket)");
+                                $stmtIns->execute([
+                                    ':sid' => $pengajuan['siswa_id'],
+                                    ':tgl' => $tgl,
+                                    ':status' => $jenisIzin,
+                                    ':admin' => $this->user['id'],
+                                    ':ket' => 'Izin disetujui: ' . $pengajuan['alasan']
+                                ]);
+                            }
+                    }
+                    $currentDate->modify('+1 day');
+                }
+            }
+            if ($status === 'DISETUJUI' || $status === 'DITOLAK') {
+                $db = \App\Config\Database::getConnection();
+                $stmtSiswa = $db->prepare("SELECT nama_siswa, no_hp_ortu FROM siswa WHERE id = :sid");
+                $stmtSiswa->execute([':sid' => $pengajuan['siswa_id']]);
+                $siswa = $stmtSiswa->fetch();
+                
+                if ($siswa && !empty($siswa['no_hp_ortu'])) {
+                    $msg = "INFO SEKOLAH:\nBapak/Ibu, pengajuan izin untuk anak Anda *{$siswa['nama_siswa']}* (Mulai: {$pengajuan['tanggal_mulai']}) telah *{$status}* oleh Wali Kelas.\nCatatan: " . ($catatan ?: '-');
+                    \App\Helpers\WhatsappHelper::sendMessage($siswa['no_hp_ortu'], $msg);
+                }
+            }
+
+            $_SESSION['flash_success'] = 'Pengajuan izin berhasil diproses.';
+        } else {
+            $_SESSION['flash_error'] = 'Gagal memproses pengajuan izin.';
+        }
+
+        App::redirect(App::baseUrl('guru/izin-siswa'));
     }
 }
 
