@@ -141,7 +141,8 @@ $activeNav = 'buku_induk';
 
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
                     <form method="POST" action="<?= App::baseUrl('admin/buku-induk/input-kolektif') ?>">
-                        <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                        
                         <input type="hidden" name="kelas_id" value="<?= $kelasId ?>">
                         <input type="hidden" name="semester_ke" value="<?= $semesterKe ?>">
                         <?php foreach ($mapelIds as $mid): ?>
@@ -220,6 +221,7 @@ $activeNav = 'buku_induk';
             </div>
             <form method="POST" action="<?= App::baseUrl('admin/mapel/store') ?>" class="p-6 space-y-4">
                 <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                
                 <input type="hidden" name="redirect_to" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
                 
                 <div>

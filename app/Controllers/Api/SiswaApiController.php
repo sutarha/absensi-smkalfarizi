@@ -180,6 +180,13 @@ class SiswaApiController extends ApiController
             }
         }
 
+        // Cast to int
+        $absensi['hadir'] = (int)($absensi['hadir'] ?? 0);
+        $absensi['terlambat'] = (int)($absensi['terlambat'] ?? 0);
+        $absensi['izin'] = (int)($absensi['izin'] ?? 0);
+        $absensi['sakit'] = (int)($absensi['sakit'] ?? 0);
+        $absensi['alpha'] = (int)($absensi['alpha'] ?? 0);
+
         // Jadwal hari ini
         $hariIni = strtoupper(['MINGGU','SENIN','SELASA','RABU','KAMIS','JUMAT','SABTU'][date('w')]);
         $stmt = $db->prepare("

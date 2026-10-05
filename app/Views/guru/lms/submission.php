@@ -115,6 +115,8 @@ use App\Config\App;
             <div class="p-5">
                 <form id="formNilai" action="" method="POST" class="space-y-4">
     <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+
+    
                     <div>
                         <label class="block mb-1.5 text-sm font-bold text-slate-700">Nilai (0-100)</label>
                         <input type="number" name="nilai" id="inputNilai" min="0" max="100" step="0.01" class="bg-slate-50 border border-slate-200 text-slate-900 font-bold text-lg rounded-xl focus:ring-brand-500 focus:border-brand-500 block w-full p-3 text-center" required>

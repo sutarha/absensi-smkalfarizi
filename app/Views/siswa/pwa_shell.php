@@ -575,7 +575,7 @@ if ($sessionSiswa && ($sessionSiswa['role'] ?? '') === 'siswa') {
                         Lihat Log &rarr;
                     </button>
                 </div>
-                <div class="grid grid-cols-2 gap-2.5">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-2.5">
                     <div class="stat-card hadir flex items-center gap-3">
                         <div class="text-2xl">✅</div>
                         <div>
@@ -590,11 +590,18 @@ if ($sessionSiswa && ($sessionSiswa['role'] ?? '') === 'siswa') {
                             <div class="text-xs text-amber-800 font-semibold">Telat</div>
                         </div>
                     </div>
+                    <div class="stat-card sakit flex items-center gap-3" style="background: #fdf4ff; border-color: #fae8ff; color: #86198f;">
+                        <div class="text-2xl">🏥</div>
+                        <div>
+                            <div id="stat-sakit" class="text-2xl font-black text-fuchsia-700">–</div>
+                            <div class="text-xs text-fuchsia-800 font-semibold">Sakit</div>
+                        </div>
+                    </div>
                     <div class="stat-card izin flex items-center gap-3">
                         <div class="text-2xl">📋</div>
                         <div>
                             <div id="stat-izin" class="text-2xl font-black text-purple-700">–</div>
-                            <div class="text-xs text-purple-800 font-semibold">Izin/Sakit</div>
+                            <div class="text-xs text-purple-800 font-semibold">Izin</div>
                         </div>
                     </div>
                     <div class="stat-card alpha flex items-center gap-3">
@@ -1317,7 +1324,9 @@ const App = {
             const a = data.absensi_bulan;
             document.getElementById('stat-hadir').textContent = a.hadir || 0;
             document.getElementById('stat-telat').textContent = a.terlambat || 0;
-            document.getElementById('stat-izin').textContent = (parseInt(a.izin||0) + parseInt(a.sakit||0));
+            document.getElementById('stat-izin').textContent = a.izin || 0;
+            const elSakit = document.getElementById('stat-sakit');
+            if (elSakit) elSakit.textContent = a.sakit || 0;
             document.getElementById('stat-alpha').textContent = a.alpha || 0;
 
             // Jadwal

@@ -131,6 +131,7 @@ async function processBarcode(barcodeText) {
 
         if (res.success) {
             playBeepSound(true);
+            speakGreeting(currentMode);
 
             // Tampilkan pop-up kartu profil siswa hijau selama 1.5 detik
             showStudentPopup(res.siswa, res.message, res.time);
@@ -204,6 +205,28 @@ function showErrorToast(msg) {
     setTimeout(() => {
         errBox.classList.add('hidden');
     }, 2500);
+}
+
+// Fitur Text-to-Speech (Suara)
+function speakGreeting(mode) {
+    if (!('speechSynthesis' in window)) return;
+    
+    // Hentikan suara yang sedang berjalan agar tidak bertumpuk
+    window.speechSynthesis.cancel();
+    
+    let text = "";
+    if (mode === 'DATANG') {
+        text = "Terima kasih sudah absen datang, semangat belajar.";
+    } else if (mode === 'PULANG') {
+        text = "Terima kasih sudah absen pulang, hati-hati di jalan.";
+    }
+    
+    if (text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'id-ID'; // Bahasa Indonesia
+        utterance.rate = 1.0; // Kecepatan normal
+        window.speechSynthesis.speak(utterance);
+    }
 }
 
 // Inisialisasi Kamera HTML5-QRCode
@@ -370,4 +393,38 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('click', () => {
         initAudio();
     }, { once: true });
+
+    // --- FITUR SCANNER FISIK (BARCODE GUN) ---
+    // Scanner fisik bekerja layaknya keyboard yang mengetik sangat cepat lalu menekan "Enter".
+    let hardwareScannerBuffer = '';
+    let hardwareScannerTimeout;
+
+    document.addEventListener('keypress', (e) => {
+        // Jika user sedang mengetik di dalam input/textarea (misal sedang isi form manual), biarkan normal
+        const activeTag = e.target.tagName.toLowerCase();
+        if (activeTag === 'input' || activeTag === 'textarea') {
+            return;
+        }
+
+        // Hapus timeout sebelumnya
+        clearTimeout(hardwareScannerTimeout);
+
+        // Jika karakter "Enter" terdeteksi dan buffer ada isinya, proses barcode
+        if (e.key === 'Enter') {
+            if (hardwareScannerBuffer.length > 0) {
+                processBarcode(hardwareScannerBuffer);
+                hardwareScannerBuffer = '';
+                e.preventDefault(); // Cegah default action dari Enter
+            }
+        } else {
+            // Tambahkan karakter ke dalam buffer
+            hardwareScannerBuffer += e.key;
+        }
+
+        // Scanner mengetik sangat cepat. Jika jeda antar karakter lebih dari 100ms, 
+        // kemungkinan itu ketikan manusia biasa, jadi kosongkan buffer.
+        hardwareScannerTimeout = setTimeout(() => {
+            hardwareScannerBuffer = '';
+        }, 100);
+    });
 });

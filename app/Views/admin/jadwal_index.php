@@ -243,6 +243,7 @@ $hasFilterActive = !empty($selectedHari) || !empty($selectedKelasId) || !empty($
                                             <form action="<?= App::baseUrl("admin/jadwal/delete/{$j['id']}") ?>" method="POST"
                                                   onsubmit="return confirm('Yakin ingin menghapus jadwal ini?')">
                                                 <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                                                
                                                 <button type="submit" 
                                                         title="Hapus Jadwal"
                                                         class="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition">
@@ -276,7 +277,7 @@ $hasFilterActive = !empty($selectedHari) || !empty($selectedKelasId) || !empty($
             </div>
 
             <form id="jadwalForm" method="POST" action="<?= App::baseUrl('admin/jadwal/store') ?>" class="space-y-4">
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <input type="hidden" name="exclude_id" id="m_exclude_id" value="">
                 <input type="hidden" name="redirect_to" value="<?= htmlspecialchars($currentRedirectUrl) ?>">
 

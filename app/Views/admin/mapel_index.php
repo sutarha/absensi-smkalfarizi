@@ -190,6 +190,7 @@ $selectedTingkat = $_GET['tingkat'] ?? '';
                                             <form action="<?= App::baseUrl("admin/mapel/delete/{$m['id']}") ?>" method="POST"
                                                   onsubmit="return confirm('Hapus mata pelajaran <?= addslashes($m['nama_mapel']) ?>? Nilai siswa terkait mungkin terdampak.')">
                                                 <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                                                
                                                 <button type="submit" 
                                                         title="Hapus Mata Pelajaran"
                                                         class="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition">
@@ -222,7 +223,8 @@ $selectedTingkat = $_GET['tingkat'] ?? '';
             </div>
             
             <form id="mapelForm" method="POST" action="<?= App::baseUrl('admin/mapel/store') ?>" class="p-6 space-y-4">
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+    
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Kode Mata Pelajaran</label>
                     <input type="text" name="kode_mapel" id="m_kode_mapel" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition uppercase" placeholder="Contoh: PPLG-01, PAI, PJOK" required>

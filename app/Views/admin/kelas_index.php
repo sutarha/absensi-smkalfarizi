@@ -157,6 +157,7 @@ $activeNav = 'kelas';
 
              <form id="kelasForm" method="POST" action="<?= App::baseUrl('admin/kelas/store') ?>" class="space-y-4">
                  <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                 
                  <div>
                      <label class="block text-xs font-bold text-slate-700 mb-1">Nama Rombel / Kelas</label>
                      <input type="text" name="nama_kelas" id="m_nama_kelas" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition" placeholder="Contoh: X PPLG 1" required>
@@ -220,6 +221,8 @@ $activeNav = 'kelas';
                  <!-- Form Pasang Mapel & Guru -->
                  <form id="plotForm" method="POST" action="" class="bg-slate-50/80 p-4 rounded-2xl border border-slate-200/80 space-y-3">
     <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+
+    
                      <div class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
                          <span>➕</span>
                          <span>Pasangkan Mata Pelajaran & Guru Baru ke Kelas Ini</span>
@@ -430,8 +433,8 @@ $activeNav = 'kelas';
                                             class="p-1 rounded-lg text-brand-600 hover:bg-brand-50 transition">
                                              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                                          </a>
-                                         <form action="<?= App::baseUrl('admin/kelas/mapel/delete/') ?>${item.id}" method="POST" onsubmit="return confirm('Hapus plotting mapel ${escapeHtml(item.nama_mapel)} dari kelas ini?')">
-                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                                         <form action="<?= App::baseUrl('admin/kelas/mapel/delete/') ?>${item.id}" method="POST" onsubmit="return confirm('Hapus plotting mapel ${escapeHtml(item.nama_mapel)} dari kelas ini?')"><input type="hidden" name="csrf_token" value="<?= \App\Helpers\CsrfHelper::getToken() ?>">
+                                                
                                              <button type="submit" title="Hapus Plotting" class="p-1 rounded-lg text-rose-500 hover:bg-rose-50 transition">
                                                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                                              </button>

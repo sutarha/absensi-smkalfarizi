@@ -126,6 +126,7 @@ use App\Config\App;
         <div class="bg-white w-full max-w-md sm:rounded-2xl rounded-t-2xl shadow-2xl overflow-hidden transition-all transform translate-y-0 max-h-[90vh] flex flex-col">
             <form action="<?= \App\Config\App::baseUrl('guru/tabungan/daftar/' . $program['id']) ?>" method="POST" class="flex flex-col h-full overflow-hidden">
                                                 <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                                                
                 <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-white sticky top-0 z-10 shrink-0">
                     <h3 class="font-bold text-slate-800">Daftarkan Siswa Baru</h3>
                     <button type="button" onclick="document.getElementById('modalDaftar').classList.add('hidden')" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-500 hover:bg-slate-200">
@@ -179,6 +180,8 @@ use App\Config\App;
         <div class="bg-white w-full max-w-md sm:rounded-2xl rounded-t-2xl shadow-2xl overflow-hidden transition-all transform translate-y-0">
             <form id="formSetor" method="POST">
     <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+
+    
                 <input type="hidden" name="program_id" value="<?= $program['id'] ?>">
                 <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-white">
                     <h3 class="font-bold text-slate-800">Catat Setoran</h3>

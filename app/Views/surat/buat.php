@@ -41,7 +41,8 @@ $activeNav = 'surat';
         <div class="p-8 max-w-4xl w-full mx-auto space-y-6">
 
             <form id="form-surat" method="POST" action="<?= App::baseUrl('admin/surat/store') ?>" class="space-y-6">
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+    
 
                 <!-- Klasifikasi & Penerima -->
                 <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-soft-sm">

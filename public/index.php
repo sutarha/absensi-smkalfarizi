@@ -1006,6 +1006,18 @@ try {
     echo "<h1>404 - Halaman Tidak Ditemukan</h1><p>Halaman '{$path}' tidak tersedia.</p><a href='" . App::baseUrl() . "'>Kembali ke Beranda</a>";
 
 } catch (\Throwable $e) {
+    if ($e instanceof \PDOException && $e->getCode() == 23000) {
+        $isApi = (strpos($path, 'api/v1/') === 0);
+        if (!$isApi && !empty($_SERVER['HTTP_REFERER'])) {
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            $_SESSION['flash_error'] = "Gagal menyimpan: Data yang Anda masukkan bentrok, sudah ada (duplikat), atau melanggar aturan database (Kode 1062).";
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+    }
+
     http_response_code(500);
     error_log("[SI Presensi Error] " . $e->getMessage() . " in " . $e->getFile() . ":" . $e->getLine());
     

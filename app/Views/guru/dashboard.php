@@ -144,12 +144,12 @@ use App\Helpers\TimeHelper;
                     </a>
                 </div>
                 <div class="text-3xl font-outfit font-extrabold tracking-tight mt-1 relative z-10 text-white drop-shadow-sm">
-                    <?= TimeHelper::formatRupiah($totalHonorBulanIni + (float)$user['tunjangan_tugas']) ?>
+                    <?= TimeHelper::formatRupiah($totalHonorBulanIni + $tunjanganTugas) ?>
                 </div>
                 <div class="text-[11px] text-blue-100 mt-3 pt-2.5 border-t border-white/20 flex flex-wrap gap-x-4 gap-y-1 relative z-10">
                     <span>Honor KBM: <strong><?= TimeHelper::formatRupiah($totalHonorBulanIni) ?></strong></span>
-                    <?php if ((float)$user['tunjangan_tugas'] > 0): ?>
-                    <span>Tunjangan: <strong><?= TimeHelper::formatRupiah($user['tunjangan_tugas']) ?></strong></span>
+                    <?php if ($tunjanganTugas > 0): ?>
+                    <span>Tunjangan: <strong><?= TimeHelper::formatRupiah($tunjanganTugas) ?></strong></span>
                     <?php endif; ?>
                 </div>
                 <?php if ($totalDendaBulanIni > 0): ?>

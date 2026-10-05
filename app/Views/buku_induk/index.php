@@ -101,7 +101,8 @@ $activeNav = 'buku_induk';
 
             <!-- Form Bulk Assign Kelas (Ceklis Massal) -->
                 <form id="bulkAssignForm" method="POST" action="<?= App::baseUrl('admin/siswa/bulk-assign-kelas') ?>">
-                    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                                                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                    
                     <input type="hidden" name="return_url" value="<?= htmlspecialchars($_SERVER['REQUEST_URI'] ?? App::baseUrl('admin/buku-induk')) ?>">
 
                 <!-- Table Card -->

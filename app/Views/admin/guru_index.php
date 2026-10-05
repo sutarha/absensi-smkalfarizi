@@ -137,6 +137,7 @@ $activeNav = 'guru';
                                             <form action="<?= App::baseUrl("admin/guru/delete/{$g['id']}") ?>" method="POST" 
                                                   onsubmit="return confirm('Yakin ingin menghapus guru ini?')">
                                                 <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                                                
                                                 <button type="submit" 
                                                         title="Hapus Guru"
                                                         class="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition">
@@ -167,7 +168,7 @@ $activeNav = 'guru';
             </div>
 
             <form id="guruForm" method="POST" action="<?= App::baseUrl('admin/guru/store') ?>" class="space-y-4">
-    <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
+                <?= \App\Helpers\CsrfHelper::getTokenInput() ?>
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">NIK / NIP</label>
                     <input type="text" name="nik_nip" id="m_nik_nip" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-brand-500 focus:bg-white focus:outline-none transition" placeholder="Nomor Induk Kepegawaian" required>

@@ -89,6 +89,9 @@ class GuruController
             $totalDendaBulanIni += (float)($h['menit_terlambat'] * $this->config['denda_per_menit']);
         }
 
+        $guruData = \App\Models\Guru::findById($guruId);
+        $tunjanganTugas = (float)($guruData['tunjangan_tugas'] ?? 0);
+
         // Data Penilaian KBM Semester Berjalan
         $activeTapel = \App\Models\TahunPelajaran::getActive();
         $kelasMapelGuru = JadwalPelajaran::getDistinctKelasMapelByGuru($guruId);
@@ -382,7 +385,8 @@ class GuruController
             $totalHonorBersih += (float)$h['honor_didapat'];
         }
 
-        $tunjanganTugas = (float)($this->user['tunjangan_tugas'] ?? 0);
+        $guruData = \App\Models\Guru::findById($guruId);
+        $tunjanganTugas = (float)($guruData['tunjangan_tugas'] ?? 0);
         $totalTakeHome = $totalHonorBersih + $tunjanganTugas;
 
         $user = $this->user;
