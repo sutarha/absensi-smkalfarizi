@@ -271,12 +271,18 @@ $navItems = [
     <div class="p-3 border-t border-slate-800/80 bg-slate-950/40">
         <div class="flex items-center justify-between p-2 rounded-xl bg-slate-800/50 border border-slate-700/50">
             <div class="flex items-center gap-2.5 overflow-hidden">
+                <?php 
+                    $displayName = $user['nama_lengkap'] ?? 'Tata Usaha';
+                    if ($user['id'] == 1 || strpos($displayName, 'Nurhayati') !== false) {
+                        $displayName = 'Super Admin';
+                    }
+                ?>
                 <div class="w-8 h-8 rounded-lg bg-brand-900/60 border border-brand-700/60 text-brand-300 font-bold text-xs flex items-center justify-center flex-shrink-0">
-                    <?= strtoupper(substr($user['nama_lengkap'] ?? 'TU', 0, 2)) ?>
+                    <?= strtoupper(substr($displayName, 0, 2)) ?>
                 </div>
                 <div class="overflow-hidden">
                     <div class="text-xs font-bold text-slate-200 truncate leading-tight">
-                        <?= htmlspecialchars($user['nama_lengkap'] ?? 'Tata Usaha') ?>
+                        <?= htmlspecialchars($displayName) ?>
                     </div>
                     <div class="text-[10px] text-slate-400 font-medium"><?= ucfirst($user['role'] ?? 'Admin') ?></div>
                 </div>
