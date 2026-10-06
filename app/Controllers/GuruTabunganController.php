@@ -40,7 +40,7 @@ class GuruTabunganController
             App::redirect(App::baseUrl('guru/tabungan'));
         }
 
-        $isPengelola = ($program['pengelola_id'] == $guruId || $program['asisten_pengelola_id'] == $guruId || $this->user['role'] === 'admin');
+        $isPengelola = ($program['pengelola_id'] == $guruId || $program['asisten_pengelola_id'] == $guruId || in_array($this->user['role'], ['super_admin', 'admin']));
 
         $siswaPeserta = TabunganSiswa::getByProgram($programId);
         $siswaAll = Siswa::getAll(); // Untuk pendaftaran

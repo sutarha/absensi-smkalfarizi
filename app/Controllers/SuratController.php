@@ -15,7 +15,7 @@ class SuratController
     private function authAdmin(): array
     {
         $user = AuthController::checkAuth();
-        if (!$user || !in_array($user['role'], ['admin', 'kepala_sekolah'])) {
+        if (!$user || !in_array($user['role'], ['super_admin', 'admin', 'kepala_sekolah'])) {
             App::redirect(App::baseUrl('login'));
             exit;
         }

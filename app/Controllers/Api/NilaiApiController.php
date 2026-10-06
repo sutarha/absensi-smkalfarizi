@@ -31,7 +31,7 @@ class NilaiApiController extends ApiController
         self::requireMethod('GET');
         $payload = self::requireAuth(['guru', 'admin', 'kepala_sekolah', 'wakasek_kurikulum', 'bendahara']);
         $guruId  = (int)$payload->uid;
-        $isAdmin = ($payload->role === 'admin');
+        $isAdmin = (in_array($payload->role, ['super_admin', 'admin']));
 
         $activeTapel = TahunPelajaran::getActive();
         $tapelList = TahunPelajaran::getAll();
@@ -163,7 +163,7 @@ class NilaiApiController extends ApiController
         self::requireMethod('POST');
         $payload = self::requireAuth(['guru', 'admin', 'kepala_sekolah', 'wakasek_kurikulum', 'bendahara']);
         $guruId  = (int)$payload->uid;
-        $isAdmin = ($payload->role === 'admin');
+        $isAdmin = (in_array($payload->role, ['super_admin', 'admin']));
 
         $body = self::jsonBody();
 

@@ -15,7 +15,7 @@ class NilaiController
     private function authAdminOrGuru(): array
     {
         $user = AuthController::checkAuth();
-        if (!$user || !in_array($user['role'], ['admin', 'guru', 'kepala_sekolah', 'wakasek_kurikulum', 'bendahara'])) {
+        if (!$user || !in_array($user['role'], ['super_admin', 'admin', 'guru', 'kepala_sekolah', 'wakasek_kurikulum', 'bendahara'])) {
             App::redirect(App::baseUrl('login'));
             exit;
         }

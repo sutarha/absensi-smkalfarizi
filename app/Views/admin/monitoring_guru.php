@@ -272,7 +272,7 @@ $activeNav = 'monitoring_guru';
                                         <?= !empty($g['keterangan']) ? htmlspecialchars($g['keterangan']) : '<span class="text-slate-300">-</span>' ?>
                                     </td>
                                     <td class="py-3 px-4 text-center">
-                                        <?php if ($user['role'] === 'admin'): ?>
+                                        <?php if (in_array($user['role'], ['super_admin', 'admin'])): ?>
                                             <button onclick="openModalEditGerbang(<?= htmlspecialchars(json_encode([
                                                 'guru_id' => $g['guru_id'],
                                                 'waktu_datang' => $g['waktu_datang'] ? date('H:i', strtotime($g['waktu_datang'])) : '',
@@ -415,7 +415,7 @@ $activeNav = 'monitoring_guru';
                                         <?php endif; ?>
                                     </td>
                                     <td class="py-3 px-4 text-center">
-                                        <?php if ($user['role'] === 'admin'): ?>
+                                        <?php if (in_array($user['role'], ['super_admin', 'admin'])): ?>
                                             <button onclick="openModalEditSesi(<?= htmlspecialchars(json_encode([
                                                 'jadwal_id' => $m['jadwal_id'],
                                                 'guru_id' => $m['guru_id'],
@@ -566,7 +566,7 @@ $activeNav = 'monitoring_guru';
                         let ket = g.keterangan ? escapeHtml(g.keterangan) : '<span class="text-slate-300">-</span>';
 
                         let aksiCol = '<span class="text-slate-400">-</span>';
-                        <?php if ($user['role'] === 'admin'): ?>
+                        <?php if (in_array($user['role'], ['super_admin', 'admin'])): ?>
                             const gerbangData = {
                                 guru_id: g.guru_id,
                                 waktu_datang: g.waktu_datang ? g.waktu_datang.substring(11, 16) : '',
@@ -653,7 +653,7 @@ $activeNav = 'monitoring_guru';
                                 <td class="py-3 px-4">${dendaCol}</td>
                                 <td class="py-3 px-4">${gpsCol}</td>
                                 <td class="py-3 px-4 text-center">
-                                    <?php if ($user['role'] === 'admin'): ?>
+                                    <?php if (in_array($user['role'], ['super_admin', 'admin'])): ?>
                                         ${(() => {
                                             const sessionData = {
                                                 jadwal_id: m.jadwal_id,

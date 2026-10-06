@@ -10,7 +10,7 @@ foreach ($files as $file) {
     if (!file_exists($file)) continue;
     $content = file_get_contents($file);
     
-    // The bad string that was inserted previously right after `?>`
+    // The bad string that was inserted previously right after `? >`
     $badString = "\n                                                <?= \\App\\Helpers\\CsrfHelper::getTokenInput() ?>";
     
     if (strpos($content, $badString) !== false) {

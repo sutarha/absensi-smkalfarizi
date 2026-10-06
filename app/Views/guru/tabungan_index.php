@@ -132,7 +132,7 @@ use App\Helpers\TimeHelper;
                                 </div>
                             </div>
 
-                            <?php $isPengelolaProgram = ($p['pengelola_id'] == $user['id'] || $p['asisten_pengelola_id'] == $user['id'] || $user['role'] == 'admin'); ?>
+                            <?php $isPengelolaProgram = ($p['pengelola_id'] == $user['id'] || $p['asisten_pengelola_id'] == $user['id'] || in_array($user['role'], ['super_admin', 'admin'])); ?>
                             <?php if($isPengelolaProgram): ?>
                             <div class="bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white font-bold py-2.5 rounded-xl text-center text-xs w-full border border-indigo-200/80 transition-all flex items-center justify-center gap-1.5">
                                 <span>Kelola Setoran Siswa</span>

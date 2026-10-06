@@ -34,7 +34,7 @@ class AdminController
     private function checkRbacAccess()
     {
         $role = $this->user['role'];
-        if ($role === 'admin') return;
+        if ($role === 'super_admin' || in_array($role, ['super_admin', 'admin'])) return;
 
         $uriPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
         $baseDir = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
@@ -59,7 +59,7 @@ class AdminController
             'admin/lms' => ['kepala_sekolah', 'wakasek_kurikulum']
         ];
 
-        if ($path === 'admin') $path = 'admin/dashboard';
+        if (in_array($path, ['super_admin', 'admin'])) $path = 'admin/dashboard';
 
         $isAllowed = false;
         foreach ($allowedPaths as $prefix => $roles) {
@@ -806,7 +806,7 @@ class AdminController
         $this->checkRbacAccess('admin/monitoring/guru');
 
         // Hanya super admin yang boleh melakukan update manual
-        if ($this->user['role'] !== 'admin') {
+        if ($this->user['role'] !== 'super_admin' && $this->user['role'] !== 'admin') {
             $_SESSION['flash_error'] = 'Akses ditolak. Hanya Super Admin yang dapat mengedit presensi manual.';
             App::redirect(App::baseUrl('admin/monitoring/guru'));
             exit;
@@ -837,7 +837,7 @@ class AdminController
     {
         $this->checkRbacAccess('admin/monitoring/guru');
 
-        if ($this->user['role'] !== 'admin') {
+        if ($this->user['role'] !== 'super_admin' && $this->user['role'] !== 'admin') {
             $_SESSION['flash_error'] = 'Akses ditolak. Hanya Super Admin yang dapat mengedit presensi manual.';
             App::redirect(App::baseUrl('admin/monitoring/guru'));
             exit;
@@ -1139,7 +1139,7 @@ class AdminController
             'siswa' => (int)$db->query("SELECT COUNT(*) FROM siswa")->fetchColumn(),
             'buku_induk' => (int)$db->query("SELECT COUNT(*) FROM buku_induk_siswa")->fetchColumn(),
             'guru' => (int)$db->query("SELECT COUNT(*) FROM guru")->fetchColumn(),
-            'guru_non_admin' => (int)$db->query("SELECT COUNT(*) FROM guru WHERE role != 'admin'")->fetchColumn(),
+            'guru_non_admin' => (int)$db->query("SELECT COUNT(*) FROM guru WHERE role NOT IN ('super_admin', 'admin')")->fetchColumn(),
             'kelas' => (int)$db->query("SELECT COUNT(*) FROM kelas")->fetchColumn(),
             'mapel' => (int)$db->query("SELECT COUNT(*) FROM mata_pelajaran")->fetchColumn(),
             'jadwal' => (int)$db->query("SELECT COUNT(*) FROM jadwal_pelajaran")->fetchColumn(),
@@ -1177,10 +1177,10 @@ class AdminController
                 $db->exec("DELETE FROM siswa");
                 $_SESSION['flash_success'] = "Seluruh data siswa, buku induk, dan data presensi terkait berhasil dihapus!";
             } elseif ($action === 'guru') {
-                $db->exec("DELETE FROM presensi_gerbang_guru WHERE guru_id IN (SELECT id FROM guru WHERE role != 'admin')");
-                $db->exec("DELETE FROM jadwal_pelajaran WHERE guru_id IN (SELECT id FROM guru WHERE role != 'admin')");
-                $db->exec("DELETE FROM guru WHERE role != 'admin'");
-                $_SESSION['flash_success'] = "Seluruh akun guru dummy non-admin berhasil dihapus! Akun Super Admin ('admin') tetap terjaga.";
+                $db->exec("DELETE FROM presensi_gerbang_guru WHERE guru_id IN (SELECT id FROM guru WHERE role NOT IN ('super_admin', 'admin'))");
+                $db->exec("DELETE FROM jadwal_pelajaran WHERE guru_id IN (SELECT id FROM guru WHERE role NOT IN ('super_admin', 'admin'))");
+                $db->exec("DELETE FROM guru WHERE role NOT IN ('super_admin', 'admin')");
+                $_SESSION['flash_success'] = "Seluruh akun guru dummy non-admin berhasil dihapus! Akun Super Admin ('super_admin', 'admin') tetap terjaga.";
             } elseif ($action === 'all') {
                 $confirmText = $_POST['confirm_text'] ?? '';
                 if (strtoupper(trim($confirmText)) !== 'BERSIHKAN') {
@@ -1195,7 +1195,7 @@ class AdminController
                 $db->exec("DELETE FROM nilai_siswa");
                 $db->exec("DELETE FROM siswa");
                 $db->exec("DELETE FROM jadwal_pelajaran");
-                $db->exec("DELETE FROM guru WHERE role != 'admin'");
+                $db->exec("DELETE FROM guru WHERE role NOT IN ('super_admin', 'admin')");
                 $_SESSION['flash_success'] = "Reset Total Berhasil! Seluruh data dummy (siswa, guru non-admin, jadwal, nilai, dan absensi gerbang) telah dibersihkan. Sistem siap untuk data riil sekolah.";
                 \App\Helpers\AuditLog::log('RESET_DATA', "Pembersihan total (all) dieksekusi.");
             } else {

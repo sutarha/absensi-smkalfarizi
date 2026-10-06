@@ -94,7 +94,7 @@ class GerbangApiController extends ApiController
         $userLng       = isset($body['longitude']) ? (float)$body['longitude'] : (isset($_POST['longitude']) ? (float)$_POST['longitude'] : null);
         
         $bypassRequested = (!empty($body['bypass_gps']) && $body['bypass_gps'] === true) || (isset($_POST['bypass_gps']) && $_POST['bypass_gps'] === '1');
-        $canBypass = ($payload->role === 'admin') || App::isDevMode();
+        $canBypass = (in_array($payload->role, ['super_admin', 'admin'])) || App::isDevMode();
         $bypassGps = $bypassRequested && $canBypass;
 
         // 1. Non-Hadir (Tugas Luar, Izin, Sakit)
@@ -198,7 +198,7 @@ class GerbangApiController extends ApiController
         $userLng    = isset($body['longitude']) ? (float)$body['longitude'] : (isset($_POST['longitude']) ? (float)$_POST['longitude'] : null);
 
         $bypassRequested = (!empty($body['bypass_gps']) && $body['bypass_gps'] === true) || (isset($_POST['bypass_gps']) && $_POST['bypass_gps'] === '1');
-        $canBypass = ($payload->role === 'admin') || App::isDevMode();
+        $canBypass = (in_array($payload->role, ['super_admin', 'admin'])) || App::isDevMode();
         $bypassGps = $bypassRequested && $canBypass;
 
         $today = date('Y-m-d');

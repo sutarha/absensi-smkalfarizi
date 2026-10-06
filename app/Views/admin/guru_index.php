@@ -107,7 +107,7 @@ $activeNav = 'guru';
                                         </span>
                                     </td>
                                     <td class="py-3 px-4">
-                                        <?php if ($g['role'] === 'admin'): ?>
+                                        <?php if (in_array($g['role'], ['super_admin', 'admin'])): ?>
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-50 text-purple-700 border border-purple-200">
                                                 Super Admin
                                             </span>

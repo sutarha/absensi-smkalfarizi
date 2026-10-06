@@ -24,7 +24,7 @@ class GuruController
 
     private function canBypassGps(): bool
     {
-        return ($this->user['role'] === 'admin') || App::isDevMode();
+        return (in_array($this->user['role'], ['super_admin', 'admin'])) || App::isDevMode();
     }
 
     public function dashboard(): void

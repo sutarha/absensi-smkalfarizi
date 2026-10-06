@@ -28,6 +28,9 @@ class AuthController
 
     public static function requireRole(array $allowedRoles): array
     {
+        if (in_array('admin', $allowedRoles) && !in_array('super_admin', $allowedRoles)) {
+            $allowedRoles[] = 'super_admin';
+        }
         $user = self::requireLogin();
         if (!in_array($user['role'], $allowedRoles)) {
             $isAjax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
@@ -133,6 +136,7 @@ class AuthController
     private function redirectByRole(string $role): void
     {
         switch ($role) {
+            case 'super_admin':
             case 'admin':
                 App::redirect(App::baseUrl('admin/dashboard'));
                 break;

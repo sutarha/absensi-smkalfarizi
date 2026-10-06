@@ -14,7 +14,7 @@ class AkademikController
     private function authAdmin(): array
     {
         $user = AuthController::checkAuth();
-        if (!$user || !in_array($user['role'], ['admin', 'wakasek_kurikulum', 'kepala_sekolah'])) {
+        if (!$user || !in_array($user['role'], ['super_admin', 'admin', 'wakasek_kurikulum', 'kepala_sekolah'])) {
             App::redirect(App::baseUrl('login'));
             exit;
         }
