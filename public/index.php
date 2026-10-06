@@ -670,6 +670,14 @@ try {
                 else $bukuCtrl->inputNilaiManualView((int)$m[1]);
                 exit;
             }
+            if ($path === 'admin/buku-induk/catatan/save' && $method === 'POST') {
+                $bukuCtrl->catatanSave();
+                exit;
+            }
+            if (preg_match('#^admin/buku-induk/catatan/delete/(\d+)$#', $path, $m) && $method === 'POST') {
+                $bukuCtrl->catatanDelete((int)$m[1]);
+                exit;
+            }
         }
 
         // PENILAIAN SISWA BERKELANJUTAN (SEMESTER 1 - 6)

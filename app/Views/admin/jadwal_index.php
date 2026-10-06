@@ -526,6 +526,7 @@ $hasFilterActive = !empty($selectedHari) || !empty($selectedKelasId) || !empty($
             const jamMulai = document.getElementById('m_jam_mulai').value;
             const jamSelesai = document.getElementById('m_jam_selesai').value;
             const excludeId = document.getElementById('m_exclude_id').value;
+            const mapelId = document.getElementById('m_mapel_id').value;
 
             const box = document.getElementById('conflictAlertBox');
             const icon = document.getElementById('conflictIcon');
@@ -557,6 +558,7 @@ $hasFilterActive = !empty($selectedHari) || !empty($selectedKelasId) || !empty($
                 formData.append('jam_mulai', jamMulai);
                 formData.append('jam_selesai', jamSelesai);
                 if (excludeId) formData.append('exclude_id', excludeId);
+                if (mapelId) formData.append('mapel_id', mapelId);
 
                 const res = await fetch('<?= App::baseUrl('admin/jadwal/check-conflict') ?>', {
                     method: 'POST',

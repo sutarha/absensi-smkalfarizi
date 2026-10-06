@@ -667,13 +667,14 @@ class AdminController
         $jamMulai = trim($_POST['jam_mulai'] ?? $_GET['jam_mulai'] ?? '');
         $jamSelesai = trim($_POST['jam_selesai'] ?? $_GET['jam_selesai'] ?? '');
         $excludeId = !empty($_POST['exclude_id']) ? (int)$_POST['exclude_id'] : (!empty($_GET['exclude_id']) ? (int)$_GET['exclude_id'] : null);
+        $mapelId = !empty($_POST['mapel_id']) ? (int)$_POST['mapel_id'] : (!empty($_GET['mapel_id']) ? (int)$_GET['mapel_id'] : null);
 
         if (empty($hari) || empty($kelasId) || empty($guruId) || empty($jamMulai) || empty($jamSelesai)) {
             echo json_encode(['status' => 'ok', 'has_conflict' => false, 'message' => 'Parameter belum lengkap']);
             exit;
         }
 
-        $conflict = JadwalPelajaran::checkConflict($hari, $kelasId, $guruId, $jamMulai, $jamSelesai, $excludeId);
+        $conflict = JadwalPelajaran::checkConflict($hari, $kelasId, $guruId, $jamMulai, $jamSelesai, $excludeId, $mapelId);
         if ($conflict) {
             echo json_encode([
                 'status' => 'conflict',
@@ -700,9 +701,10 @@ class AdminController
         $jamMulai = trim($_POST['jam_mulai'] ?? '');
         $jamSelesai = trim($_POST['jam_selesai'] ?? '');
         $redirectUrl = !empty($_POST['redirect_to']) ? $_POST['redirect_to'] : App::baseUrl('admin/jadwal');
+        $mapelId = !empty($_POST['mapel_id']) ? (int)$_POST['mapel_id'] : null;
 
         // Validasi Anti-Bentrok Waktu KBM
-        $conflict = JadwalPelajaran::checkConflict($hari, $kelasId, $guruId, $jamMulai, $jamSelesai);
+        $conflict = JadwalPelajaran::checkConflict($hari, $kelasId, $guruId, $jamMulai, $jamSelesai, null, $mapelId);
         if ($conflict) {
             $_SESSION['flash_error'] = "⛔ GAGAL MENYIMPAN: " . $conflict['message'];
             App::redirect($redirectUrl);
@@ -745,9 +747,10 @@ class AdminController
         $jamMulai = trim($_POST['jam_mulai'] ?? '');
         $jamSelesai = trim($_POST['jam_selesai'] ?? '');
         $redirectUrl = !empty($_POST['redirect_to']) ? $_POST['redirect_to'] : App::baseUrl('admin/jadwal');
+        $mapelId = !empty($_POST['mapel_id']) ? (int)$_POST['mapel_id'] : null;
 
         // Validasi Anti-Bentrok Waktu KBM (kecualikan jadwal yang sedang diedit)
-        $conflict = JadwalPelajaran::checkConflict($hari, $kelasId, $guruId, $jamMulai, $jamSelesai, $id);
+        $conflict = JadwalPelajaran::checkConflict($hari, $kelasId, $guruId, $jamMulai, $jamSelesai, $id, $mapelId);
         if ($conflict) {
             $_SESSION['flash_error'] = "⛔ GAGAL MEMPERBARUI: " . $conflict['message'];
             App::redirect($redirectUrl);

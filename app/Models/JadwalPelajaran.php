@@ -148,9 +148,21 @@ class JadwalPelajaran
         int $guruId,
         string $jamMulai,
         string $jamSelesai,
-        ?int $excludeId = null
+        ?int $excludeId = null,
+        ?int $mapelId = null
     ): ?array {
         $db = Database::getConnection();
+
+        // Bypass conflict check for Mapel Umum, Muatan Lokal, and Pilihan (to allow class merging)
+        if ($mapelId) {
+            $stmt = $db->prepare("SELECT kelompok FROM mata_pelajaran WHERE id = ?");
+            $stmt->execute([$mapelId]);
+            $kelompok = $stmt->fetchColumn();
+            
+            if ($kelompok && in_array($kelompok, ['Umum', 'Muatan Lokal', 'Pilihan'])) {
+                return null;
+            }
+        }
 
         $excludeSql = $excludeId ? " AND j.id != :exclude_id" : "";
 
