@@ -11,8 +11,11 @@ class OneSignalService
     {
         // Sebaiknya ini diletakkan di .env atau konfigurasi database
         // APP ID yang digunakan oleh Android Guru App
-        $this->appId = getenv('ONESIGNAL_APP_ID') ?: '70c61e2a-caba-49bb-a9d4-97776600a225';
-        $this->restApiKey = getenv('ONESIGNAL_REST_API_KEY') ?: 'YOUR_REST_API_KEY';
+        $appId = getenv('ONESIGNAL_APP_ID') ?: '70c61e2a-caba-49bb-a9d4-97776600a225';
+        $apiKey = getenv('ONESIGNAL_REST_API_KEY') ?: 'YOUR_REST_API_KEY';
+        
+        $this->appId = trim($appId, ' "\'');
+        $this->restApiKey = trim($apiKey, ' "\'');
     }
 
     /**
