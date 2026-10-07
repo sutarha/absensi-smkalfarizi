@@ -45,18 +45,10 @@ class OneSignalService
         }
 
         if ($targetRole) {
-            if ($targetRole === 'guru') {
-                // Untuk guru: Kirim ke semua device KECUALI yang memiliki tag role='siswa'.
-                // Ini akan mencakup Web PWA Guru (role='guru') DAN Aplikasi Android Guru (yang belum punya tag).
-                $fields['filters'] = [
-                    ["field" => "tag", "key" => "role", "relation" => "!=", "value" => "siswa"]
-                ];
-            } else {
-                // Untuk siswa: Kirim hanya ke device yang secara eksplisit memiliki tag role='siswa'
-                $fields['filters'] = [
-                    ["field" => "tag", "key" => "role", "relation" => "=", "value" => $targetRole]
-                ];
-            }
+            // Karena aplikasi Android akan diupdate dengan tag role="guru", kita bisa menggunakan filter tegas
+            $fields['filters'] = [
+                ["field" => "tag", "key" => "role", "relation" => "=", "value" => $targetRole]
+            ];
         } else {
             $fields['included_segments'] = ['All'];
         }
