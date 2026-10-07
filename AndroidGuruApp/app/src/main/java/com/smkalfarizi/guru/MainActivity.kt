@@ -130,6 +130,14 @@ class MainActivity : AppCompatActivity() {
             }
         }, "AndroidPermission")
 
+        // Inject JavaScript Bridge untuk Role Tagging OneSignal
+        webView.addJavascriptInterface(object {
+            @JavascriptInterface
+            fun setRoleTag(role: String) {
+                com.onesignal.OneSignal.User.addTag("role", role)
+            }
+        }, "AndroidOneSignal")
+
         webView.webViewClient = object : WebViewClient() {
             override fun onReceivedError(
                 view: WebView?,

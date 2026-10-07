@@ -130,6 +130,11 @@ $userRole = $sessionUser['role'] ?? 'guest';
     const userRole = "<?= htmlspecialchars($userRole, ENT_QUOTES, 'UTF-8') ?>";
     if (userRole !== 'guest') {
         OneSignal.User.addTag("role", userRole);
+        
+        // Daftarkan ke Native Android SDK jika dijalankan di dalam WebView Aplikasi
+        if (typeof AndroidOneSignal !== 'undefined') {
+            AndroidOneSignal.setRoleTag(userRole);
+        }
     }
   });
 </script>

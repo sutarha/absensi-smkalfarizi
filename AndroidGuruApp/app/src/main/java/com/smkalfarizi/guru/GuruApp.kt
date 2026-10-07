@@ -35,8 +35,7 @@ class GuruApp : Application() {
         // Inisialisasi OneSignal
         OneSignal.initWithContext(this, ONESIGNAL_APP_ID)
 
-        // Set tag role sebagai guru agar filter notifikasi berjalan akurat
-        OneSignal.User.addTag("role", "guru")
+        // Set tag role akan di-handle via JavascriptInterface saat user login
 
         // Minta izin notifikasi OneSignal di coroutine
         CoroutineScope(Dispatchers.IO).launch {
