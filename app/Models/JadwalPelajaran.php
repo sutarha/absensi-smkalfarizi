@@ -153,13 +153,13 @@ class JadwalPelajaran
     ): ?array {
         $db = Database::getConnection();
 
-        // Bypass conflict check for Mapel Umum, Muatan Lokal, and Pilihan (to allow class merging)
+        // Bypass conflict check for Mapel Umum, Muatan Lokal, Pilihan, and Kejuruan (to allow class merging)
         if ($mapelId) {
             $stmt = $db->prepare("SELECT kelompok FROM mata_pelajaran WHERE id = ?");
             $stmt->execute([$mapelId]);
             $kelompok = $stmt->fetchColumn();
             
-            if ($kelompok && in_array($kelompok, ['Umum', 'Muatan Lokal', 'Pilihan'])) {
+            if ($kelompok && in_array($kelompok, ['Umum', 'Muatan Lokal', 'Pilihan', 'Kejuruan'])) {
                 return null;
             }
         }
