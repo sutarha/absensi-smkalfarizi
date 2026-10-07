@@ -164,6 +164,34 @@ class Notifikasi
             $update->execute([':tot' => $totalPenerima, ':id' => $broadcastId]);
 
             $db->commit();
+            
+            // --- FCM PUSH NOTIFICATION ---
+            // Kirim push notification ke perangkat siswa yang memiliki fcm_token
+            if ($targetRole === 'semua' || $targetRole === 'siswa') {
+                $fcmTokens = [];
+                if ($targetSiswaId) {
+                    $token = $db->query("SELECT fcm_token FROM siswa WHERE id = $targetSiswaId AND fcm_token IS NOT NULL AND fcm_token != ''")->fetchColumn();
+                    if ($token) $fcmTokens[] = $token;
+                } elseif ($targetKelasId) {
+                    $tokens = $db->prepare("SELECT fcm_token FROM siswa WHERE kelas_id = :kid AND fcm_token IS NOT NULL AND fcm_token != ''");
+                    $tokens->execute([':kid' => $targetKelasId]);
+                    $fcmTokens = $tokens->fetchAll(PDO::FETCH_COLUMN);
+                } else {
+                    $tokens = $db->query("SELECT fcm_token FROM siswa WHERE fcm_token IS NOT NULL AND fcm_token != ''");
+                    $fcmTokens = $tokens->fetchAll(PDO::FETCH_COLUMN);
+                }
+                
+                if (!empty($fcmTokens)) {
+                    $fcmService = new \App\Services\FcmService();
+                    // Split tokens into chunks of 500 (FCM limit, but we can do it inside sendToTokens if we want, or just let sendToTokens handle loop)
+                    // sendToTokens uses loop internally to call HTTP v1 per token.
+                    $fcmService->sendToTokens($fcmTokens, $judul, $pesan, $linkUrl ?: '/siswa/notifikasi', [
+                        'type' => 'pengumuman',
+                        'tipe' => $tipe
+                    ]);
+                }
+            }
+
             return $broadcastId;
         } catch (\Throwable $e) {
             $db->rollBack();

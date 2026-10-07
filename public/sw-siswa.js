@@ -95,6 +95,9 @@ self.addEventListener('push', event => {
         if (payload.notification) {
             title = payload.notification.title || title;
             body = payload.notification.body || body;
+        } else if (payload.data) {
+            title = payload.data.title || title;
+            body = payload.data.body || body;
         } else {
             title = payload.title || title;
             body = payload.body || body;

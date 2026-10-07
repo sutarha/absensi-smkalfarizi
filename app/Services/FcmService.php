@@ -77,26 +77,20 @@ class FcmService
 
         $endpoint = "https://fcm.googleapis.com/v1/projects/{$this->projectId}/messages:send";
 
+        // FCM requires all data values to be strings
+        $mergedData = array_merge([
+            'title' => (string)$title,
+            'body' => (string)$body,
+            'url' => (string)$url,
+            'click_action' => 'FLUTTER_NOTIFICATION_CLICK'
+        ], $dataPayload);
+        
+        $stringData = array_map('strval', $mergedData);
+
         $message = [
             'message' => [
                 'token' => $fcmToken,
-                'notification' => [
-                    'title' => $title,
-                    'body' => $body,
-                ],
-                'data' => array_merge([
-                    'url' => $url,
-                    'click_action' => 'FLUTTER_NOTIFICATION_CLICK'
-                ], $dataPayload),
-                'webpush' => [
-                    'notification' => [
-                        'icon' => '/icons/icon-192.png',
-                        'badge' => '/icons/icon-192.png',
-                        'data' => [
-                            'url' => $url
-                        ]
-                    ]
-                ]
+                'data' => $stringData
             ]
         ];
 
