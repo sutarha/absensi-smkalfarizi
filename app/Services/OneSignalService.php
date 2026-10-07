@@ -27,23 +27,43 @@ class OneSignalService
      * @param string|null $targetRole Target role (misal: 'siswa', 'guru', atau null untuk semua)
      * @return bool
      */
-    public function sendBroadcast(string $title, string $message, string $url = null, ?string $targetRole = null)
+    public function sendBroadcast(string $title, string $message, string $url = null, ?string $targetRole = null, array $customData = [])
     {
         if (empty($this->appId) || empty($this->restApiKey) || $this->restApiKey === 'YOUR_REST_API_KEY') {
             error_log("OneSignalService: REST API Key belum di-setting.");
-            return false; // Jangan lempar exception agar tidak memutus alur program
+            return false;
         }
 
         $fields = [
             'app_id' => $this->appId,
-            'included_segments' => ['All'], // Sesuai permintaan: Kirim ke SEMUA HP
             'headings' => ["en" => $title],
             'contents' => ["en" => $message],
         ];
 
+        if (!empty($customData)) {
+            $fields['data'] = $customData;
+        }
+
+        if ($targetRole) {
+            // Jika target adalah guru, sertakan juga device yang TIDAK memiliki tag role (karena aplikasi Android Guru belum diset tag-nya)
+            if ($targetRole === 'guru') {
+                $fields['filters'] = [
+                    ["field" => "tag", "key" => "role", "relation" => "=", "value" => "guru"],
+                    ["operator" => "OR"],
+                    ["field" => "tag", "key" => "role", "relation" => "not_exists"]
+                ];
+            } else {
+                $fields['filters'] = [
+                    ["field" => "tag", "key" => "role", "relation" => "=", "value" => $targetRole]
+                ];
+            }
+        } else {
+            $fields['included_segments'] = ['All'];
+        }
+
         if ($url) {
-            // URL PWA / Action ketika diklik
             $fields['url'] = $url;
+            $fields['app_url'] = $url;
         }
 
         $fieldsJson = json_encode($fields);

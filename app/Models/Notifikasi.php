@@ -204,7 +204,12 @@ class Notifikasi
             $appBaseUrl = defined('APP_URL') ? APP_URL : '';
             $fullLinkUrl = ($linkUrl && strpos($linkUrl, 'http') !== 0) ? rtrim($appBaseUrl, '/') . '/' . ltrim($linkUrl, '/') : $linkUrl;
 
-            $oneSignalService->sendBroadcast($judul, $pesan, $fullLinkUrl, $roleParam);
+            $customData = [
+                'type' => 'pengumuman',
+                'tipe' => $tipe
+            ];
+
+            $oneSignalService->sendBroadcast($judul, $pesan, $fullLinkUrl, $roleParam, $customData);
 
             return $broadcastId;
         } catch (\Throwable $e) {
