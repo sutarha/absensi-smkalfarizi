@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_splash.xml — Layar splash SMK Al-Farizi
+    Background biru gelap dengan logo & nama sekolah
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#0F172A"
+    android:padding="40dp">
+
+    <!-- Ikon / Emoji sekolah -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🏫"
+        android:textSize="80sp"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Nama Aplikasi -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SI Presensi Guru"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Nama Sekolah -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SMK AL-FARIZI"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#60A5FA"
+        android:letterSpacing="0.15"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Tagline -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sistem Informasi Terintegrasi"
+        android:textSize="12sp"
+        android:textColor="#94A3B8"
+        android:layout_marginBottom="60dp" />
+
+    <!-- Loading indicator -->
+    <ProgressBar
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:indeterminateTint="#3B82F6" />
+
+    <!-- Versi -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="v1.0.0"
+        android:textSize="11sp"
+        android:textColor="#475569"
+        android:layout_marginTop="24dp" />
+
+</LinearLayout>

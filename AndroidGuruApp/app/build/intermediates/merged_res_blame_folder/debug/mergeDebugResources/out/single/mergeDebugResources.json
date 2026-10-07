@@ -1,42 +1,38 @@
 [
     {
-        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\drawable_ic_person.xml.flat",
-        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\drawable\\ic_person.xml"
+        "merged": "com.smkalfarizi.guru.app-debug-49:/drawable_bg_badge_siap.xml.flat",
+        "source": "com.smkalfarizi.guru.app-main-51:/drawable/bg_badge_siap.xml"
     },
     {
-        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\layout\\activity_main.xml"
+        "merged": "com.smkalfarizi.guru.app-debug-49:/drawable_bg_badge_selesai.xml.flat",
+        "source": "com.smkalfarizi.guru.app-main-51:/drawable/bg_badge_selesai.xml"
     },
     {
-        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\drawable_bg_badge_siap.xml.flat",
-        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\drawable\\bg_badge_siap.xml"
+        "merged": "com.smkalfarizi.guru.app-debug-49:/drawable_ic_home.xml.flat",
+        "source": "com.smkalfarizi.guru.app-main-51:/drawable/ic_home.xml"
     },
     {
-        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\xml_network_security_config.xml.flat",
-        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\xml\\network_security_config.xml"
+        "merged": "com.smkalfarizi.guru.app-debug-49:/drawable_ic_person.xml.flat",
+        "source": "com.smkalfarizi.guru.app-main-51:/drawable/ic_person.xml"
     },
     {
-        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\drawable_ic_wallet.xml.flat",
-        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\drawable\\ic_wallet.xml"
+        "merged": "com.smkalfarizi.guru.app-debug-49:/xml_network_security_config.xml.flat",
+        "source": "com.smkalfarizi.guru.app-main-51:/xml/network_security_config.xml"
     },
     {
-        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\drawable_bg_badge_default.xml.flat",
-        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\drawable\\bg_badge_default.xml"
+        "merged": "com.smkalfarizi.guru.app-debug-49:/drawable_bg_badge_default.xml.flat",
+        "source": "com.smkalfarizi.guru.app-main-51:/drawable/bg_badge_default.xml"
     },
     {
-        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\layout_activity_splash.xml.flat",
-        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\layout\\activity_splash.xml"
+        "merged": "com.smkalfarizi.guru.app-debug-49:/layout_activity_main.xml.flat",
+        "source": "com.smkalfarizi.guru.app-main-51:/layout/activity_main.xml"
     },
     {
-        "merged": "com.smkalfarizi.guru.app-debug-35:/xml_network_security_config.xml.flat",
-        "source": "com.smkalfarizi.guru.app-main-37:/xml/network_security_config.xml"
+        "merged": "com.smkalfarizi.guru.app-debug-49:/drawable_ic_wallet.xml.flat",
+        "source": "com.smkalfarizi.guru.app-main-51:/drawable/ic_wallet.xml"
     },
     {
-        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\drawable_bg_badge_selesai.xml.flat",
-        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\drawable\\bg_badge_selesai.xml"
-    },
-    {
-        "merged": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-debug-35:\\drawable_ic_home.xml.flat",
-        "source": "C:\\Users\\USER\\.gradle\\daemon\\9.3.0\\com.smkalfarizi.guru.app-main-37:\\drawable\\ic_home.xml"
+        "merged": "com.smkalfarizi.guru.app-debug-49:/layout_activity_splash.xml.flat",
+        "source": "com.smkalfarizi.guru.app-main-51:/layout/activity_splash.xml"
     }
 ]

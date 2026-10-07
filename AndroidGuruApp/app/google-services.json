@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "840473055776",
+    "project_id": "notifikasi-absen-b2db3",
+    "storage_bucket": "notifikasi-absen-b2db3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840473055776:android:004540e3ef5f6e2d9b2245",
+        "android_client_info": {
+          "package_name": "com.smkalfarizi.guru"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmgKh3dQghoQJvma04yNaPpIwmivyQ1tE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -192,6 +192,20 @@ class Notifikasi
                 }
             }
 
+            // --- ONESIGNAL PUSH NOTIFICATION ---
+            // Secara otomatis membroadcast notifikasi OneSignal di latar belakang
+            $oneSignalService = new \App\Services\OneSignalService();
+            // Tentukan target role
+            $roleParam = null;
+            if ($targetRole === 'siswa' || $targetRole === 'guru') {
+                $roleParam = $targetRole;
+            }
+
+            $appBaseUrl = defined('APP_URL') ? APP_URL : '';
+            $fullLinkUrl = ($linkUrl && strpos($linkUrl, 'http') !== 0) ? rtrim($appBaseUrl, '/') . '/' . ltrim($linkUrl, '/') : $linkUrl;
+
+            $oneSignalService->sendBroadcast($judul, $pesan, $fullLinkUrl, $roleParam);
+
             return $broadcastId;
         } catch (\Throwable $e) {
             $db->rollBack();

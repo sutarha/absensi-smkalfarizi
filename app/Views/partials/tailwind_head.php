@@ -107,3 +107,29 @@ window.fetch = async function() {
 
 <!-- App Core CSS (Animasi Khusus, Laser Scan, Print Media) -->
 <link rel="stylesheet" href="<?= App::baseUrl('css/app.css') ?>">
+
+<!-- OneSignal Web Push SDK -->
+<?php
+$sessionUser = $_SESSION['user'] ?? (isset($user) ? $user : null);
+$userRole = $sessionUser['role'] ?? 'guest';
+?>
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "70c61e2a-caba-49bb-a9d4-97776600a225",
+      safari_web_id: "",
+      notifyButton: {
+        enable: true,
+      },
+      allowLocalhostAsSecureOrigin: true, // Untuk testing di localhost
+    });
+    
+    // Daftarkan tag berdasarkan role user yang sedang login
+    const userRole = "<?= htmlspecialchars($userRole, ENT_QUOTES, 'UTF-8') ?>";
+    if (userRole !== 'guest') {
+        OneSignal.User.addTag("role", userRole);
+    }
+  });
+</script>

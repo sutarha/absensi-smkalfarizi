@@ -36,17 +36,22 @@ class MainActivity : AppCompatActivity() {
 
     private val baseUrl: String by lazy { BuildConfig.WEB_BASE_URL }
     private val baseHost: String? by lazy { try { Uri.parse(baseUrl).host } catch (e: Exception) { null } }
+    private val prefs by lazy { getSharedPreferences("app_prefs", MODE_PRIVATE) }
 
-    // Permission launcher untuk GPS
+    // Permission launcher untuk GPS & Notifikasi
     private val locationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
-        val granted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true
-        if (granted) {
-            // Notifikasi halaman web bahwa permission sudah diberikan
+        val gpsGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true
+        val notifGranted = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            permissions[Manifest.permission.POST_NOTIFICATIONS] == true
+        } else true
+
+        if (gpsGranted) {
             webView.loadUrl("javascript:if(typeof onGpsPermissionGranted==='function'){onGpsPermissionGranted();}")
-        } else {
-            webView.loadUrl("javascript:if(typeof onGpsPermissionDenied==='function'){onGpsPermissionDenied();}")
+        }
+        if (notifGranted) {
+            webView.loadUrl("javascript:if(typeof onNotificationPermissionGranted==='function'){onNotificationPermissionGranted();}")
         }
     }
 
@@ -60,6 +65,8 @@ class MainActivity : AppCompatActivity() {
         gpsBridge = GpsJsBridge(this, webView)
 
         setupWebView()
+        requestAppPermissions()
+        handleNotificationIntent(intent)
         checkConnectionAndLoad()
 
         // Tombol retry di halaman offline
@@ -99,21 +106,27 @@ class MainActivity : AppCompatActivity() {
         // User-Agent: tambahkan identifier app
         settings.userAgentString = "${settings.userAgentString} SMKAlFarizi-GuruApp/1.0"
 
+        // CookieManager setup
+        val cookieManager = CookieManager.getInstance()
+        cookieManager.setAcceptCookie(true)
+        cookieManager.setAcceptThirdPartyCookies(webView, true)
+
         // Inject JavaScript Bridge untuk GPS
         webView.addJavascriptInterface(gpsBridge, "AndroidGps")
 
-        // Inject JavaScript Bridge untuk permission request
+        // Inject JavaScript Bridge untuk permission request (GPS & Notifikasi)
         webView.addJavascriptInterface(object {
             @JavascriptInterface
-            fun requestGpsPermission() {
+            fun requestPermissions() {
                 runOnUiThread {
-                    locationPermissionLauncher.launch(
-                        arrayOf(
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_COARSE_LOCATION
-                        )
-                    )
+                    requestAppPermissions()
                 }
+            }
+            
+            // Kompatibilitas mundur dengan script GPS lama
+            @JavascriptInterface
+            fun requestGpsPermission() {
+                requestPermissions()
             }
         }, "AndroidPermission")
 
@@ -164,6 +177,15 @@ class MainActivity : AppCompatActivity() {
                 // Sembunyikan offline page, tampilkan WebView
                 showWebView()
 
+                // Simpan URL terakhir agar user (siswa/guru) kembali ke halaman role mereka
+                if (!url.isNullOrEmpty() && (url.contains("absensismkalfarizi.my.id") || url.contains("trycloudflare.com"))) {
+                    if (url.contains("/logout")) {
+                        prefs.edit().remove("last_visited_url").apply()
+                    } else if (!url.contains("/login")) {
+                        prefs.edit().putString("last_visited_url", url).apply()
+                    }
+                }
+
                 // Inject helper JS agar web tahu berjalan di Android
                 view?.loadUrl(
                     "javascript:(function(){" +
@@ -183,6 +205,12 @@ class MainActivity : AppCompatActivity() {
                     binding.progressBar.visibility = android.view.View.GONE
                 }
             }
+            override fun onPermissionRequest(request: PermissionRequest?) {
+                runOnUiThread {
+                    request?.grant(request.resources)
+                }
+            }
+
             override fun onGeolocationPermissionsShowPrompt(
                 origin: String?,
                 callback: GeolocationPermissions.Callback?
@@ -202,16 +230,45 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun requestAppPermissions() {
+        val permissions = mutableListOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            permissions.add(Manifest.permission.POST_NOTIFICATIONS)
+        }
+        locationPermissionLauncher.launch(permissions.toTypedArray())
+    }
+
     private fun checkConnectionAndLoad() {
         if (isNetworkAvailable()) {
             showWebView()
             if (webView.url == null) {
-                webView.loadUrl(baseUrl)
+                val savedUrl = prefs.getString("last_visited_url", null)
+                if (!savedUrl.isNullOrEmpty()) {
+                    webView.loadUrl(savedUrl)
+                } else {
+                    webView.loadUrl(baseUrl)
+                }
             } else {
                 webView.reload()
             }
         } else {
             showOfflinePage()
+        }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleNotificationIntent(intent)
+    }
+
+    private fun handleNotificationIntent(intent: Intent?) {
+        val targetUrl = intent?.getStringExtra("target_url")
+        if (!targetUrl.isNullOrEmpty()) {
+            prefs.edit().putString("last_visited_url", targetUrl).apply()
         }
     }
 
@@ -249,6 +306,8 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         webView.onPause()
+        // Simpan sesi cookie saat pause
+        CookieManager.getInstance().flush()
     }
 
     override fun onDestroy() {

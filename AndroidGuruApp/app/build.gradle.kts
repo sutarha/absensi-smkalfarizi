@@ -5,6 +5,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -56,6 +57,13 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
+
+    // OneSignal Push Notification
+    implementation(libs.onesignal)
+
+    // Firebase Messaging (FCM)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging)
 
     // Lifecycle
     implementation(libs.androidx.lifecycle.runtime.ktx)
