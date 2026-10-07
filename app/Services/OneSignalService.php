@@ -36,30 +36,20 @@ class OneSignalService
 
         $fields = [
             'app_id' => $this->appId,
+            'included_segments' => ['All'], // Sesuai permintaan: Kirim ke SEMUA HP
             'headings' => ["en" => $title],
             'contents' => ["en" => $message],
         ];
 
-        if ($targetRole) {
-            // Gunakan filter berdasarkan tag "role" yang sudah didaftarkan di frontend
-            $fields['filters'] = [
-                ["field" => "tag", "key" => "role", "relation" => "=", "value" => $targetRole]
-            ];
-        } else {
-            $fields['included_segments'] = ['Total Subscriptions'];
-        }
-
         if ($url) {
-            // URL PWA
+            // URL PWA / Action ketika diklik
             $fields['url'] = $url;
-            // Agar bisa dibuka di webview/browser external Android
-            $fields['app_url'] = $url;
         }
 
         $fieldsJson = json_encode($fields);
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://api.onesignal.com/notifications?c=push");
+        curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json; charset=utf-8',
             'Authorization: Basic ' . $this->restApiKey
