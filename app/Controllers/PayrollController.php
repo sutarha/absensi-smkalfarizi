@@ -24,8 +24,8 @@ class PayrollController
      */
     public function index(): void
     {
-        // Hanya admin, kepala_sekolah, bendahara yang bisa melihat rekap seluruh guru
-        if (!in_array($this->user['role'], ['admin', 'kepala_sekolah', 'bendahara'])) {
+        // Hanya admin, super_admin, kepala_sekolah, bendahara yang bisa melihat rekap seluruh guru
+        if (!in_array($this->user['role'], ['super_admin', 'admin', 'kepala_sekolah', 'bendahara'])) {
             App::redirect(App::baseUrl('guru/dompet'));
         }
 
@@ -96,8 +96,8 @@ class PayrollController
      */
     public function cetakSlip(int $guruId, int $bulan, int $tahun): void
     {
-        // Admin, kepala sekolah, bendahara bisa cetak semua, guru hanya miliknya sendiri
-        if (!in_array($this->user['role'], ['admin', 'kepala_sekolah', 'bendahara']) && (int)$this->user['id'] !== $guruId) {
+        // Admin, super_admin, kepala sekolah, bendahara bisa cetak semua, guru hanya miliknya sendiri
+        if (!in_array($this->user['role'], ['super_admin', 'admin', 'kepala_sekolah', 'bendahara']) && (int)$this->user['id'] !== $guruId) {
             App::redirect(App::baseUrl('guru/dompet'));
         }
 
